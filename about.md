@@ -1,11 +1,16 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: "Moi"
+description: "Un peu de narcissime ne peut pas faire de mal."
+header-img: "img/about-bg.jpg"
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+Officiellement, je suis "Ingénieur des Travaux Géographiques et Cartographiques de l'Etat".
+En pratique je fais de l'ordinateur 😌.
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+J'ai fait l'[ENSG](http://www.ensg.eu) et je suis devenu [géodésien](http://fr.wikipedia.org/wiki/G%C3%A9od%C3%A9sie).
+Depuis que je suis sorti de l'école, je fais parti de l'équipe [Géoportail](http://www.geoportail.gouv.fr) à l'[IGN](http://www.ign.fr).
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+J'aime Linux, les ordis, mon téléphone, bref ce qui a des circuits. Ah oui et le café 🍵 et la bière 🍻 aussi !
+
+

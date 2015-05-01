@@ -1,14 +1,17 @@
 # Site settings
-title: Your awesome title
-email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+title: Thibault Coupin
+header-img: img/home-bg.jpg
+email: thibault.coupin@gmail.com
+description: "Le bloc note de Thibault Coupin"
+baseurl: ""
+url: "http://tcoupin.github.io"
+twitter_username: thibbojunior
+github_username:  tcoupin
+#facebook_username:  IronSummitMedia
 
 # Build settings
 markdown: kramdown
+highlighter: pygments
+permalink: /:year/:month/:day/:title/
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
