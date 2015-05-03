@@ -12,7 +12,23 @@ layout: default
                     {% if page.subtitle %}
                     <h2 class="subheading">{{ page.subtitle }}</h2>
                     {% endif %}
-                    <span class="meta">Posté le {{ page.date | date: "%d %B %Y" }}</span>
+                    <span class="meta">Posté le {{ page.date | date: "%d" }}
+                    {% assign m = page.date | date: "%m" %}
+                        {% case m %}
+                            {% when '01' %}janvier
+                            {% when '02' %}février
+                            {% when '03' %}mars
+                            {% when '04' %}avril
+                            {% when '05' %}mai
+                            {% when '06' %}juin
+                            {% when '07' %}juillet
+                            {% when '08' %}août
+                            {% when '09' %}septembre
+                            {% when '10' %}octobre
+                            {% when '11' %}novembre
+                            {% when '12' %}décembre
+                        {% endcase %}
+                    {{ page.date | date: "%Y" }}</span>
                     {% for tag in page.tags %}
                         {% if forloop.first %}
                             <small>Tags : </small>
