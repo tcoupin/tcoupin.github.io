@@ -14,21 +14,20 @@ Après un petit traitement avec *GeoIp Lite City Edition Rev 1* voilà le résul
 
 <div id="map" style="height: 400px"></div>
 
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-<script src="http://rawgithub.com/mylen/leaflet.TileLayer.WMTS/master/leaflet-tilelayer-wmts.js"></script>
-<script src="http://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+<script src="{{ "/js/leaflet-0.7.7.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/leaflet.markercluster-src.js" | prepend: site.baseurl }}"></script>
 
 <script type="text/javascript">
 	window.onload = function(){
-		$('head').append('<link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">');
-		$('head').append('<link rel="stylesheet" type="text/css" href="http://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css">');
-		$('head').append('<link rel="stylesheet" type="text/css" href="http://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="{{ "/css/leaflet.css" | prepend: site.baseurl }}">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="{{ "/css/MarkerCluster.css" | prepend: site.baseurl }}">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="{{ "/css/MarkerCluster.Default.css" | prepend: site.baseurl }}">');
 
 	
 		var map = L.map('map').setView([0,0], 1);
 
 
-		L.tileLayer('http://wxs.ign.fr/q9zuax52wm45kvk0bro186p8/wmts?service=WMTS&request=GetTile&version=1.0.0&layer={id}&style=normal&tilematrixSet=PM&format=image%2Fjpeg&height=256&width=256&tilematrix={z}&tilerow={y}&tilecol={x}', {
+		L.tileLayer('https://wxs.ign.fr/q9zuax52wm45kvk0bro186p8/wmts?service=WMTS&request=GetTile&version=1.0.0&layer={id}&style=normal&tilematrixSet=PM&format=image%2Fjpeg&height=256&width=256&tilematrix={z}&tilerow={y}&tilecol={x}', {
 			maxZoom: 8,
 			minZoom: 1,
 			attribution: '<a href="http://www.ign.fr">IGN</a>',
