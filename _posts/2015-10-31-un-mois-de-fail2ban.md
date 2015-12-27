@@ -62,6 +62,7 @@ Après un petit traitement avec *GeoIp Lite City Edition Rev 1* voilà le résul
 	<div class="col-md-3"><img src="/img/fail3ban-country-legend.jpeg"></div>
 </div>
 
+
 3- Carte de chaleur :
 ---------------------
 
