@@ -27,7 +27,7 @@ Après un petit traitement avec *GeoIp Lite City Edition Rev 1* voilà le résul
 		var map = L.map('map').setView([0,0], 1);
 
 
-		L.tileLayer('https://wxs.ign.fr/q9zuax52wm45kvk0bro186p8/wmts?service=WMTS&request=GetTile&version=1.0.0&layer={id}&style=normal&tilematrixSet=PM&format=image%2Fjpeg&height=256&width=256&tilematrix={z}&tilerow={y}&tilecol={x}', {
+		L.tileLayer(window.location.protocol+'//wxs.ign.fr/q9zuax52wm45kvk0bro186p8/wmts?service=WMTS&request=GetTile&version=1.0.0&layer={id}&style=normal&tilematrixSet=PM&format=image%2Fjpeg&height=256&width=256&tilematrix={z}&tilerow={y}&tilecol={x}', {
 			maxZoom: 8,
 			minZoom: 1,
 			attribution: '<a href="http://www.ign.fr">IGN</a>',
