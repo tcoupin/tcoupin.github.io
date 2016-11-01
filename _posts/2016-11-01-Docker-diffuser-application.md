@@ -13,6 +13,7 @@ Il y a plusieurs façons d'aborder ce problème : doit-on faciliter la mise en p
 Ce post est un mini retour d'expérience sur des projets pro et perso.
 
 ## Vécu
+
 ### Rok4
 
 1er cas rencontré, la dockerisation du serveur rok4 pour le diffuser et le faire connaître. Ce serveur, je le connais bien (et c'est sûrement ça le problème) : on s'en sert au Géoportail pour la diffusion des cartes et photos aériennes. L'image docker que j'en ai fait est minimale : un serveur avec une configuration par défaut (mais personnalisable) sans donnée.
