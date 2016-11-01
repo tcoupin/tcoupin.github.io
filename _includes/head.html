@@ -6,13 +6,13 @@
     <meta name="description" content="{{ site.description }}">
     {% if site.twitter_username %}
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="{{ site.twitter_username }}" />
+    <meta name="twitter:site" content="@{{ site.twitter_username }}" />
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
     {% if page.subtitle %}
-    <meta name="twitter:description" content="{{ page.subtitletitle }}" />
+    <meta name="twitter:description" content="{{ page.subtitle }}" />
     {% endif %}
     {% if page.header-img %}
-    <meta name="twitter:image" content="{{ site.baseurl }}/{{ page.header-img }}" />
+    <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/{{ page.header-img }}" />
     {% endif %}
     {% endif %}
     
