@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Docker : comment bien diffuser son application ?
+subtitle: Retours de ma petite expérience
 ---
 
 Docker révolutionne la vie des applications. Sa force est d'avoir mis à disposition des dev et des ops un outil commun pour que chacun puisse se focaliser sur son cœur de travail tout en prenant en compte les besoins et impératifs de l'autre. 
