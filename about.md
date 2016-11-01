@@ -1,8 +1,6 @@
 ---
 layout: page
 title: "Moi"
-description: "Un peu de narcissime ne peut pas faire de mal."
-header-img: "img/about-bg.jpg"
 ---
 
 Officiellement, je suis "Ingénieur des Travaux Géographiques et Cartographiques de l'Etat".

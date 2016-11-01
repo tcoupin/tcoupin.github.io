@@ -2,71 +2,24 @@
 layout: default
 ---
 
-<!-- Post Header -->
-<header class="intro-header"{% if page.header-img %} style="background-image: url('{{ site.baseurl }}/{{ page.header-img }}')"{% endif %}>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <h1>{{ page.title }}</h1>
-                    {% if page.subtitle %}
-                    <h2 class="subheading">{{ page.subtitle }}</h2>
-                    {% endif %}
-                    <span class="meta">Posté le {{ page.date | date: "%d" }}
-                    {% assign m = page.date | date: "%m" %}
-                        {% case m %}
-                            {% when '01' %}janvier
-                            {% when '02' %}février
-                            {% when '03' %}mars
-                            {% when '04' %}avril
-                            {% when '05' %}mai
-                            {% when '06' %}juin
-                            {% when '07' %}juillet
-                            {% when '08' %}août
-                            {% when '09' %}septembre
-                            {% when '10' %}octobre
-                            {% when '11' %}novembre
-                            {% when '12' %}décembre
-                        {% endcase %}
-                    {{ page.date | date: "%Y" }}</span>
-                    {% for tag in page.tags %}
-                        {% if forloop.first %}
-                            <small>Tags : </small>
-                        {% endif %}
-                        <span class="badge">{{ tag }}</span>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<div class="post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <span class="post-date">{{ page.date | date_to_string }}</span>
+  {{ content }}
+</div>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-				{{ content }}
-
-                <hr>
-
-                <ul class="pager">
-                    {% if page.previous.url %}
-                    <li class="previous">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
-                    </li>
-                    {% endif %}
-                    {% if page.next.url %}
-                    <li class="next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
-                    </li>
-                    {% endif %}
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</article>
-
-<hr>
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    {% for post in site.related_posts limit:3 %}
+      <li>
+        <h3>
+          <a href="{{ post.url }}">
+            {{ post.title }}
+            <small>{{ post.date | date_to_string }}</small>
+          </a>
+        </h3>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
