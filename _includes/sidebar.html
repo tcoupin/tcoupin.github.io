@@ -25,12 +25,32 @@
           {% endif %}
         {% endif %}
       {% endfor %}
-
-      <li class="sidebar-nav-item"><a href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a></li>
-      <li class="sidebar-nav-item"><a href="{{ site.github.repo }}">GitHub project</a></li>
-      <li class="sidebar-nav-item">Currently v{{ site.version }}</li>
     </ul>
+    <p align="center">
+      <a href="/atom.xml">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle-thin fa-stack-2x"></i>
+              <i class="fa fa-rss fa-stack-1x"></i>
+          </span>
+      </a>
 
+      <a href="https://twitter.com/{{ site.author.twitter }}">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle-thin fa-stack-2x"></i>
+              <i class="fa fa-twitter fa-stack-1x"></i>
+          </span>
+      </a>
+
+      <a href="https://github.com/{{ site.author.github }}">
+          <span class="fa-stack fa-lg">
+              <i class="fa fa-circle-thin fa-stack-2x"></i>
+              <i class="fa fa-github fa-stack-1x"></i>
+          </span>
+      </a>
+    </p>
     <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+    <p>
+      <small>Dernière mise à jour : {{ site.time | date: '%d-%m-%Y' }}</small>
+    </p>
   </div>
 </div>

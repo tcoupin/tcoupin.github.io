@@ -9,18 +9,13 @@ relative_permalinks: true
 # Setup
 title:            'Thibault Coupin'
 tagline:          'Mon bloc note'
-description:      'Le bloc note de Thibault Coupin'
+description:      'Des notes, des trucs, mon bordel quoi.'
 url:              'https://tcoupin.github.io'
 baseurl:          /
 
 author:
   name:           'Thibault Coupin'
-  url:            https://twitter.com/tcoupin
+  twitter:        tcoupin
+  github:         tcoupin
 
 paginate:         5
-
-# Custom vars
-version:          2.1.0
-
-github:
-  repo:           https://github.com/tcoupin
