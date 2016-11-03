@@ -5,9 +5,7 @@ description: 'Quelques présentations'
 ---
 
 <div class="posts">
-  {% for post in site.posts %}
-{% for tag in post.tags %}
-        {% if tag == 'Cours' %}
+  {% for post in site.categories.cours %}
   <div class="post">
     <h1 class="post-title">
       <a href="{{ post.url }}">
@@ -37,7 +35,5 @@ description: 'Quelques présentations'
     </span>
 
   </div>
-  {% endif %}
-    {% endfor %}
   {% endfor %}
 </div>

@@ -12,6 +12,7 @@ tagline:          'Mon bloc note'
 description:      'Des notes, des trucs, mon bordel quoi.'
 url:              'https://tcoupin.github.io'
 baseurl:          /
+theme:            'theme-base-0d'
 
 author:
   name:           'Thibault Coupin'

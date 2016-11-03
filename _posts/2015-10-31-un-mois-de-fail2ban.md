@@ -2,7 +2,6 @@
 layout: post
 title: Un mois de fail2ban
 subtitle:   D'où viennent les attaques ?
-header-img: "img/post-fail2ban.jpg"
 ---
 
 Voilà un mois que j'ai (enfin) installé *fail2ban* sur mon serveur pour sécuriser le ssh et le ftp. Il est temps de faire un petit point : **72 ip bloquées**.
@@ -14,14 +13,18 @@ Après un petit traitement avec *GeoIp Lite City Edition Rev 1* voilà le résul
 
 <div id="map" style="height: 400px"></div>
 
-<script src="{{ "/js/leaflet-0.7.7.js" | prepend: site.baseurl }}"></script>
-<script src="{{ "/js/leaflet.markercluster-src.js" | prepend: site.baseurl }}"></script>
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/leaflet-0.7.7.js"></script>
+<script src="/public/js/leaflet.markercluster-src.js"></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+
 
 <script type="text/javascript">
 	window.onload = function(){
-		$('head').append('<link rel="stylesheet" type="text/css" href="{{ "/css/leaflet.css" | prepend: site.baseurl }}">');
-		$('head').append('<link rel="stylesheet" type="text/css" href="{{ "/css/MarkerCluster.css" | prepend: site.baseurl }}">');
-		$('head').append('<link rel="stylesheet" type="text/css" href="{{ "/css/MarkerCluster.Default.css" | prepend: site.baseurl }}">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="/public/css/leaflet.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="/public/css/MarkerCluster.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="/public/css/MarkerCluster.Default.css">');
+		$('head').append("<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />");
 
 	
 		var map = L.map('map').setView([0,0], 1);
@@ -37,7 +40,7 @@ Après un petit traitement avec *GeoIp Lite City Edition Rev 1* voilà le résul
 
 		
 
-		$.get("{{ site.baseurl }}/data/fail2ban.geojson",function(data){
+		$.get("/public/data/fail2ban.geojson",function(data){
 			var markers = L.markerClusterGroup();
 			markers.addLayer(L.geoJson(data, {
     			style: function (feature) {
@@ -58,15 +61,15 @@ Après un petit traitement avec *GeoIp Lite City Edition Rev 1* voilà le résul
 ----------------------------------
 
 <div class="row">
-	<img src="/img/fail2ban-country.jpeg" class="col-md-9">
-	<div class="col-md-3"><img src="/img/fail3ban-country-legend.jpeg"></div>
+	<img src="/public/img/fail2ban-country.jpeg" class="col-md-9">
+	<div class="col-md-3"><img src="/public/img/fail3ban-country-legend.jpeg"></div>
 </div>
 
 
 3- Carte de chaleur :
 ---------------------
 
-![](/img/post-fail2ban.jpg)
+![](/public/img/post-fail2ban.jpg)
 
 
 Références :
