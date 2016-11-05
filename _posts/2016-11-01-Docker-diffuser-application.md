@@ -48,7 +48,3 @@ Je ne veux pas être prétentieux en définissant des bonnes pratiques, voici ju
 - une image de base customisable pour le déploiement en production. C'est la brique de base, juste l'application ;
 - si nécessaire, un autre tag sur cette image avec les dépendances nécessaires pour être utilisable en un seul `docker run`. Par exemple dans le cas de rok4, créer en plus du tag VERSION, un tag VERSION-nginx avec un nginx connecté au rok4.
 - la cerise sur le gâteau, un orchestrateur de déploiement comme la KavaRok4 ou encore le CloudBees Jenkins Operation Center
-
-<hr>
-<blockquote class="twitter-tweet" data-lang="fr"><p lang="fr" dir="ltr">Docker comment diffuser une application ? Retours appréciés :)<a href="https://t.co/2FezIybHmm">https://t.co/2FezIybHmm</a></p>&mdash; Thibault Coupin (@thibbojunior) <a href="https://twitter.com/thibbojunior/status/793473925019738112">1 novembre 2016</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

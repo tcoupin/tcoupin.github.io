@@ -12,7 +12,7 @@ Pô grave, on va pointer les dépendances vers chez nous, on contrôle notre cro
 
 Premier test :
 
-~~~
+~~~nginx
 location /pub {
   rewrite (.*) http://fpdownload.adobe.com$1 last;
   proxy_pass http://monSuperProxySquid:3128;
@@ -30,7 +30,7 @@ Ah oui, c'est écrit dans la doc : "If a replacement string starts with “http:
 
 Bon ben on va arrêté de mettre http devant alors ! Mais j'en ai besoin quand même un moment ou un autre, sinon mon Squid va être perdu. Aller, on va la faire à la sioux...
 
-~~~
+~~~nginx
 location /pub {
   rewrite (.*) /http/fpdownload.adobe.com$1 last;
 }

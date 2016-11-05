@@ -2,7 +2,6 @@
 layout: post
 title: Un point sur les proxys HTTP
 subtitle:   "HTTP, Squid3"
-#header-img: "img/post-cadenas.jpg"
 ---
 
 1. [Pourquoi mettre un proxy ?](#pourquoi)
@@ -28,19 +27,23 @@ La requête peut contenir jusqu'à 3 parties : la commande, les en-têtes et le 
 1. La commande. C'est la seule partie obligatoire. Elle contient la méthode (`GET`, `POST`, `PUT` ou autre), la ressource demandée et la version du protocole HTTP utilisée.
 Par exemple pour demander la page tcoupin sur github.com :
 
-		GET /tcoupin HTTP/1.1
+```http
+GET /tcoupin HTTP/1.1
+```
 
 2. Viennent ensuite les en-têtes de requête. Ils permettent de faire de multiples choses : contrôle de la mise en cache, ajout d'information de contexte (Referer : site ayant émis la requête, User-Agent : logiciel ayant émis la requête) et tout ce qu'on veut y mettre qui peut aider le serveur à répondre.
 L'en-tête le plus utile est `Host` qui définit le domaine interrogé. C'est utile quand un serveur (une seule IP) héberge plusieurs sites (domaines).
 Voici des exemples d'en-têtes :
 
-		Host: github.com
-		Connection: keep-alive
-		Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-		Upgrade-Insecure-Requests: 1
-		User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
-		Accept-Encoding: gzip, deflate, sdch
-		Accept-Language: fr,en-US;q=0.8,en;q=0.6
+```
+Host: github.com
+Connection: keep-alive
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: fr,en-US;q=0.8,en;q=0.6
+```
 
 3. Enfin le corps de la requête. Il n'est pas obligatoire voire inutile pour certaines méthodes comme `GET`. Le corps est souvent renseigné pour les méthodes `POST` et `PUT` car il contient les données envoyées par le client au serveur.
 

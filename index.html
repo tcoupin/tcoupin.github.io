@@ -1,52 +1,43 @@
 ---
-layout: page
-description: "Des notes, des trucs, mon bordel quoi."
+layout: default
 ---
 
-{% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-    </a>
-    <p class="post-meta">Posté le {{ post.date | date: "%d" }}
-                {% assign m = post.date | date: "%m" %}
-                        {% case m %}
-                            {% when '01' %}janvier
-                            {% when '02' %}février
-                            {% when '03' %}mars
-                            {% when '04' %}avril
-                            {% when '05' %}mai
-                            {% when '06' %}juin
-                            {% when '07' %}juillet
-                            {% when '08' %}août
-                            {% when '09' %}septembre
-                            {% when '10' %}octobre
-                            {% when '11' %}novembre
-                            {% when '12' %}décembre
-                        {% endcase %}
-                {{ post.date | date: "%Y" }}</p>
-</div>
-<hr>
-{% endfor %}
 
-<!-- Pager -->
-{% if paginator.total_pages > 1 %}
-<ul class="pager">
-    {% if paginator.previous_page %}
-    <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-    </li>
+<div class="posts">
+  {% for post in site.posts %}
+  <div class="post">
+    <h1 class="post-title">
+      <a href="{{ post.url }}">
+        {{ post.title }}
+      </a>
+    </h1>
+
+    <span class="post-date">
+      {{ post.date | date: "%d" }}
+      {% assign m = post.date | date: "%m" %}
+      {% case m %}
+          {% when '01' %}janvier
+          {% when '02' %}février
+          {% when '03' %}mars
+          {% when '04' %}avril
+          {% when '05' %}mai
+          {% when '06' %}juin
+          {% when '07' %}juillet
+          {% when '08' %}août
+          {% when '09' %}septembre
+          {% when '10' %}octobre
+          {% when '11' %}novembre
+          {% when '12' %}décembre
+      {% endcase %}
+      {{ post.date | date: "%Y" }}
+    - {{ post.subtitle }}
+    {% if post.comments %}
+    <a data-disqus-identifier="{{ post.url }}" href="{{ post.url }}#disqus_thread"></a>
     {% endif %}
-    {% if paginator.next_page %}
-    <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-    </li>
-    {% endif %}
-</ul>
-{% endif %}
+    </span>
+
+  </div>
+  {% endfor %}
+</div>
+
+<script id="dsq-count-scr" src="//tcoupin-github-io.disqus.com/count.js" async></script>

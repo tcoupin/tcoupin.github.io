@@ -2,7 +2,6 @@
 layout:     post
 title:      "NodeJS et les certificats"
 subtitle:   "Https, certif serveur et client"
-header-img: "img/post-cadenas.jpg"
 ---
 
 J'ai été récemment confronté au problème de la sécurisation du lien entre 2 instances NodeJS dans un projet personnel.
@@ -26,7 +25,7 @@ Avec [pem][2], la création d'un certificat est ultra simple.
 
 Pour le CA :
 
-~~~ javascript
+```javascript
 var https = require('https'),
       pem = require('pem');
 //Stockage de la clé et du certificat CA
@@ -42,13 +41,13 @@ pem.createCertificate({
       //La clé privée
       SSLcaKey = keys.clientKey;
     });
-~~~ 
+``` 
 
 C'est quand même plus simple qu'en ligne de commande avec openssl, non ?? 
 
 Et pour le certificat client : 
 
-~~~ javascript
+```javascript
 var SSLClientCert, SSLClientKey;
 pem.createCertificate({
       days:365,
@@ -58,14 +57,14 @@ pem.createCertificate({
       commonName: "Probe client"
     },
     function(err,keys){
-   	  //Le certificat
+      //Le certificat
       SSLClientCert = keys.certificate;
 
       //La clé privée
       SSLClientKey = keys.clientKey;
 
     });
-~~~ 
+``` 
 Pour le serveur c'est la même chose.
 
 ## L'utilisation des clés et certificats
@@ -74,7 +73,7 @@ On utilise le package https pour communiquer du central à la sonde avec [https.
 
 L'exemple fourni sur nodejs.org est assez parlant :
 
-~~~ javascript
+```javascript
 var options = {
   hostname: 'encrypted.google.com',
   port: 443,
@@ -89,7 +88,7 @@ options.agent = new https.Agent(options);
 var req = https.request(options, function(res) {
   ...
 }
-~~~ 
+``` 
 
 On aura juste pris soin de stocker la valeur de *SSLClientKey* dans *test/fixtures/keys/agent2-key.pem* et *SSLClientCert* dans *test/fixtures/keys/agent2-cert.pem*.
 
