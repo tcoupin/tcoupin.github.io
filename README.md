@@ -7,6 +7,6 @@ Basé sur le thème de [@mdo](https://twitter.com/mdo) https://github.com/poole/
 ## Déploiement local 
 
 ```
-docker run --rm -v $PWD:/site -p 4000:4000 andredumas/github-pages serve --watch --trace
+docker run --rm -it --label=jekyll -v $(pwd):/srv/jekyll -p 4000:4000 jekyll/jekyll jekyll serve --watch
 ```
 

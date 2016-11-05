@@ -1,10 +1,10 @@
 # Dependencies
-markdown:         redcarpet
-highlighter:      pygments
+markdown:         kramdown
+highlighter:      rouge
 
 # Permalinks
 permalink:        pretty
-relative_permalinks: true
+#relative_permalinks: true
 
 # Setup
 title:            'Thibault Coupin'
@@ -12,11 +12,11 @@ tagline:          'Mon bloc note'
 description:      'Des notes, des trucs, mon bordel quoi.'
 url:              'https://tcoupin.github.io'
 baseurl:          /
-theme:            'theme-base-0d'
+mytheme:            'theme-base-0d'
 
 author:
   name:           'Thibault Coupin'
   twitter:        tcoupin
   github:         tcoupin
 
-paginate:         5
+#paginate:         5

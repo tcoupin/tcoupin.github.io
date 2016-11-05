@@ -251,5 +251,5 @@ a.sidebar-nav-item:focus {
 
 
 .post img {
-  width: 100%;
+  max-width: 100%;
 }

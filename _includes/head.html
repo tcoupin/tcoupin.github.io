@@ -29,4 +29,18 @@
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  {% if site.author.twitter %}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@{{ site.author.twitter }}" />
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
+    {% if page.title && page.subtitle %}
+  <meta name="twitter:description" content="{{ page.subtitle }}" />
+    {% else %}
+      <meta name="twitter:description" content="{{ site.description }}" />
+    {% endif %}
+    {% if page.header-img %}
+  <!--meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/{{ page.header-img }}" /-->
+    {% endif %}
+  {% endif %}
 </head>

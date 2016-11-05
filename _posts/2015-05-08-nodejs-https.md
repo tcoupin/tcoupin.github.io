@@ -25,7 +25,7 @@ Avec [pem][2], la création d'un certificat est ultra simple.
 
 Pour le CA :
 
-```
+```javascript
 var https = require('https'),
       pem = require('pem');
 //Stockage de la clé et du certificat CA
@@ -47,7 +47,7 @@ C'est quand même plus simple qu'en ligne de commande avec openssl, non ??
 
 Et pour le certificat client : 
 
-```
+```javascript
 var SSLClientCert, SSLClientKey;
 pem.createCertificate({
       days:365,
@@ -73,7 +73,7 @@ On utilise le package https pour communiquer du central à la sonde avec [https.
 
 L'exemple fourni sur nodejs.org est assez parlant :
 
-```
+```javascript
 var options = {
   hostname: 'encrypted.google.com',
   port: 443,
