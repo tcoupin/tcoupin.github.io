@@ -1,18 +1,12 @@
 {
-  "name": "geocoGPP",
+  "name": "geocoGeoportail",
   "authors": [
     "Thibault Coupin <thibault.coupin@ign.fr>"
   ],
-  "description": "Geocoder, routing and isocurve on French Geoportail",
-  "main": "index.html",
-  "keywords": [
-    "geocoder",
-    "routing",
-    "isocurve",
-    "geoportail"
-  ],
+  "description": "",
+  "main": "",
   "license": "MIT",
-  "homepage": "https://tcoupin.github.io/geocoGPP",
+  "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",
