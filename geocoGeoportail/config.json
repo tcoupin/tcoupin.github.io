@@ -1,0 +1,38 @@
+{
+	"api_key": "q9zuax52wm45kvk0bro186p8",
+	"wxs_domain": "wxs.ign.fr",
+	"activity": {
+		"direct":{
+			"resources": {
+				"PositionOfInterest":{
+					"layers":[
+						"GEOGRAPHICALGRIDSYSTEM.MAPS"
+					]
+				},
+				"SteetAddress":{
+					"layers":[
+						"GEOGRAPHICALGRIDSYSTEM.MAPS"
+					]
+				},
+				"CadastralParcel":{
+					"layers":[
+						"GEOGRAPHICALGRIDSYSTEM.MAPS",
+						"CADASTRALPARCEL.PARCEL"
+					]
+				}
+			}
+		},
+		"reverse": {
+
+		},
+		"completion": {
+
+		},
+		"routing": {
+
+		},
+		"isocurve": {
+
+		}
+	}
+}

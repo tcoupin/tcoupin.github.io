@@ -1,0 +1,38 @@
+#main {
+	position: relative;
+	overflow: hidden;
+}
+#result, #map, #data, div.config {
+	height: 100vh;
+	top:0;
+	width: 100%;
+	transition-property: opacity, visibility, margin-left;
+	transition-duration: 500ms;
+}
+#result {
+	overflow: hidden;
+}
+
+#data {
+	left:0;
+	margin-left: 100%;
+	position: absolute;
+} 
+div.config {
+	position: absolute;
+	background-color: #191818;
+	z-index: 2000;
+	opacity: 0;
+	visibility: hidden;
+}
+div.config-content {
+	margin: 12px;
+}
+
+.switch-light {
+	z-index: 1000 !important; 
+	position: absolute;
+	width: 150px;
+	bottom: 20px;
+	left: calc( 50% - 75px );
+}

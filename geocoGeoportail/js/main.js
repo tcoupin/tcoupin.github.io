@@ -1,64 +1,39 @@
+var map;
 window.onload = function() {
-	var old_activity = localStorage.getItem("activity") || 'direct';
-	setActivity(old_activity,true);
+	initConfig(function(){
+		var old_activity = (location.hash!=''?location.hash.replace('#',''):null) || localStorage.getItem("activity") || 'direct';
+		setActivity(old_activity,true);
+	
+		$("a.activity-link").click(function(){
+			setActivity($(this).attr('href').replace('#',''));
+		});
+	
+		$("a.config").click(function(){
+			toogleConfig();
+		});
+		
+		map = L.map('map',{zoomControl: false}).setView([48.845,2.424], 10);
 
-	$(".pure-menu-item a").click(function(){
-		setActivity($(this).attr('href').replace('#',''));
+		L.control.zoom({position:'topright'}).addTo(map);
+
+		L.tileLayer('https://wxs.ign.fr/'+CONFIG.api_key+'/wmts?service=WMTS&request=GetTile&version=1.0.0&layer={id}&style=normal&tilematrixSet=PM&format=image%2Fjpeg&height=256&width=256&tilematrix={z}&tilerow={y}&tilecol={x}', {
+			maxZoom: 18,
+			minZoom: 0,
+			attribution: '<a href="http://www.ign.fr">IGN</a>',
+			id: 'GEOGRAPHICALGRIDSYSTEMS.MAPS',
+			opacity:0.5
+		}).addTo(map);
 	});
 }
 
-var setActivity = function(activity, dontstop) {
-	if (dontstop !== true){
-		$(".pure-menu-item").removeClass("pure-menu-selected");
-		var old_activity = localStorage.getItem("activity");
-		if (old_activity != null) {
-			ACTIVITY[old_activity].stop();
-
+var toogleMapData = function(){
+	$("#map").css("margin-left", function(i,val){
+		if (val == "0px"){
+			$("#map").css("margin-left","-100%");
+			$("#data").css("margin-left","0px");
+		} else {
+			$("#map").css("margin-left","0px");
+			$("#data").css("margin-left","100%");
 		}
-	}
-	$(".pure-menu-item:has(a[href='#"+activity+"'])").addClass("pure-menu-selected");
-	localStorage.setItem("activity", activity);
-	ACTIVITY[activity].start();
-};
-var ACTIVITY = {
-	direct: {
-		start: function() {
-			console.log("start direct");
-		},
-		stop: function() {
-			console.log("stop direct");
-		}
-	},
-	reverse: {
-		start: function() {
-			console.log("start reverse");
-		},
-		stop: function() {
-			console.log("stop reverse");
-		}
-	},
-	completion: {
-		start: function() {
-			console.log("start completion");
-		},
-		stop: function() {
-			console.log("stop completion");
-		}
-	},
-	routing: {
-		start: function() {
-			console.log("start routing");
-		},
-		stop: function() {
-			console.log("stop routing");
-		}
-	},
-	isocurve: {
-		start: function() {
-			console.log("start isocurve");
-		},
-		stop: function() {
-			console.log("stop isocurve");
-		}
-	}
+	});
 }
