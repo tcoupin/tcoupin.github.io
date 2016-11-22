@@ -12,17 +12,38 @@ window.onload = function() {
 			toogleConfig();
 		});
 		
-		map = L.map('map',{zoomControl: false}).setView([48.845,2.424], 10);
+		Gp.Services.getConfig({
+    		apiKey: CONFIG.api_key,
+    		onSuccess: function (response) {
+    		    // votre utilisation de l'extension Géoportail pour Leaflet
+				map = L.map('map',{zoomControl: false}).setView([48.845,2.424], 10);
 
-		L.control.zoom({position:'topright'}).addTo(map);
+				L.control.zoom({position:'topright'}).addTo(map);
 
-		L.tileLayer('https://wxs.ign.fr/'+CONFIG.api_key+'/wmts?service=WMTS&request=GetTile&version=1.0.0&layer={id}&style=normal&tilematrixSet=PM&format=image%2Fjpeg&height=256&width=256&tilematrix={z}&tilerow={y}&tilecol={x}', {
-			maxZoom: 18,
-			minZoom: 0,
-			attribution: '<a href="http://www.ign.fr">IGN</a>',
-			id: 'GEOGRAPHICALGRIDSYSTEMS.MAPS',
-			opacity:0.5
-		}).addTo(map);
+				var lyr = L.geoportalLayer.WMTS(
+					{
+						layer  : "GEOGRAPHICALGRIDSYSTEMS.MAPS"
+					},
+					{
+						opacity:0.5
+					}
+				) ;
+
+				lyr.addTo(map); 
+				var layerSwitcher = L.geoportalControl.LayerSwitcher({position:"topright"});
+				map.addControl(layerSwitcher);
+
+				var search = L.geoportalControl.SearchEngine({
+					position:"topright",
+					resources:["StreetAddress","PositionOfInterest"],
+					displayInfo: false,
+					displayAdvancedSearch: false
+				});
+				map.addControl(search);
+    		}
+		});
+
+
 	});
 }
 
