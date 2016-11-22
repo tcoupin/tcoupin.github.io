@@ -12,7 +12,7 @@ var toogleConfig = function(){
 	
 }
 var resetConfig = function(callback){
-	$.getJSON("/config.json",function(data){
+	$.getJSON("./config.json",function(data){
 		localStorage.setItem("config", JSON.stringify(data));
 		CONFIG = data;
 		if (callback){
