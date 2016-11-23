@@ -20,6 +20,7 @@
 		<link rel="stylesheet" href="css/toggle-switch.css">
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="css/config.css">
+		<link rel="stylesheet" href="css/prism.css">
 		
 	</head>
 	<body>
@@ -49,11 +50,81 @@
 				</div>
 			</div>
 			<div id="main">
-					<div id="result">
+				<div id="result">
 					<div id="map">
 					</div>
 					<div id="data">
-						Data here
+						<div class="data-content">
+							<form class="pure-form pure-form-aligned">
+								<fieldset>
+									<legend>POST</legend>
+									<div class="pure-g">
+										<div class="pure-u-1">
+											<input type="text" class="pure-input-1" readonly value="http://toto/sdfsd/sdqf">
+										</div>
+										<div class="pure-u-1-2 pure-u-md-1-2">
+											<legend>Requête</legend>
+											<div class="pure-u-1">
+												<table class="pure-table pure-table-horizontal header">
+													<tbody>
+														<tr>
+															<td>Head1</td>
+															<td>Val1</td>
+														</tr>
+														<tr>
+															<td>Head2</td>
+															<td>Val2</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="pure-u-1">
+												<pre>
+													<code class="language-markup">
+<root>
+<a b='3'>
+<c>toto</c>
+</a>
+</root>	
+													</code>
+												</pre>
+											</div>
+										</div>
+										<div class="pure-u-1-2 pure-u-md-1-2">
+											<legend>Réponse</legend>
+											<div class="pure-u-1">
+												<table class="pure-table pure-table-horizontal header">
+													<tbody>
+														<tr>
+															<td>Head1</td>
+															<td>Val1</td>
+														</tr>
+														<tr>
+															<td>Head2</td>
+															<td>Val2</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="pure-u-1">
+												<pre>
+													<code class="language-json">
+														{
+															"a": {
+																"$": {
+																	"b": 3
+																},
+																"c": "toto"
+															}
+														}
+													</code>
+												</pre>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+						</div>
 					</div>
 				</div>
 				<label class="switch-light switch-candy switch-candy-blue" onclick="toogleMapData()">
@@ -81,6 +152,8 @@
 		<script src="https://use.fontawesome.com/def0fa07b6.js"></script>
 		<script src="js/leaflet.js"></script>
 		<script src="js/GpPluginLeaflet.js"></script>
+		<script src="js/NetworkInterceptor.js"></script>
+		<script src="js/prism.js"></script>
 		<script src="js/activity.js"></script>
 		<script src="js/config.js"></script>
 		<script src="js/main.js"></script>

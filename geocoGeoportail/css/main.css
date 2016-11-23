@@ -36,3 +36,15 @@ div.config-content {
 	bottom: 20px;
 	left: calc( 50% - 75px );
 }
+
+.data-content {
+	margin: 20px;
+}
+
+.header tr>td:first-child {
+    font-weight: bold;
+}
+
+table.header {
+	border: 0;
+}
