@@ -10,6 +10,8 @@ var setActivity = function(activity, dontstop) {
 	$(".pure-menu-item:has(a[href='#"+activity+"'])").addClass("pure-menu-selected");
 	localStorage.setItem("activity", activity);
 	ACTIVITY[activity].start();
+	$(".activity").removeClass("active").removeClass("activity-collapsed");
+	$(".activity-"+activity).addClass("active");
 };
 
 var ACTIVITY = {
@@ -54,3 +56,12 @@ var ACTIVITY = {
 		}
 	}
 }
+
+var toogleActivityForm = function(){
+	var parent = $(".activity.active");
+	if (parent.hasClass("activity-collapsed")){
+		parent.removeClass("activity-collapsed")
+	} else {
+		parent.addClass("activity-collapsed")
+	}
+};

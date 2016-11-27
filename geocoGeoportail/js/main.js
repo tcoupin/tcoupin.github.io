@@ -8,9 +8,8 @@ window.onload = function() {
 			setActivity($(this).attr('href').replace('#',''));
 		});
 	
-		$("a.config").click(function(){
-			toogleConfig();
-		});
+		$("a.config").click(toogleConfig);
+		$(".activity-title").click(toogleActivityForm);
 		
 		Gp.Services.getConfig({
     		apiKey: CONFIG.api_key,

@@ -18,6 +18,9 @@
 	margin-left: 100%;
 	position: absolute;
 } 
+a.config {
+	cursor: pointer;
+}
 div.config {
 	position: absolute;
 	background-color: #191818;
@@ -47,4 +50,40 @@ div.config-content {
 
 table.header {
 	border: 0;
+}
+
+
+.activity {
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 10px;
+    z-index: 1000;
+    left: 10px;
+    padding: 10px;
+    /* transition: all 0.5s; */
+    visibility: hidden;
+}
+
+.active {
+	visibility: visible;
+}
+.activity-collapsed .activity-form {
+	max-height: 0;
+	max-width: 0;
+}
+
+.activity-title {
+    /* transition: all 0.5s; */
+	font-weight: bold;
+	cursor: pointer;
+}
+.activity-form {
+	max-height: 1000px;
+	max-width: 1000px;
+    /* transition: all 0.5s; */
+    border-bottom: 1px dotted grey;
+    overflow: hidden;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
 }

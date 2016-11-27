@@ -35,13 +35,13 @@
 				<div class="pure-menu">
 					<a class="pure-menu-heading" href="../"><i class="fa fa-chevron-left" aria-hidden="true"></i> Retour</a>
 					<ul class="pure-menu-list">
-						<li class="pure-menu-item activity-link"><a href="#direct" class="pure-menu-link">Géocodage</a></li>
-						<li class="pure-menu-item activity-link"><a href="#reverse" class="pure-menu-link">Inverse</a></li>
-						<li class="pure-menu-item activity-link menu-item-divided">
-							<a href="#completion" class="pure-menu-link">Autocomplétion</a>
+						<li class="pure-menu-item"><a href="#direct" class="pure-menu-link activity-link">Géocodage</a></li>
+						<li class="pure-menu-item"><a href="#reverse" class="pure-menu-link activity-link">Inverse</a></li>
+						<li class="pure-menu-item menu-item-divided">
+							<a href="#completion" class="pure-menu-link activity-link">Autocomplétion</a>
 						</li>
-						<li class="pure-menu-item activity-link menu-item-divided"><a href="#routing" class="pure-menu-link">Itinéraire</a></li>
-						<li class="pure-menu-item activity-link"><a href="#isocurve" class="pure-menu-link">Isochrone</a></li>
+						<li class="pure-menu-item menu-item-divided"><a href="#routing" class="pure-menu-link activity-link">Itinéraire</a></li>
+						<li class="pure-menu-item"><a href="#isocurve" class="pure-menu-link activity-link">Isochrone</a></li>
 						<li class="pure-menu-item menu-item-divided">
 							<a class="pure-menu-link config">
 								<i class="fa fa-cog" aria-hidden="true"></i> Config
@@ -50,10 +50,60 @@
 					</ul>
 				</div>
 			</div>
+
+			<!-- Le contenu de l'application -->
 			<div id="main">
 				<div id="result">
+					<!-- La carte -->
 					<div id="map">
 					</div>
+					<!-- Les formulaires -->
+					<div>
+						<div class="activity activity-direct active">
+							<div class="activity-form">
+								<form class="pure-form pure-form-stacked">
+									<label for="direct-countrycode">Type</label>
+        							<select id="direct-countrycode">
+            							<option>PositionOfInterest</option>
+        							    <option>StreetAddress</option>
+        							    <option>Administratif</option>
+        							</select>
+        							<label for="direct-freeform">Recherche</label>
+        							<select id="direct-countrycode">
+            							<option>PositionOfInterest</option>
+        							    <option>StreetAddress</option>
+        							    <option>Administratif</option>
+        							</select>
+								</form>
+							</div>
+							<div class="activity-title">Géocodage</div>
+						</div>
+						<div class="activity activity-reverse">
+							<div class="activity-form">
+								TOTO
+							</div>
+							<div class="activity-title">Inverse</div>
+						</div>
+						<div class="activity activity-completion">
+							<div class="activity-form">
+								TOTO
+							</div>
+							<div class="activity-title">Autocomplétion</div>
+						</div>
+						<div class="activity activity-routing">
+							<div class="activity-form">
+								TOTO
+							</div>
+							<div class="activity-title">Itinéraire</div>
+						</div>
+						<div class="activity activity-isocurve">
+							<div class="activity-form">
+								TOTO
+							</div>
+							<div class="activity-title">Isochrone</div>
+						</div>
+					</div>
+					<!-- L'affichage de la requête -->
 					<div id="data">
 						<div class="data-content">
 							<form class="pure-form pure-form-aligned">
@@ -129,6 +179,9 @@
 						</div>
 					</div>
 				</div>
+
+
+
 				<label class="switch-light switch-candy switch-candy-blue" onclick="toogleMapData()">
 				  <input type="checkbox">
 				
