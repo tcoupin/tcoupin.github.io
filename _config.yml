@@ -20,3 +20,21 @@ author:
   github:         tcoupin
 
 #paginate:         5
+#
+
+reveal:
+  version:    3.3.0
+  
+highlighter: rouge
+collections:
+  presentations:
+    permalink: /presentations/:path/
+    output: true
+  slides:
+
+defaults:
+  - scope:
+      path: ""
+      type: presentations
+    values:
+      layout: presentations

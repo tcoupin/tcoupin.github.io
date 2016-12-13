@@ -1,0 +1,80 @@
+---
+---
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>{{ page.title }}</title>
+
+		<link rel="stylesheet" href="//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/css/reveal.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/lib/css/zenburn.css">
+
+		{% if page.theme %}
+			<link rel="stylesheet" href="//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/css/theme/{{ page.theme }}.css">
+		{% else %}		
+			<link rel="stylesheet" href="//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/css/theme/black.css">
+		{% endif %}
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/css/print/pdf.css' : '//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<script src="https://use.fontawesome.com/bc0b7d3ca9.js"></script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>{{ page.title }}</h1>
+					{{ page.subtitle }}
+				</section>
+				{% assign slides = content | split: "§new" %}
+				{% for slide in slides %}
+					<section>
+					{% assign vslides = slide | split: "§break" %}
+					{% for vslide in vslides %}
+						{% assign slidecontent = vslide | split: "§notes" %}
+						<section>
+							{{ slidecontent.first }}
+							{% if slidecontent.last != slidecontent.first %}
+								<aside class="notes">
+									{{ slidecontent.last }}
+								</aside>
+							{% endif %}
+						</section>
+					{% endfor %}
+					</section>
+				{% endfor %}
+			</div>
+		</div>
+
+		<script src="//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/lib/js/head.min.js"></script>
+		<script src="//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				{% for init in page.initialization %}
+				{{ init[0] }}: "{{ init[1] }}",
+				{% endfor %}
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '/public/plugin/paragraph-markup.js' },
+					{ src: '/public/plugin/print-shortcut.js' },
+					{ src: '//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/plugin/notes/notes.js', async: true },
+					{ src: '//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
+
+
