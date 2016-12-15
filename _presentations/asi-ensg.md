@@ -35,7 +35,7 @@ Thibault Coupin
 §id:sommaire§;
 
 - [Définitions](#definitions)
-- [Mais pourquoi ?](#why)
+- [Pourquoi et comment ?](#why)
 - [Les principes d'architectures](#principes)
 
 §new
@@ -162,8 +162,128 @@ Conception et structure du SI selon plusieurs axes :
 <!--                          | |                     -->
 <!--                          |_|                     -->
 
-## Mais pourquoi ?
+## Pourquoi et comment ?
 §id:why§;
+
+- [Le SI informatique des entreprises](#entreprise)
+- [Les enjeux](#enjeux)
+- [Les acteurs](#acteurs)
+
+§break
+
+§id:entreprise§;
+
+## Le SI informatique des entreprises
+
+* **70s** : 3e révolution industrielle "révolution informatique" : Arpanet (1969), microprocesseur (1971), ordinateur de bureau (1977) ; §fragment
+* **70s-80s** : informatisation de l'entreprise et de son SI, sentiment de modernité. Le changement peut se faire par partie, p2p ou au hasard ;§fragment
+* **2000s** : explosion d'internet avec plusieurs impacts : §fragment
+  - internet est un nouveau réseau en plus de celui de l'entreprise. §fragment
+  - internet impose TCP/IP §fragment
+  - internet est un nouveau moyen de se faire du $$$ §fragment
+* **Aujourd'hui** : urbanisation du SI : diminution des coûts, rationalisation, optimisation (retour sur investissement). §fragment
+
+§break
+§id:enjeux§;
+
+## Les enjeux
+
+L'organisation de l'information dans l'entreprise est un pré-requis pour faire des profits et être efficace.
+
+§break
+
+## Les enjeux
+Nature très variée de l'information selon les activités de l'organisation :
+- commande
+- stock
+- annuaire
+- info géographique... 
+
+§break
+
+## Les enjeux
+
+Données "business" et "méta-données"
+
+- rapport
+- RH
+- comptabilité analytique...
+
+§break
+
+## Le découpage classique de l'entreprise
+On peut découper l'entreprise en 3 sous-sytèmes :
+
+- le système de pilotage §fragment §element:class=grow§;
+- le SI §fragment §element:class=grow§;
+- le systéme opérant §fragment §element:class=grow§;
+
+§break
+
+## Le système de pilotage
+
+- Exploite les informations qui circulent §fragment
+- Organise le fonctionnement du système §fragment
+- Décide des actions à conduire sur le système opérant §fragment
+- Raisonne en fonction des objectifs et des politiques de l’entreprise §fragment
+
+§break
+
+## Le système opérant
+
+- Reçoit les informations émises par le système de pilotage  §fragment
+- Se charge de réaliser les tâches qui lui sont confiées  §fragment
+- Génère à son tour des informations en direction du système de pilotage  §fragment
+  - Qui peut ainsi contrôler les écarts et agir en conséquence  §fragment
+- Il englobe toutes les fonctions liées à l’activité propre de l’entreprise :  §fragment
+  - Facturer les clients, régler les salaires, gérer les stocks, ...  §fragment
+
+§break
+
+## Le SI
+
+- Pour organiser son fonctionnement, le système a besoin de mémoriser des informations : pour comparer, prévoir, ... §fragment
+- Diffuser l’information §fragment
+- Réaliser tous les traitements nécessaires au fonctionnement du système §fragment
+
+§break
+
+![Schéma d'organisation des systèmes d'une entreprise](/data/asi_entreprise.png)
+
+<i class="fa fa-copyright" aria-hidden="true"></i> G. Rivière
+
+§break
+§id:acteurs§;
+
+## Les acteurs
+§slide:data-transition=fade§;
+**Direction du SI** : Piloter, décider en ayant une vision stratégique.
+§break
+
+## Les acteurs
+§slide:data-transition=fade§;
+**Maitrise d'ouvrage (MOA)** : Entitée porteuse du besoin. Elle établit les objectifs, le calendrier et le budget. Son objectif est la réalisation des oeuvres (==ouvrage)
+§break
+
+## Les acteurs
+§slide:data-transition=fade§;
+**Maitrise d'ouvrage (MOE)** : Entitée, chargée par la MOA, d'effectuer la réalisation de l'oeuvre. Assiste et conseille la MOA, dirige l'exécution de l'oeuvre.
+§break
+
+## Les acteurs
+§slide:data-transition=fade§;
+**Etudes et dévelopement** : Entité qui conçoit et produit l'oeuvre. Dirigée par la MOE. (Ce sont les dévelopeurs...)
+§break
+
+## Les acteurs
+§slide:data-transition=fade§;
+**Production et exploitation** : Entité chargée de faire fonctionner les oeuvres, ainsi que les maintenir en conditions opérationnelles. (Ce sont les ops...)
+§break
+
+## Les acteurs
+§slide:data-transition=fade§;
+**Support** : Entité assurant le suivi des utilisateurs des ouvrages. Niveaux 1 / 2 / 3
+
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
