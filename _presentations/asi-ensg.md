@@ -195,6 +195,7 @@ L'organisation de l'information dans l'entreprise est un pré-requis pour faire 
 
 ## Les enjeux
 Nature très variée de l'information selon les activités de l'organisation :
+
 - commande
 - stock
 - annuaire
