@@ -139,6 +139,26 @@ Docker ne lance qu'un seule processus**, c'est plus rapide !§fragment**
 ## Concepts
 §id:concepts§;
 
+§break
+
+## Images
+
+Les applications sont diffusées dans des *images*. 
+
+Où on les trouve ? 
+
+- hub.docker.com : des images officielles ou communautaires 
+- à construire soi-même 
+  - from sracth, images totalement vide
+  - sur des images de base (ubuntu, centOs, alpine)
+
+§break
+
+## Conteneurs 
+
+Une application tourne dans un *conteneurs*.
+ 
+Un conteneur se base sur une image.
 
 
 §break
