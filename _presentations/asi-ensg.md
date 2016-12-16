@@ -139,6 +139,7 @@ Notion d'agencement, de contexte, d'humain.
 ### Architecture des systèmes d'informations
 
 Conception et structure du SI selon plusieurs axes :
+
 - **l'organisation** : procédure (humaine et informatique), politique... §fragment
 - **la structuration de l'information** : quel modèle de données ?§fragment
 - **les logiciels** : découpage en couches et modules§fragment
