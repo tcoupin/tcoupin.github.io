@@ -30,6 +30,14 @@ Thibault Coupin
 
 §break
 
+### Sources :
+
+- *Chapitre : Informatisation du Système d’Information* - **Guillaume Rivière** (ESTIA)
+- *Architecture des Systèmes d'Informations* - **Damien Duportal** [http://dduportal.github.io/cours/ensg-asi-2015/](http://dduportal.github.io/cours/ensg-asi-2015/)
+- Wikipédia :)
+
+§break
+
 ## Sommaire
 
 §id:sommaire§;
@@ -180,7 +188,7 @@ Conception et structure du SI selon plusieurs axes :
 * **2000s** : explosion d'internet avec plusieurs impacts : §fragment
   - internet est un nouveau réseau en plus de celui de l'entreprise. §fragment
   - internet impose TCP/IP §fragment
-  - internet est un nouveau moyen de se faire du $$$ §fragment
+  - internet est un nouveau moyen de se faire du $€£ §fragment
 * **Aujourd'hui** : urbanisation du SI : diminution des coûts, rationalisation, optimisation (retour sur investissement). §fragment
 
 §break
@@ -258,32 +266,37 @@ On peut découper l'entreprise en 3 sous-sytèmes :
 ## Les acteurs
 §slide:data-transition=fade§;
 **Direction du SI** : Piloter, décider en ayant une vision stratégique.
+<small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Maitrise d'ouvrage (MOA)** : Entitée porteuse du besoin. Elle établit les objectifs, le calendrier et le budget. Son objectif est la réalisation des oeuvres (==ouvrage)
+<small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Maitrise d'ouvrage (MOE)** : Entitée, chargée par la MOA, d'effectuer la réalisation de l'oeuvre. Assiste et conseille la MOA, dirige l'exécution de l'oeuvre.
+<small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Etudes et dévelopement** : Entité qui conçoit et produit l'oeuvre. Dirigée par la MOE. (Ce sont les dévelopeurs...)
+<small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Production et exploitation** : Entité chargée de faire fonctionner les oeuvres, ainsi que les maintenir en conditions opérationnelles. (Ce sont les ops...)
+<small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Support** : Entité assurant le suivi des utilisateurs des ouvrages. Niveaux 1 / 2 / 3
-
+<small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
