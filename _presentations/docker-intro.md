@@ -36,9 +36,11 @@ Thibault Coupin
 §id:sommaire§;
 
 - [Intro](#intro)
-- [Concepts](#concepts)
-- [Docker engine](#engine)
-- [Docker compose](#compose)
+- [Images](#images)
+- [Conteneurs](#containers)
+- [Réseaux (base)](#networks)
+- [Volumes](#volumes)
+- [Dockerfile](#dockerfile)
 
 §new
 
@@ -125,73 +127,251 @@ Environ 200 processus actifs...
 Docker ne lance qu'un seule processus**, c'est plus rapide !§fragment**
 
 §break
-[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
-§new
 
-<!--   _____                           _        -->
-<!--  / ____|                         | |       -->
-<!-- | |     ___  _ __   ___ ___ _ __ | |_ ___  -->
-<!-- | |    / _ \| '_ \ / __/ _ \ '_ \| __/ __| -->
-<!-- | |___| (_) | | | | (_|  __/ |_) | |_\__ \ -->
-<!--  \_____\___/|_| |_|\___\___| .__/ \__|___/ -->
-<!--                            | |             -->
-<!--                            |_|             -->
+## Terminologie
 
-## Concepts
-§id:concepts§;
+Pour démarrer une application de façon isolée, on lance un **conteneur§fragment** basé sur une **image§fragment**.
+
+Pour stocker des données on peut associer le conteneur à un ou plusieurs **volumes§fragment**.§fragment
+
+Le conteneur peut être associé à un ou plusieurs **réseaux§fragment** pour communiquer avec d'autres conteneurs ou avec l'extérieur.§fragment
 
 §break
 
-## Images
+## La ligne de commande
 
-Les applications sont diffusées dans des *images*. 
+La suite de cette présentation liste les commandes utiles.
 
-Où on les trouve ? 
+La liste complète est disponible sur la [documentation](https://docs.docker.com/engine/reference/commandline/)
 
-- hub.docker.com : des images officielles ou communautaires 
+§break
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
+§new
+
+<!--  _____                                  -->
+<!-- |_   _|                                 -->
+<!--   | |  _ __ ___   __ _  __ _  ___  ___  -->
+<!--   | | | '_ ` _ \ / _` |/ _` |/ _ \/ __| -->
+<!--  _| |_| | | | | | (_| | (_| |  __/\__ \ -->
+<!-- |_____|_| |_| |_|\__,_|\__, |\___||___/ -->
+<!--                         __/ |           -->
+<!--                        |___/            -->
+
+## Les images
+§id:images§;
+
+L'image est le "disque dur"* du conteneur.
+
+Elle contient le système d'exploitation et l'application.
+
+<small>*Le terme "disque dur" n'est pas parfait, à voir juste après dans le chapitre [conteneurs](#containers)</small>
+
+§notes
+"Disque dur" n'est pas le bon terme : les modifications du système de fichiers n'affecte pas l'image. A voir juste après dans la partie conteneurs.
+
+§break
+
+### Où on les trouve ? 
+
+- [hub.docker.com](https://hub.docker.com) : des images officielles ou communautaires 
 - à construire soi-même 
-  - from sracth, images totalement vide
-  - sur des images de base (ubuntu, centOs, alpine)
+  - *from sracth* ou basée sur des images de base (ubuntu, centOs, alpine)
+  - à partir d'un *Dockerfile*
+  - en *commitant* un conteneur
 
 §break
 
-## Conteneurs 
+### Les comandes utiles
 
-Une application tourne dans un *conteneurs*.
- 
-Un conteneur se base sur une image.
+Lister les images locales
+
+```
+$ docker images 
+REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
+forumi0721/alpine-armv7h-minidlna   latest              8418d491e218        2 weeks ago         44.34 MB
+hypriot/rpi-traefik                 latest              a1350c91b51e        3 weeks ago         37.91 MB
+portainer/portainer                 arm                 dc7e0ee82da9        6 weeks ago         10.27 MB
+tcoupin/rpi-gpass                   latest              f8bfd0e5c152        6 weeks ago         193.8 MB
+...
+```
+§break
+
+### Les comandes utiles
+
+Chercher une image sur hub.docker.com
+
+```
+$ docker search hello-world
+NAME                                      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+hello-world                               Hello World! (an example of minimal Docker...   225       [OK]       
+tutum/hello-world                         Image to test docker deployments. Has Apac...   29                   [OK]
+dockercloud/hello-world                   Hello World!                                    9                    [OK]
+marcells/aspnet-hello-world               ASP.NET vNext - Hello World                     4                    [OK]
+...
+```
+§break
+
+### Les comandes utiles
+
+Télécharger une image
+
+```
+$ docker pull hypriot/rpi-busybox-httpd
+```
+§break
+
+### Les comandes utiles
+
+Supprimer une image locale
+
+```
+$ docker rmi hypriot/rpi-busybox-httpd
+```
+
+<i class="fa fa-warning" aria-hidden="true"></i> Ne pas confondre avec *rm* qui supprime un conteneur.
+
+§break
+
+### Les comandes utiles
+
+Construire une image avec un Dockerfile
+
+```
+$ docker build DOCKERFILE_PATH
+```
+
+- *DOCKERFILE_PATH* est le chemin du dossier contenant le Dockerfile.
+
+Plus de détails dans le chapitre [Dockerfile](#dockerfile).
+
+§break
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
+§new
+
+
+<!--   _____            _                                  -->
+<!--  / ____|          | |                                 -->
+<!-- | |     ___  _ __ | |_ ___ _ __   ___ _   _ _ __ ___  -->
+<!-- | |    / _ \| '_ \| __/ _ \ '_ \ / _ \ | | | '__/ __| -->
+<!-- | |___| (_) | | | | ||  __/ | | |  __/ |_| | |  \__ \ -->
+<!--  \_____\___/|_| |_|\__\___|_| |_|\___|\__,_|_|  |___/ -->
+
+## Les conteneurs
+§id:containers§;
+Un conteneur est une instance d'une image avec ses propres réglages.
+
+Le conteneur permet d'isoler un processus (et ses enfants) et ne peut pas vivre si le processus se termine.
+
+Chaque conteneur a son propre stockage même s'ils sont basés sur la même image.
+
+§break
+
+### Démarrer un conteneur
+
+```
+docker run OPTIONS IMAGE[:TAG] COMMANDE 
+```
+
+- *OPTIONS* : diverses options sont possibles
+- *IMAGE* : le nom de l'image ou son identifiant. On peut préciser une version avec le *TAG*
+- *COMMANDE* : la commande à lancer dans le conteneur. L'image peut être associée à une commande par défaut
+
+§break
+
+### Démarrer un conteneur
+
+Exemple :
+
+```
+docker run debian:jessie cat /etc/hostname
+```
+
+Le conteneur affiche le contenu du fichier `/etc/hostname` et s'arrête.
+
+§break
+
+### Lister les conteneurs
+
+```
+$ docker ps
+CONTAINER ID        IMAGE                               COMMAND                  CREATED             STATUS              PORTS                                      NAMES
+```
+
+Mais pourquoi on ne voit pas le conteneur d'avant ? §fragment
+
+```
+$ docker ps -a §fragment
+CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS                     PORTS                               NAMES
+a5b74e24da65        debian:jessie            "cat /etc/hostname"      9 seconds ago       Exited (0) 6 seconds ago                                       happy_cori
+```
+
+§break
+
+### Supprimer les conteneurs
+
+```
+$ docker rm NOM
+```
+
+§break
+
+### Gérer les conteneurs
+
+- `stop` et `start`
+- `retart`
+- `pause` et `unpause`
+
+§break
+
+### Options utiles
+
+- *--name* :  donner un nom au conteneur
+- *-i* : interactif§fragment
+- *-t* : forcer l'allocation d'un TTY§fragment
+- *--rm* : supprimer le conteneur à la fin de son exécution§fragment
+- *-d* : démarrer le conteneur en arrière-plan§fragment
 
 
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
 
-<!--  ______             _             -->
-<!-- |  ____|           (_)            -->
-<!-- | |__   _ __   __ _ _ _ __   ___  -->
-<!-- |  __| | '_ \ / _` | | '_ \ / _ \ -->
-<!-- | |____| | | | (_| | | | | |  __/ -->
-<!-- |______|_| |_|\__, |_|_| |_|\___| -->
-<!--                __/ |              -->
-<!--               |___/               -->
-
-## Docker Engine
-§id:engine§;
+<!--  _____   __                             -->
+<!-- |  __ \ /_/                             -->
+<!-- | |__) |___  ___  ___  __ _ _   ___  __ -->
+<!-- |  _  // _ \/ __|/ _ \/ _` | | | \ \/ / -->
+<!-- | | \ \  __/\__ \  __/ (_| | |_| |>  <  -->
+<!-- |_|  \_\___||___/\___|\__,_|\__,_/_/\_\ -->
+## Les réseaux
+§id:networks§;
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
 
-<!--   _____                                      -->
-<!--  / ____|                                     -->
-<!-- | |     ___  _ __ ___  _ __   ___  ___  ___  -->
-<!-- | |    / _ \| '_ ` _ \| '_ \ / _ \/ __|/ _ \ -->
-<!-- | |___| (_) | | | | | | |_) | (_) \__ \  __/ -->
-<!--  \_____\___/|_| |_| |_| .__/ \___/|___/\___| -->
-<!--                       | |                    -->
-<!--                       |_|                    -->
-
-## Docker Compose
-§id:compose§;
+<!-- __      __   _                            -->
+<!-- \ \    / /  | |                           -->
+<!--  \ \  / /__ | |_   _ _ __ ___   ___  ___  -->
+<!--   \ \/ / _ \| | | | | '_ ` _ \ / _ \/ __| -->
+<!--    \  / (_) | | |_| | | | | | |  __/\__ \ -->
+<!--     \/ \___/|_|\__,_|_| |_| |_|\___||___/ -->
+                                          
+## Les volumes
+§id:volumes§;
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
-§new
+
+§new                                      
+
+<!--  _____             _              __ _ _       -->
+<!-- |  __ \           | |            / _(_) |      -->
+<!-- | |  | | ___   ___| | _____ _ __| |_ _| | ___  -->
+<!-- | |  | |/ _ \ / __| |/ / _ \ '__|  _| | |/ _ \ -->
+<!-- | |__| | (_) | (__|   <  __/ |  | | | | |  __/ -->
+<!-- |_____/ \___/ \___|_|\_\___|_|  |_| |_|_|\___| -->
+                                               
+## Dockerfile
+§id:dockerfile§;
+§break
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
+
+§new                                                                                     
