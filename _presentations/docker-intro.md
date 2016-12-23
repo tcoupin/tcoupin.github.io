@@ -1,6 +1,7 @@
 ---
-title: "[En cours] Intro à docker"
+title: "Intro à docker"
 subtitle: ENSG, février 2017
+draft: true
 theme: night
 initialization:
   transition: convex
