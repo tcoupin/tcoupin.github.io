@@ -258,11 +258,11 @@ Plus de détails dans le chapitre [Dockerfile](#dockerfile).
 
 ## Les conteneurs
 §id:containers§;
-Un conteneur est une instance d'une image avec ses propres réglages.
 
-Le conteneur permet d'isoler un processus (et ses enfants) et ne peut pas vivre si le processus se termine.
-
-Chaque conteneur a son propre stockage même s'ils sont basés sur la même image.
+- Un conteneur est une instance d'image.
+- Le conteneur permet d'isoler un processus (et ses enfants)
+- Le conteneur ne peut pas vivre si le processus se termine.
+- Chaque conteneur a son propre stockage même s'ils sont basés sur la même image.
 
 §break
 
@@ -290,6 +290,24 @@ Le conteneur affiche le contenu du fichier `/etc/hostname` et s'arrête.
 
 §break
 
+### Démarrer un conteneur
+
+Exemple :
+
+```
+docker run -it debian:jessie /bin/bash
+```
+
+Démarre un terminal bash dans le conteneur.
+
+*Comme si on était dans une VM.*
+
+§notes
+df -h pour voir le montage des volumes
+ifconfig pour voir la config réseau
+
+§break
+
 ### Lister les conteneurs
 
 ```
@@ -297,7 +315,7 @@ $ docker ps
 CONTAINER ID        IMAGE                               COMMAND                  CREATED             STATUS              PORTS                                      NAMES
 ```
 
-Mais pourquoi on ne voit pas le conteneur d'avant ? §fragment
+Mais pourquoi on ne voit pas les conteneurs d'avant ? §fragment
 
 ```
 $ docker ps -a §fragment
@@ -333,6 +351,20 @@ $ docker rm NOM
 
 
 §break
+
+### Le stockage dans un conteneur
+
+Les modifications dans le système de fichier sont stockées dans une surcouche de l'image.
+
+![Couches de conteneurs](https://docs.docker.com/engine/userguide/storagedriver/images/container-layers.jpg)
+
+§notes
+Partage des couches images pour tous les conteneurs basés sur la même image.
+Une image est un assemblage de couche.
+Commiter un conteneur revient à ajouter une couche à une image.
+
+§break
+
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
 
@@ -344,6 +376,73 @@ $ docker rm NOM
 <!-- |_|  \_\___||___/\___|\__,_|\__,_/_/\_\ -->
 ## Les réseaux
 §id:networks§;
+
+L'isolation porte aussi sur le réseau.
+
+
+- On contrôle les liens réseaux associés au conteneur **: réseaux virtuels§fragment** §fragment
+- On contrôle les liens entre ces réseaux virtuels et les réseaux physiques de l'hôte.§fragment
+
+§break
+
+### L'option `--net`
+
+La commande *run* offre l'option `--net`
+
+Les 3 valeurs les plus répandues : 
+
+- `none` : pas de réseau
+- `host` : les réseaux de l'hôte
+- `bridge` (par défaut) : un réseau isolé avec un mécanisme de *bridge*
+
+§break 
+### Pas de réseau
+
+```
+docker run --rm --net none debian:jessie ip a
+```
+
+Seulement l'interface *loopback*.§fragment
+
+§break
+
+### Réseau de l'hôte
+
+```
+docker run --rm --net host debian:jessie ip a
+```
+
+Toutes les interfaces de la machine hôte (eth0, wlan0...).§fragment
+
+§break
+
+### Réseau isolé
+
+- Les conteneurs sont sur un réseau séparé
+- Ils peuvent communiquer avec l'extérieur et entre eux
+- L'extérieur ne peut pas communiquer avec le conteneur, sauf si explicitement demandé (option `-p`).
+
+§break
+
+### Exposer un port avec l'option `-p`
+
+```
+docker run --rm -p 8080:80 httpd:alpine
+```
+
+[http://127.0.0.1:8080](http://127.0.0.1:8080)
+
+Le port 8080 de la machine hôte est redirigé vers le port 80 du conteneur.§fragment
+
+§break
+
+### Communication inter-conteneurs
+
+- Les conteneurs peuvent communiquer avec les autres sur le même réseau, mais il faut connaître l'IP.
+- Le DNS peut être modifié localement dans le conteneur avec 2 options :
+  - `--link` : on déclare le lien entre 2 conteneurs : `--link CONTENEUR_NAME:ALIAS`
+  - `--add-host` : on ajoute manuellement une entrée DNS dans le conteneur : `--add-host NAME:IP`
+
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
@@ -357,6 +456,47 @@ $ docker rm NOM
                                           
 ## Les volumes
 §id:volumes§;
+
+Lorsqu'on détruit un conteneur, on supprime aussi les modifications apportées au système de fichier.
+
+Les conteneurs ne partagent pas leur système de fichiers entre-eux.
+
+**Les volumes apportent une solution à cela.§fragment**
+
+§break
+
+### Les volumes
+
+- permettent la persistance des données au delà du conteneur
+- permettent le partage de données entre plusieurs conteneurs
+
+§break
+
+### Types
+
+- un dossier de la machine hôte
+- un volume géré par docker
+
+§break
+
+### Volume hôte
+
+On utilise l'option `-v LOCAL_PATH:PATH_ON_CONTAINER:MODE`
+
+- *LOCAL_PATH* : le chemin absolu sur l'hôte
+- *PATH_ON_CONTAINER* : où brancher ce dossier dans le conteneur ?
+- *MODE* (optionnel) : mode d'accès, principalement *rw* (par défaut) et *ro*
+
+```
+docker run --rm -it -v /:/monhote:ro debian:jessie /bin/bash
+```
+
+§break
+
+### Volume docker
+
+
+
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 
@@ -375,3 +515,4 @@ $ docker rm NOM
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 
 §new                                                                                     
+
