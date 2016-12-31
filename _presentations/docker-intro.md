@@ -152,6 +152,7 @@ Le conteneur peut être associé à un ou plusieurs **réseaux§fragment** pour 
 La suite de cette présentation liste les commandes utiles.
 
 La liste complète est disponible :
+
 - sur la [documentation web](https://docs.docker.com/engine/reference/commandline/)
 - en ligne de commande `docker help`
 
