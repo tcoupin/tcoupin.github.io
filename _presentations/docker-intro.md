@@ -1,7 +1,6 @@
 ---
 title: "Intro à docker"
 subtitle: ENSG, février 2017
-draft: true
 theme: night
 initialization:
   transition: convex
@@ -811,5 +810,8 @@ VOLUME #Ajout d'un volume
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 
 §new                                                                                     
- 
-## That's all folks !
+
+<i class="fa fa-copyright" aria-hiden="true"></i> N. De Loof & 
+<i class="fa fa-copyright" aria-hiden="true"></i> Docker, Inc.
+
+§slide: data-background-image=http://1.bp.blogspot.com/-uW4MDLVVJxw/WFA35g_80-I/AAAAAAAATWs/aVMGBGKrcKYzQrYJ8oswJxDcVJ70yRnjQCK4B/s1600/that%2527s%2Ball%2Bfolks.png §;
