@@ -461,11 +461,100 @@ Exemple en Géomatique :
 
 *Pas bien.*§fragment
 
+§notes
+Avant de passer à la suite : réfléchir à ce qui n'est "pas bien"
+
 §break
 
 ### 3 tiers
 
 ![Modèle 3 tiers](/data/modele3tiers.png)
 
+- Présentation§fragment
+- Traitement métier§fragment
+- Accès aux données§fragment
+
+§break
+
+### Répartition
+
+§element: style=background-color:white§;
+![Répartition en 3 tiers](http://dduportal.github.io/cours/ensg-asi-2015/images/pld_gartner_classification.gif)
+
+§break
+
+### Généralisation : N tiers
+
+Diviser la couche **métier** pour simplifier.
+
+§break
+
+### Architecture distribuée
+
+- Plusieurs référentiels de données
+- Plusieurs traitements métiers
+- Plusieurs présentations
+
+§break
+### Architecture distribuée
+
+![Archi distribuée](http://dduportal.github.io/cours/ensg-asi-2015/images/arch_distribuee.png)
+
+§break
+### Architecture distribuée
+
+- Rationalisation et rentabilisation des composants
+- Distribution des données et des traitements
+- Découpage par unité métier
+
+§break
+### Problèmes inhérents à la distribution
+
+- Cohérence de l'information
+- Concurrence des actions
+- Complexité de l'architecture
+
+§break
+### Problèmes inhérents à la distribution
+#### Cohérence de l'information
+
+Quelque soit le chemin emprunté, la donnée doit rester cohérente.
+
+§break
+### Problèmes inhérents à la distribution
+#### Concurrence des actions
+
+Plusieurs éléments manipulent en même temps la même donnée.
+
+Qui gagne ?
+
+§break
+### Problèmes inhérents à la distribution
+#### Complexité de l'architecture
+
+Multiplication des éléments de l'architecture.
+
+§break
+
+### Pourquoi distribuer ?
+
+Distribution = scalabilité horizontale
+
+VS
+
+Scalabilité verticale = grossir les machines
+
+
+*Damien Duportal : [Notions de répartition des ressources](http://dduportal.github.io/cours/ensg-asi-2015/repartition-ressources.html)*§fragment:1§;
+
+§break
+
+### Pourquoi distribuer ?
+
+Mise en place de la Haute Disponibilité (HA)
+
+*Damien Duportal : [Notions de HA](http://dduportal.github.io/cours/ensg-asi-2015/ha.html)*§fragment:1§;
+
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
+
