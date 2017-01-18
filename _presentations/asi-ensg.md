@@ -319,5 +319,153 @@ On peut découper l'entreprise en 3 sous-sytèmes :
 
 ## Les principes d'architectures
 §id:principes§;
+
+§break
+
+### UML
+
+L'UML pour aider à architecturer un système d'information ?
+
+§break
+
+### Rappel : Architecture des systèmes d'informations
+
+Conception et structure du SI selon plusieurs axes :
+
+- **l'organisation** : procédure (humaine et informatique), politique... §fragment
+- **la structuration de l'information** : quel modèle de données ?§fragment
+- **les logiciels** : découpage en couches et modules§fragment
+- **le matériel et la technique** : quel serveur, quel réseau, quelle baie...§fragment
+
+§break
+
+### UML : les 5 vues
+§slide:data-transition=fade§;
+![Les 5 vues UML](https://upload.wikimedia.org/wikipedia/commons/a/aa/UML_Vues.png)
+
+*Source : wikipédia*
+
+§break
+
+### UML : les 5 vues
+§slide:data-transition=fade§;
+
+![Les 5 vues UML](https://upload.wikimedia.org/wikipedia/commons/a/aa/UML_Vues.png)
+
+- **l'organisation** : procédure (humaine et informatique), politique... 
+
+Vue des procedure et des cas d'utilisation : acteurs, séquences...§fragment
+§break
+
+### UML : les 5 vues
+§slide:data-transition=fade§;
+
+![Les 5 vues UML](https://upload.wikimedia.org/wikipedia/commons/a/aa/UML_Vues.png)
+
+- **la structuration de l'information** : quel modèle de données ?
+
+Vue logique : modèle de données§fragment
+§break
+
+### UML : les 5 vues
+§slide:data-transition=fade§;
+
+![Les 5 vues UML](https://upload.wikimedia.org/wikipedia/commons/a/aa/UML_Vues.png)
+
+- **les logiciels** : découpage en couches et modules
+
+Vue d'implémentation§fragment
+
+§break
+
+### UML : les 5 vues
+§slide:data-transition=fade§;
+
+![Les 5 vues UML](https://upload.wikimedia.org/wikipedia/commons/a/aa/UML_Vues.png)
+
+- **le matériel et la technique** : quel serveur, quel réseau, quelle baie...
+
+Vue du déploiement§fragment
+§break
+
+### Principes de conception
+
+La brique de base est appelée *tiers*.
+
+Un acteur, un élément du déploiement, un applicatif qui a une fonction particulière.§fragment
+
+§break
+
+### 1 tiers
+
+Un peu seul au monde§fragment
+![Seul au monde](http://cdn.cinemur.fr/posts/cache/cast7-1024x550.jpg)
+
+§break
+
+### 2 tiers : client-serveur
+
+![Modèle client-serveur](/data/modele2tiers.png)
+
+
+1. Le serveur est en attente§fragment:1§;
+2. Le client initie la connection§fragment:1§;
+3. Le serveur répond à la requête du client§fragment:1§;
+
+§break
+### 2 tiers : client-serveur
+
+- relation maître-esclave
+- même protocole de communication (HTTP ?)
+- le serveur a l'information
+- le serveur est un middleware§fragment
+
+§break
+
+### Middleware : intergicielle
+
+> Un middleware est une couche logicielle qui permet la diffusion de la donnée.
+
+§break
+
+### Middleware
+
+4 familles :
+- §fragment**Message-oriented Middleware** : échange de message (pas des emails <i class="fa fa-smile-o" aria-hidden="true"></i>)
+- §fragment**Remote procedure call** : demande de traitement
+- §fragment**Objects request broker** : manipulation d'objet (attributs et méthodes)
+- §fragment**Transactional monitors** : une transaction est une suite d'opérations indissociables - qui doivent être réalisées entièrement ou pas du tout (rollback)
+
+
+§notes
+MOM : faible couplage, concept de file
+RPC : appel asynchrone (exemple en geomatique : WPS)
+ORB : les traitements de l'objet sont faites sur le serveur
+TM  : SGCB ACID
+
+§break
+
+### 2 tiers : répartition des rôles
+
+![Répartition dans le modèle 2 tiers](http://dduportal.github.io/cours/ensg-asi-2015/images/arch_2_tiers_2_types.png)
+*Source : Damien Duportal*
+
+§notes
+Exemple en Géomatique :
+- WMS : sélection des données et rendu coté serveur
+- WFS : sélection des données côté serveur et rendu côté client
+
+§break
+
+### 2 tiers : couplage fort
+
+*Pas bien.*§fragment
+
+§break
+
+### 3 tiers
+
+![Modèle 3 tiers](/data/modele3tiers.png)
+
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
