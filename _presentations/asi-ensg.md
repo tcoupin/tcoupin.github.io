@@ -425,6 +425,7 @@ Un peu seul au monde§fragment
 3. Le serveur répond à la requête du client§fragment:1§;
 
 §break
+
 ### 2 tiers : client-serveur
 
 - relation maître-esclave
@@ -504,7 +505,9 @@ Avant de passer à la suite : réfléchir à ce qui n'est "pas bien"
 Diviser la couche **métier** pour simplifier.
 
 §break
+
 ### Architecture distribuée
+
 §id:distribuee§;
 §break
 
@@ -515,6 +518,7 @@ Diviser la couche **métier** pour simplifier.
 - Plusieurs présentations
 
 §break
+
 ### Architecture distribuée
 
 §element: style=background-color:white§;
@@ -524,6 +528,7 @@ Diviser la couche **métier** pour simplifier.
 *Source : Damien Duportal*
 
 §break
+
 ### Architecture distribuée
 
 - Rationalisation et rentabilisation des composants
@@ -539,13 +544,17 @@ Diviser la couche **métier** pour simplifier.
 - Complexité de l'architecture
 
 §break
+
 ### Problèmes inhérents à la distribution
+
 #### Cohérence de l'information
 
 Quelque soit le chemin emprunté, la donnée doit rester cohérente.
 
 §break
+
 ### Problèmes inhérents à la distribution
+
 #### Concurrence des actions
 
 Plusieurs éléments manipulent en même temps la même donnée.
@@ -553,7 +562,9 @@ Plusieurs éléments manipulent en même temps la même donnée.
 Qui gagne ?
 
 §break
+
 ### Problèmes inhérents à la distribution
+
 #### Complexité de l'architecture
 
 Multiplication des éléments de l'architecture.
@@ -582,6 +593,7 @@ Mise en place de la Haute Disponibilité (HA)
 §break 
 
 ### Exemple de système distribué
+
 ### Le Géoportail
 
 - des serveurs web exposés sur Internet §fragment
@@ -594,8 +606,11 @@ Mise en place de la Haute Disponibilité (HA)
   - une base de données Postgis
   - un "gros" disque dur pour les données raster
 
+
 §break
+
 ### Exemple de système distribué
+
 ### Stockage distribué
 
 - Le stockage objet (Amazon S3, OS Swift, Ceph...)
@@ -604,7 +619,10 @@ Mise en place de la Haute Disponibilité (HA)
 Les capacités de stockage d'un pool de machine sont mises en commun pour assurer la disponibilité de la donnée (disponibilité, cohérence).
 
 §break
+
+
 ### Exemple de système distribué
+
 ### Calcul distribué
 
 Le principe du *map-reduce*.
@@ -613,7 +631,9 @@ Le principe du *map-reduce*.
 - Boinc : utiliser les ressources de particuliers pour la recherche
 
 §break
+
 ### Architecture orientée services
+
 §id:services§;
 En anglais *SOA*.
 §break
@@ -734,6 +754,7 @@ REST :
 §break
 
 ### Architecture micro-services
+
 §id:microservices§;
 
 Généralement du WOA avec un découpage beaucoup plus fin :
