@@ -1,7 +1,6 @@
 ---
 title: "Architecture des systèmes d'informations"
 subtitle: ENSG, février 2017
-draft: true
 theme: night
 initialization:
   transition: convex
