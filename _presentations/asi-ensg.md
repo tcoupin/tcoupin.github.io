@@ -444,6 +444,7 @@ Un peu seul au monde§fragment
 ### Middleware
 
 4 familles :
+
 - §fragment**Message-oriented Middleware** : échange de message (pas des emails <i class="fa fa-smile-o" aria-hidden="true"></i>)
 - §fragment**Remote procedure call** : demande de traitement
 - §fragment**Objects request broker** : manipulation d'objet (attributs et méthodes)
@@ -469,6 +470,7 @@ TM  : SGCB ACID
 
 §notes
 Exemple en Géomatique :
+
 - WMS : sélection des données et rendu coté serveur
 - WFS : sélection des données côté serveur et rendu côté client
 
@@ -721,6 +723,7 @@ Comment intégrer les services dans mon SI ?
 §break
 
 ### SOA : variante ESB
+
 - <i class="fa fa-check" aria-hidden="true"></i> Pas de SPOFs
 - <i class="fa fa-check" aria-hidden="true"></i> Même avantages que l'EAI (hub, interfaces, etc.)
 - <i class="fa fa-cross" aria-hidden="true"></i> Coût initial + complexité du messaging
@@ -739,6 +742,7 @@ Comment intégrer les services dans mon SI ?
 ### SOA : variante WOA
 
 Le service web :
+
 - old school : SOAP, WSDL...
 - REST : Representational State Transfer
 
@@ -747,6 +751,7 @@ Le service web :
 ### SOA : variante WOA
 
 REST :
+
 - **URL** : Uniform Resource Locator
 - **HTTP** : GET, POST, PUT, DELETE... + fonctionnalité d'en-tête
 - Stateless
