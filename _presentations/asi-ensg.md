@@ -726,7 +726,7 @@ Comment intégrer les services dans mon SI ?
 
 - <i class="fa fa-check" aria-hidden="true"></i> Pas de SPOFs
 - <i class="fa fa-check" aria-hidden="true"></i> Même avantages que l'EAI (hub, interfaces, etc.)
-- <i class="fa fa-cross" aria-hidden="true"></i> Coût initial + complexité du messaging
+- <i class="fa fa-times" aria-hidden="true"></i> Coût initial + complexité du messaging
 
 §break
 
