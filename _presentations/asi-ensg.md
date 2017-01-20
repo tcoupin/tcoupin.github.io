@@ -531,6 +531,7 @@ Diviser la couche **métier** pour simplifier.
 - Découpage par unité métier
 
 §break
+
 ### Problèmes inhérents à la distribution
 
 - Cohérence de l'information
