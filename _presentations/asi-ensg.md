@@ -43,9 +43,9 @@ Thibault Coupin
 
 §id:sommaire§;
 
-- [Définitions](#definitions)
-- [Pourquoi et comment ?](#why)
-- [Les principes d'architectures](#principes)
+- [Définitions](#/definitions)
+- [Pourquoi et comment ?](#/why)
+- [Les principes d'architectures](#/principes)
 
 §new
 
@@ -156,7 +156,7 @@ Conception et structure du SI selon plusieurs axes :
 
 §break
 
-[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
 
 §new
 
@@ -175,9 +175,9 @@ Conception et structure du SI selon plusieurs axes :
 ## Pourquoi et comment ?
 §id:why§;
 
-- [Le SI informatique des entreprises](#entreprise)
-- [Les enjeux](#enjeux)
-- [Les acteurs](#acteurs)
+- [Le SI informatique des entreprises](#/entreprise)
+- [Les enjeux](#/enjeux)
+- [Les acteurs](#/acteurs)
 
 §break
 
@@ -269,39 +269,45 @@ On peut découper l'entreprise en 3 sous-sytèmes :
 ## Les acteurs
 §slide:data-transition=fade§;
 **Direction du SI** : Piloter, décider en ayant une vision stratégique.
+
 <small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Maitrise d'ouvrage (MOA)** : Entitée porteuse du besoin. Elle établit les objectifs, le calendrier et le budget. Son objectif est la réalisation des oeuvres (==ouvrage)
+
 <small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Maitrise d'ouvrage (MOE)** : Entitée, chargée par la MOA, d'effectuer la réalisation de l'oeuvre. Assiste et conseille la MOA, dirige l'exécution de l'oeuvre.
+
 <small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Etudes et dévelopement** : Entité qui conçoit et produit l'oeuvre. Dirigée par la MOE. (Ce sont les dévelopeurs...)
+
 <small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Production et exploitation** : Entité chargée de faire fonctionner les oeuvres, ainsi que les maintenir en conditions opérationnelles. (Ce sont les ops...)
+
 <small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
 
 ## Les acteurs
 §slide:data-transition=fade§;
 **Support** : Entité assurant le suivi des utilisateurs des ouvrages. Niveaux 1 / 2 / 3
+
 <small><i class="fa fa-copyright" aria-hidden="true"></i> D. Duportal</small>
 §break
-[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
 §new
 
 
@@ -320,9 +326,16 @@ On peut découper l'entreprise en 3 sous-sytèmes :
 ## Les principes d'architectures
 §id:principes§;
 
+- [UML](#/uml)
+- [Conception par tiers](#/tiers)
+- [distribuée](#/distribuee)
+- [orientée services](#/services)
+- [micro-services](#/microservices)
+
 §break
 
 ### UML
+§id:uml§;
 
 L'UML pour aider à architecturer un système d'information ?
 
@@ -389,7 +402,7 @@ Vue du déploiement§fragment
 §break
 
 ### Principes de conception
-
+§id:tiers§;
 La brique de base est appelée *tiers*.
 
 Un acteur, un élément du déploiement, un applicatif qui a une fonction particulière.§fragment
@@ -447,7 +460,11 @@ TM  : SGCB ACID
 
 ### 2 tiers : répartition des rôles
 
+
+§element: style=background-color:white§;
 ![Répartition dans le modèle 2 tiers](http://dduportal.github.io/cours/ensg-asi-2015/images/arch_2_tiers_2_types.png)
+§pelement:height=60%§;
+
 *Source : Damien Duportal*
 
 §notes
@@ -476,7 +493,7 @@ Avant de passer à la suite : réfléchir à ce qui n'est "pas bien"
 
 §break
 
-### Répartition
+### 3 tiers : répartition des rôles
 
 §element: style=background-color:white§;
 ![Répartition en 3 tiers](http://dduportal.github.io/cours/ensg-asi-2015/images/pld_gartner_classification.gif)
@@ -488,6 +505,9 @@ Avant de passer à la suite : réfléchir à ce qui n'est "pas bien"
 Diviser la couche **métier** pour simplifier.
 
 §break
+### Architecture distribuée
+§id:distribuee§;
+§break
 
 ### Architecture distribuée
 
@@ -498,7 +518,11 @@ Diviser la couche **métier** pour simplifier.
 §break
 ### Architecture distribuée
 
+§element: style=background-color:white§;
 ![Archi distribuée](http://dduportal.github.io/cours/ensg-asi-2015/images/arch_distribuee.png)
+§pelement:height=60%§;
+
+*Source : Damien Duportal*
 
 §break
 ### Architecture distribuée
@@ -555,6 +579,188 @@ Mise en place de la Haute Disponibilité (HA)
 
 *Damien Duportal : [Notions de HA](http://dduportal.github.io/cours/ensg-asi-2015/ha.html)*§fragment:1§;
 
+§break 
+
+### Exemple de système distribué
+### Le Géoportail
+
+- des serveurs web exposés sur Internet §fragment
+- selon la requête, on transfert vers : §fragment
+  - des serveurs WMS Raster
+  - des serveurs WMS Vecteur
+  - des serveurs de géocodage
+  - ...
+- les données sont stockées selon leur nature dans : §fragment
+  - une base de données Postgis
+  - un "gros" disque dur pour les données raster
+
 §break
-[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
+### Exemple de système distribué
+### Stockage distribué
+
+- Le stockage objet (Amazon S3, OS Swift, Ceph...)
+- Le stockage bloc (OS Cinder, Ceph RBD, Infinit...)
+
+Les capacités de stockage d'un pool de machine sont mises en commun pour assurer la disponibilité de la donnée (disponibilité, cohérence).
+
+§break
+### Exemple de système distribué
+### Calcul distribué
+
+Le principe du *map-reduce*.
+
+- Be4 : création de pyramide de donnée raster pour diffusion WMTS
+- Boinc : utiliser les ressources de particuliers pour la recherche
+
+§break
+### Architecture orientée services
+§id:services§;
+En anglais *SOA*.
+§break
+
+### SOA : concepts
+
+L'application globale est découpée en sous-éléments communiquant entre eux.
+
+- couplage faible pour réduire les dépendances (matérielles et d'environnement)
+- rationalisation des services
+- découverte des services
+
+§break
+
+### SOA : communication entre éléments
+
+- interface publiée sur le réseau avec un protocole (ex: SOAP)
+- interopérabilité, langage (ex: WSDL)
+- annuaire de service
+
+§break
+
+### SOA : intégration des services
+
+Comment intégrer les services dans mon SI ?
+
+![](/data/integration.png)
+§pelement:height=60%§;
+
+
+§break
+
+### SOA : intégration des services
+
+Comment intégrer les services dans mon SI ?
+
+- **E**nterprise **A**pplication **I**ntegration
+- **E**nterprise **S**ervice **B**us
+- **W**eb-**O**riented **A**rchitecture
+
+§break
+
+### SOA : variante EAI
+
+- l'EAI est un intermédiaire de communication
+- l'EAI centralise la communication
+- connecteurs entre l'EAI et les applications.
+- l'EAI réceptionne/transmet les OMS des applications (ang. : *ASBO*)
+- l'EAI transforme les OMS en OM pour son mapping interne (ang. : *BO*)
+- pas d'annuaire externe, l'EAI connaît les services
+
+§break
+
+### SOA : variante EAI
+
+![](/data/eai.png)
+§pelement:height=70%§;
+
+§break
+
+### SOA : variante EAI
+
+- <i class="fa fa-check" aria-hidden="true"></i> interfaces : rationalisation grâce aux OM
+- <i class="fa fa-times" aria-hidden="true"></i> Coût initial élevé mais <i class="fa fa-check" aria-hidden="true"></i> rentabilisation
+- <i class="fa fa-check" aria-hidden="true"></i> Centralisation : métier + mais <i class="fa fa-times" aria-hidden="true"></i> SPOF
+
+§break
+
+### SOA : variante ESB
+
+- middleware pour le rôle de bus
+- pas d'OMS => travail de traduction
+- orienté MoM : échange de message asynchrone avec un système de file d'attente
+- routage intelligent qui découple l'expéditeur du message de son destinataire
+- découverte des services
+
+§break
+
+### SOA : variante ESB
+
+![](/data/esb.png)
+§pelement:height=60%§;
+
+
+§break
+
+### SOA : variante ESB
+- <i class="fa fa-check" aria-hidden="true"></i> Pas de SPOFs
+- <i class="fa fa-check" aria-hidden="true"></i> Même avantages que l'EAI (hub, interfaces, etc.)
+- <i class="fa fa-cross" aria-hidden="true"></i> Coût initial + complexité du messaging
+
+§break
+
+### SOA : variante WOA
+
+- chaque service est une application web
+- le web joue le rôle de bus (DNS+TCP/IP)
+- interopérable
+- SPOFs limités, couplage faible
+
+§break
+
+### SOA : variante WOA
+
+Le service web :
+- old school : SOAP, WSDL...
+- REST : Representational State Transfer
+
+§break
+
+### SOA : variante WOA
+
+REST :
+- **URL** : Uniform Resource Locator
+- **HTTP** : GET, POST, PUT, DELETE... + fonctionnalité d'en-tête
+- Stateless
+
+§break
+
+### Architecture micro-services
+§id:microservices§;
+
+Généralement du WOA avec un découpage beaucoup plus fin :
+
+- une seule fonction par service
+- le projet doit être proprement mené : automatisation, déploiement et tests
+- service élastique
+
+§break
+
+### Architecture micro-services
+
+Avantages :
+
+- scalabilité facilitée§fragment:1§;
+- isolation des développements§fragment:1§;
+- rapidité des cycles de release§fragment:1§;
+
+Inconvénients : 
+
+- complexes§fragment:2§;
+- explosion du nombre de composants§fragment:2§;
+
+
+§new
+
+### C'est déjà fini
+
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
 
