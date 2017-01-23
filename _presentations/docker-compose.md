@@ -34,9 +34,115 @@ Thibault Coupin
 
 §id:sommaire§;
 
+- [Rappels de docker engine CLI](#/rappels)
+- [Concepts](#/concepts)
+- [Le docker-compose.yml](#/yaml)
+- [Les commandes docker-compose](#/cli)
+
 
 §new
 
-## Rappel de docker CLI
+## Rappels de docker engine CLI
 
-## 
+§id:rappels§;
+
+§break
+
+### Rappels
+
+On lance les conteneurs avec la commande
+
+```
+$ docker run [OPTS] IMAGE [CMD]
+```
+
+§break
+
+### Rappels : les options
+
+- définir des ports d'écoute
+- gestion des volumes
+- gestion des réseaux
+- options d'exécution
+
+§break
+
+### Rappels : les volumes
+
+On gère les volumes aves les commandes
+
+```
+$ docker volume create [OPTS]
+$ docker volume ls
+$ docker volume rm VOLUME_NAME
+```
+
+§break
+
+### Rappels : les réseaux
+
+On gère les réseaux avec les commandes
+
+```
+$ docker network create ...
+$ docker network connect ...
+$ docker network ls ...
+$ docker network disconnect ...
+$ docker network rm ...
+```
+
+§break
+
+### Rappels : bilan
+
+- Un commande par conteneurs
+- Toutes les options à écrire
+- Gestion fine des conteneurs, réseaux et volumes
+
+§break
+
+### Rappels : limite
+
+Imaginez la complexité pour déployer un CMS comprenant :
+
+- un CMS (Wordpress)  §fragment
+- une base de données §fragment
+- un FTP pour déposer des fichiers à publier §fragment
+- un système de cache pour soulager la BDD §fragment
+- un proxy inverse pour gérer le reste du cache §fragment
+
+§break
+
+![Déploiement wordpress en docker](/data/docker-wordpress.png)
+
+§break
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
+§new
+
+## Concepts
+
+§id:concepts§;
+
+§break
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
+§new
+
+## Le docker-compose.yml
+
+§id:yaml§;
+
+§break
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
+§new
+
+## Les commandes docker-compose
+
+§id:cli§;
+
+§break
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
+§new
+
+## C'est déjà fini
+
+[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)

@@ -421,6 +421,7 @@ On peut également ajouter un auteur, un message de commit...
 <!-- |  _  // _ \/ __|/ _ \/ _` | | | \ \/ / -->
 <!-- | | \ \  __/\__ \  __/ (_| | |_| |>  <  -->
 <!-- |_|  \_\___||___/\___|\__,_|\__,_/_/\_\ -->
+
 ## Les réseaux
 §id:networks§;
 
@@ -443,6 +444,7 @@ Les 3 valeurs les plus répandues :
 - `bridge` (par défaut) : un réseau isolé avec un mécanisme de *bridge*
 
 §break 
+
 ### Pas de réseau
 
 ```
@@ -489,6 +491,20 @@ Le port 8080 de la machine hôte est redirigé vers le port 80 du conteneur.§fr
 - Le DNS peut être modifié localement dans le conteneur avec 2 options :
   - `--link` : on déclare le lien entre 2 conteneurs : `--link CONTAINER_NAME:ALIAS`
   - `--add-host` : on ajoute manuellement une entrée DNS dans le conteneur : `--add-host NAME:IP`
+
+§break
+
+### Gestion avancée des réseaux
+
+On peut gérer plus finement les réseaux avec des commandes : 
+
+```
+$ docker network create ...
+$ docker network connect ...
+$ docker network ls ...
+$ docker network disconnect ...
+$ docker network rm ...
+```
 
 §break
 
