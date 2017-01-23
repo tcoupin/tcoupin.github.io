@@ -21,23 +21,31 @@ L'outils `kpartx` permet d'accéder à chacune des partitions de l'image.
 L'exemple est donné pour HypriotOS mais reste valable pour Raspbian avec l'utilisateur pi
 
 - Créer les devices représentant les partitions
+
 ```
 $ sudo kpartx -a -v hypriotos-rpi-v1.2.0.img
 add map loop0p1 (252:5): 0 131072 linear 7:0 2048
 add map loop0p2 (252:6): 0 1914879 linear 7:0 133120
 ```
+
 *Kpartx* a détecté 2 partitions de tailles différentes : une petite qui est la partition de *boot* et une grosse qui est la racine du système de fichiers. C'est cette dernière qu'il faut monter.
+
 - Créer le point de montage et monter
+
 ```
 $ sudo mkdir /mnt/RPI
 $ sudo mount /dev/mapper/loop0p2 /mnt/RPI
 ```
+
 - Ajouter sa clé publique
+
 ```
 $ mkdir /mnt/RPI/home/pirate/.ssh
 $ cp ~/id_rsa.pub /mnt/RPI/home/pirate/.ssh/authorized_keys
 ```
+
 - Démonter et nettoyer
+
 ```
 $ sudo umount /mnt/RPI 
 $ sudo rmdir /mnt/RPI
