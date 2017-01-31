@@ -245,6 +245,7 @@ Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#/ne
 §break
 
 ### Les réseaux
+
 #### Exemple : driver par défaut (bridge)
 
 ```dockerfile
@@ -270,6 +271,7 @@ Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#vol
 
 
 ### Les volumes
+
 #### Exemple
 
 ```dockerfile
@@ -300,11 +302,13 @@ Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#/se
 Quelle est la base du conteneur ?
 
 - une image
+
 ```dockerfile
 image: httpd:alpine
 ```
 
 - un *DockerFile*
+
 ```dockerfile
 build: ./path
 # ou
