@@ -42,7 +42,11 @@
 			if (children[i].nodeValue == null){
 				handlePElement(children[i]);
 			} else {
-				var targetElement = children[Math.max(0,i-1)];
+				if (children.length != 1){
+					var targetElement = children[Math.max(0,i-1)];
+				} else {
+					var targetElement = node.previousElementSibling;
+				}
 				var elemAttr = children[i].nodeValue.match(/§pelement:[^§]*§;/g);
 				if (elemAttr !== null){
 					for (var j = 0; j<elemAttr.length;j++){

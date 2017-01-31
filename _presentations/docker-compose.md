@@ -1,7 +1,6 @@
 ---
 title: "Docker-compose"
 subtitle: ENSG, février 2017
-draft: true
 theme: night
 initialization:
   transition: convex
@@ -30,6 +29,21 @@ Thibault Coupin
 
 §break
 
+### Limitations
+
+§slide: style=text-align:left §;
+
+Docker a subi beaucoup de changements depuis la version 1.12 (été 2016).
+
+Docker-compose est utile pour l'utilisation sur : §fragment
+
+- un poste simple comme celui d'un développeur (toutes versions)§fragment
+- un cluster swarm standalone de version < 1.12§fragment
+
+Pour les cluster swarm de version >= 1.13, il faut utiliser le concept des stacks.§fragment
+
+§break
+
 ## Sommaire
 
 §id:sommaire§;
@@ -37,7 +51,7 @@ Thibault Coupin
 - [Rappels de docker engine CLI](#/rappels)
 - [Concepts](#/concepts)
 - [Le docker-compose.yml](#/yaml)
-- [Les commandes docker-compose](#/cli)
+- [Les commandes](#/cli)
 
 
 §new
@@ -124,6 +138,36 @@ Imaginez la complexité pour déployer un CMS comprenant :
 §id:concepts§;
 
 §break
+
+## Définition
+
+> Docker-compose permet de définir tous les éléments nécessaires pour faire tourner une application multi-conteneurs.
+
+§break
+
+## Comment
+
+- Compose pilote directement le démon docker pour créer et gérer :
+  - les conteneurs
+  - les volumes
+  - les réseaux
+- Compose gère les dépendances entre ces éléments.
+- Compose permet de scaler un conteneur en particulier
+
+§break 
+
+## Le fichier de définition
+
+L'application est définie dans un fichier au format YAML avec 3 sections :
+
+- les services (les conteneurs)
+- les volumes
+- les réseaux
+
+Plus de détails dans la partie [docker-compose.yml](#/yaml)
+
+§break
+
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
 §new
 
@@ -132,16 +176,290 @@ Imaginez la complexité pour déployer un CMS comprenant :
 §id:yaml§;
 
 §break
+
+### Un format yaml
+
+>YAML Ain't Markup Language
+
+Un langage facilement lisible reprenant les concepts de XML ou JSON
+
+§break
+
+### Un format yaml
+
+```dockerfile
+services:
+  some-service:
+    networks:
+      some-network:
+        aliases:
+         - alias1
+         - alias3
+      other-network:
+        aliases:
+         - alias2
+```
+
+<i class="fa fa-warning" aria-hidden="true"></i> aux espaces !
+
+§break
+
+### Les versions
+
+Le modèle du docker-compose.yml a plusieurs versions possibles.
+
+| Compose file format | Docker Engine |
+|---------------------|---------------|
+| **3.0**             | 1.13.0+       |  
+| 2.1                 | 1.12.0+       |  
+| 2.0                 | 1.10.0+       |  
+| 1.0                 | 1.9.1+        |
+
+§pelement:style=background-color:white§;
+
+§break
+
+### Le contenu
+
+4 sections :
+
+- la version du format
+- les réseaux
+- les volumes
+- les services
+
+§notes
+Version : si absent, v1.
+
+§break
+
+
+### Les réseaux
+
+- Permet de définir des réseaux (driver, options)
+- Par défaut, un réseau est créé par projet
+- Gestion de l'IPAM
+- Tout réseau utilisé par un service doit être déclaré, même s'il est externe (*external*)
+
+Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#/network-configuration-reference).
+§break
+
+### Les réseaux
+#### Exemple : driver par défaut (bridge)
+
+```dockerfile
+networks:
+  monreseau:
+    ipam:
+      config:
+        - subnet: 192.168.91.1/24
+          ip_range: 192.168.91.0/25
+          gateway: 192.168.91.1
+```
+
+§break
+
+### Les volumes
+
+- Permet de définir des volumes (driver, options)
+- Tout volume utilisé par un service doit être déclaré, même s'il est externe (*external*)
+- Les montages host->container ne sont pas concernés
+
+Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#volume-configuration-reference).
+§break
+
+
+### Les volumes
+#### Exemple
+
+```dockerfile
+volumes:
+  monvolume:
+  monsecondvolume:
+    driver: toto
+```
+
+§break
+
+### Les services
+
+Permet de définir les éléments composant l'application :
+
+- image ou *Dockerfile*
+- volumes
+- réseaux
+- port d'écoute
+- ...
+
+Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#/service-configuration-reference).
+
+§break
+
+### Services : images ou build
+
+Quelle est la base du conteneur ?
+
+- une image
+```dockerfile
+image: httpd:alpine
+```
+
+- un *DockerFile*
+```dockerfile
+build: ./path
+# ou
+build:
+	context: ./path
+	dockerfile: monDockerFile
+	args:
+		...
+```
+
+§break
+
+### Services : volumes
+
+Montage des volumes Docker ou host
+
+```dockerfile
+volumes:
+  # Just specify a path and let the Engine create a volume
+  - /var/lib/mysql
+  # Specify an absolute path mapping
+  - /opt/data:/var/lib/mysql
+  # Path on the host, relative to the Compose file
+  - ./cache:/tmp/cache
+  # User-relative path
+  - ~/configs:/etc/configs/:ro
+  # Named volume
+  - datavolume:/var/lib/mysql
+```
+
+§break
+
+### Services : réseau
+
+Branchement des réseaux et exposition de ports sur la machine hôte
+
+```dockerfile
+services:
+  some-service:
+    networks:
+     - some-network
+     - other-network
+    ports:
+     - "80:80" #Bien mettre les guillemets
+```
+
+§break
+
+### Services : liens inter-conteneurs
+
+- Les conteneurs peuvent communiquer avec les autres sur le même réseau, mais il faut connaître l’IP.
+- Le DNS peut être modifié localement dans le conteneur avec 2 options :
+  - **links** : on déclare le lien entre 2 conteneurs SERVICE:[ALIAS]
+  - **external_links** : comme *links* mais pour des conteneurs externe au docker-compose.yml
+  - **extra_hosts** : on ajoute manuellement une entrée DNS dans le conteneur
+
+```dockerfile
+links:
+	- pgsql:database
+	- redis
+external_links:
+	- existing_container
+extra_hosts:
+	- "box:192.168.1.1"
+```
+
+§break
+
+### Services : dépendances inter-conteneurs
+
+Docker-compose démarre les conteneurs dans le bon ordre à condition qu'il le connaisse...
+
+- les **link** engendrent des dépendances inter-conteneurs
+- si nécessaire, on peut déclarer des dépendances avec **depends_on**
+
+```dockerfile
+depends_on:
+	- service1
+	- service2
+```
+
+§break
+
+### Services : command
+
+Pour surcharger la commande par défaut, on utilise le paramètre **command**
+
+```dockerfile
+command: some command && some other
+```
+
+§break
+
+
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
 §new
 
-## Les commandes docker-compose
+
+## Les commandes
 
 §id:cli§;
 
 §break
-[<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
+
+## Commandes
+
+On lance l'application avec la commande
+
+```
+$ docker-compose up [SERVICE]
+```
+
+L'option `-d` permet de lancer les conteneurs en arrière-plan.
+
+§break
+
+## Commandes
+
+Gestion des conteneurs
+
+```
+$ docker-compose stop [SERVICE]
+$ docker-compose kill [SERVICE]
+$ docker-compose scale SERVICE=NB
+```
+
+§break
+
+## Commandes
+
+Nettoyage des conteneurs stoppés
+
+```
+$ docker-compose rm
+```
+
+Nettoyage des éléments
+
+```
+$ docker-compose down
+```
+
+§break
+
+## Documentation
+
+`docker-compose help`
+
+ou
+
+[Compose command-line reference](https://docs.docker.com/compose/reference/)
+
 §new
+
+
 
 ## C'est déjà fini
 

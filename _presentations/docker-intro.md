@@ -157,6 +157,14 @@ La liste complète est disponible :
 - en ligne de commande `docker help`
 
 §break
+
+### En pratique
+
+Pour tester les exemples de commandes qui suivent, il faut :
+- se rendre sur [play-with-docker.com](http://play-with-docker.com)
+- ou installer docker sur une machine x86 (pas ARM) (voir [doc](https://docs.docker.com/engine/installation/))
+
+§break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
 
@@ -190,6 +198,16 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
   - *from sracth* ou basée sur des images de base (ubuntu, centOs, alpine)
   - à partir d'un *Dockerfile*
   - en *commitant* un conteneur
+
+§break
+
+### Nomenclature des images sur le hub
+
+- Les images fonctionnent comme des repo
+- Les images sans / sont des images officielles
+- Les images USER/NOM sont des images personnelles ou d'organisation
+- Le nom de la distribution est dans le nom de l'image ou le tag.
+- Idem pour les images destinées aux archi ARM
 
 §break
 
@@ -232,7 +250,7 @@ marcells/aspnet-hello-world               ASP.NET vNext - Hello World           
 Télécharger une image depuis hub.docker.com
 
 ```
-$ docker pull hypriot/rpi-busybox-httpd
+$ docker pull hello-world
 ```
 
 <small>*Le hub offre aussi la possibilité d'héberger vos images avec les commandes `docker login` et `docker push`*</small>
@@ -244,7 +262,7 @@ $ docker pull hypriot/rpi-busybox-httpd
 Supprimer une image locale
 
 ```
-$ docker rmi hypriot/rpi-busybox-httpd
+$ docker rmi hello-world
 ```
 
 <i class="fa fa-warning" aria-hidden="true"></i> Ne pas confondre avec *rm* qui supprime un conteneur.
@@ -267,10 +285,21 @@ Plus de détails dans le chapitre [Dockerfile](#dockerfile).
 
 ### Les commandes utiles
 
+Nommer/tagguer une image
+
+```
+$ docker tag IMAGE:TAG IMAGE:TAG
+```
+
+§break 
+
+
+### Les commandes utiles
+
 Voir les métadonnées d'une image
 
 ```
-$ docker inspect hypriot/rpi-busybox-httpd
+$ docker inspect hello-world
 ```
 
 Beaucoup de chose !§fragment
@@ -383,6 +412,7 @@ $ docker rm NOM
 - *--rm* : supprimer le conteneur à la fin de son exécution§fragment
 - *-d* : démarrer le conteneur en arrière-plan§fragment
 
+Il en existe beaucoup d'autres : gestion des ressources, environnement d’exécution...
 
 §break
 
