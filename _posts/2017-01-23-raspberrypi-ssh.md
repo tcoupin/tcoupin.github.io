@@ -41,7 +41,7 @@ $ sudo mount /dev/mapper/loop0p2 /mnt/RPI
 
 ```
 $ mkdir /mnt/RPI/home/pirate/.ssh
-$ cp ~/id_rsa.pub /mnt/RPI/home/pirate/.ssh/authorized_keys
+$ cp ~/.ssh/id_rsa.pub /mnt/RPI/home/pirate/.ssh/authorized_keys
 ```
 
 - Démonter et nettoyer
@@ -49,6 +49,12 @@ $ cp ~/id_rsa.pub /mnt/RPI/home/pirate/.ssh/authorized_keys
 ```
 $ sudo umount /mnt/RPI 
 $ sudo rmdir /mnt/RPI
+```
+
+- Supprimer les devices
+
+```
+$ sudo kpartx -d hypriotos-rpi-v1.2.0.img 
 ```
 
 Voilà, l'image est prête à être flasher ! A chaque fois que vous flasherez votre carte, la clé sera déjà déposée.
