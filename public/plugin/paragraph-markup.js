@@ -36,6 +36,34 @@
 		}
 	};
 
+	var handlePElement = function(node){
+		var children = node.childNodes;
+		for (var i = 0;i<children.length;i++){
+			if (children[i].nodeValue == null){
+				handlePElement(children[i]);
+			} else {
+				if (children.length != 1){
+					var targetElement = children[Math.max(0,i-1)];
+				} else {
+					var targetElement = node.previousElementSibling;
+				}
+				var elemAttr = children[i].nodeValue.match(/§pelement:[^§]*§;/g);
+				if (elemAttr !== null){
+					for (var j = 0; j<elemAttr.length;j++){
+						var attributes = command2Attr(elemAttr[j]);
+						for (var k in attributes){
+							if (attributes[k].key=="class"){
+								targetElement.className = targetElement.className + " "+ attributes[k].val;
+							} else {
+								targetElement.setAttribute(attributes[k].key, attributes[k].val);
+							}
+						}
+					}
+				}
+			}
+		}
+	};
+
 	var sections = document.querySelectorAll("section > section");
 	for (var i = 0; i < sections.length; i++){
 		var section = sections[i];
@@ -75,6 +103,15 @@
 		handleElement(section);
 		//Finaly remove
 		section.innerHTML = section.innerHTML.replace(/§element:[^§]*§;/g,'');
+
+		/*
+		 *  Handle §pelement tag
+		 *  §pelement:ATTR§;
+		 */
+		
+		handlePElement(section);
+		//Finaly remove
+		section.innerHTML = section.innerHTML.replace(/§pelement:[^§]*§;/g,'');
 
 		// Usefull for writing paragraph command on slide
 		section.innerHTML = section.innerHTML.replace(/PARAGRAPH/g,'§');

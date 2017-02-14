@@ -6,10 +6,11 @@ description: 'Quelques présentations'
 
 <div class="posts">
   {% for pres in site.presentations %}
+  {% if pres.draft != true or site.show_drafts == true %}
   <div class="post">
     <h1 class="post-title">
       <a href="{{ pres.url }}" target="_blank">
-        {{ pres.title }}
+        {% if pres.draft==true %}[draft]{% endif %}{{ pres.title }}
       </a>
     </h1>
     <span class="post-date">
@@ -17,5 +18,6 @@ description: 'Quelques présentations'
     </span>
 
   </div>
+  {% endif %}
   {% endfor %}
 </div>
