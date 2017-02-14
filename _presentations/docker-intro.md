@@ -161,6 +161,7 @@ La liste complète est disponible :
 ### En pratique
 
 Pour tester les exemples de commandes qui suivent, il faut :
+
 - se rendre sur [play-with-docker.com](http://play-with-docker.com)
 - ou installer docker sur une machine x86 (pas ARM) (voir [doc](https://docs.docker.com/engine/installation/))
 
