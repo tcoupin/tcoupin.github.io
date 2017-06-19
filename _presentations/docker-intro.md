@@ -123,7 +123,15 @@ Environ 200 processus actifs...
 
 ## Comment c'est avec docker ?
 
-Docker ne lance qu'un seule processus**, c'est plus rapide !§fragment**
+Docker ne lance qu'un seule processus**, c'est plus simple !§fragment**
+
+
+```
+$ docker run --rm alpine ps aux
+PID   USER     TIME   COMMAND
+    1 root       0:00 ps aux
+§fragment
+```
 
 §break
 
@@ -161,6 +169,7 @@ La liste complète est disponible :
 ### En pratique
 
 Pour tester les exemples de commandes qui suivent, il faut :
+
 - se rendre sur [play-with-docker.com](http://play-with-docker.com)
 - ou installer docker sur une machine x86 (pas ARM) (voir [doc](https://docs.docker.com/engine/installation/))
 
@@ -180,7 +189,7 @@ Pour tester les exemples de commandes qui suivent, il faut :
 ## Les images
 §id:images§;
 
-L'image est le "disque dur"* du conteneur.
+L'image est le "disque dur"* figée sur lequel va se baser le conteneur.
 
 Elle contient le système d'exploitation, l'application et des métadonnées.
 
@@ -208,6 +217,10 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
 - Les images USER/NOM sont des images personnelles ou d'organisation
 - Le nom de la distribution est dans le nom de l'image ou le tag.
 - Idem pour les images destinées aux archi ARM
+
+```
+hypriot/rpi-traefik:raclette
+```
 
 §break
 
@@ -439,6 +452,9 @@ $ docker commit CONTAINER_NAME IMAGE[:TAG]
 ```
 
 On peut également ajouter un auteur, un message de commit...
+
+§notes
+C'est le mal... La création manuelle rend l'image difficile à maintenir.
 
 §break
 
@@ -723,7 +739,7 @@ Script de création d'image.
 
 ### Dockerfile
 
-1. On part d'une image existante (ou vide)
+1. On part d'une image existante
 2. Chaque ligne équivaut à lancer un conteneur et à le commiter
 3. L'image est créée avec le nom spécifié
 
@@ -738,6 +754,9 @@ $ docker build DOCKERFILE_PATH
 ```
 
 - *DOCKERFILE_PATH* est le chemin du dossier contenant le Dockerfile.
+
+§notes
+C'est mieux d'utilise un dossier léger car tout est envoyer dans le contexte lors de la création. Gros fichier = lent.
 
 §break
 
@@ -826,6 +845,9 @@ USER    #Changement d'utilisateur
 WORKDIR #Changement du dossier de travail
 ```
 
+§notes
+User : c'est conseiller de ne pas utiliser le user root pour des raisons de sécurité.
+
 §break
 
 ### Instructions
@@ -846,7 +868,7 @@ VOLUME #Ajout d'un volume
 - un conteneur est éphémère **: utilisation de volumes§fragment**
 - juste ce qu'il faut§fragment
 - un seul processus par conteneur§fragment
-- minimiser le nombre de couche du système de fichier **en minimisant les commandes RUN et en utilisant beaucoup de `&&`§fragment**§fragment
+- minimiser le nombre de couche du système de fichiers **en minimisant les commandes RUN et en utilisant beaucoup de `&&`§fragment**§fragment
 - optimiser l'utilisation du cache de build :§fragment
   - les commandes qui changent le moins en premiers (`MAINTAINER`, `EXPOSE` ...)§fragment
   - les commandes ADD plutôt vers la fin§fragment
