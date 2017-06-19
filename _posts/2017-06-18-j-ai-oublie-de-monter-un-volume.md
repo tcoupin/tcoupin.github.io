@@ -23,6 +23,6 @@ Dans le conteneur (`docker exec -it CONTAINER_NAME sh`) :
 tar -c CHEMIN | nc HOTE 1234 
 ```
 
-Le contenu du **CHEMIN** est archivé au format *tar* puis envoyé par paquets tcp sur le port 1234 vers la machine autre qui extrait l'archive.
+Le contenu du **CHEMIN** est archivé au format *tar* puis envoyé par paquets tcp sur le port 1234 vers la machine hôte qui extrait l'archive.
 
 Voilà.
