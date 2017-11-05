@@ -1,0 +1,107 @@
+---
+---
+.no-gutter {
+	padding: 0;
+}
+
+.bg-custom {
+	background-color: #6a9fb5;
+}
+
+a {
+	color: #6a9fb5;
+}
+
+.navbar-brand {
+	font-family: 'Cabin Sketch', cursive;
+}
+
+// >= Medium devices
+@media (min-width: 991px) {
+	nav {
+		position: fixed!important;
+   		height: 100%!important;
+   		flex-direction: column!important;
+   		align-items: baseline!important;
+   		width: 250px;
+   		justify-content: flex-end!important;
+   		.navbar-nav {
+   			padding-top: 30px!important;
+   			padding-bottom: 30px!important;
+   		}
+   		.navbar-brand {
+   			img {
+   				width: 120px;
+   				height: 120px;
+   				border-radius: 60px!important;
+   			}
+   			span {
+   				white-space: pre-wrap;
+   			}
+   			.brand-title {
+   				font-size: 140%;
+   				font-weight: bold;
+   			}
+   			.brand-description {
+   				font-size: 120%;
+   			}
+   		}
+	}
+	main {
+		padding-left: 265px!important;
+	}
+}
+// < Medium devices
+@media (max-width: 990px) {
+	ul.navbar-nav {
+		flex-direction: row;
+	}
+   	.nav-item {
+   		padding-left: 15px!important;
+   	}
+   	.navbar-brand {
+   		img {
+   			width: 30px;
+   			height: 30px;
+   			border-radius: 15px;
+   		}
+   		.brand-title {
+   			font-size: 100%;
+   			font-weight: bold;
+   		}
+   		.brand-description {
+   			font-size: 75%;
+   		}
+   	}
+}
+
+
+
+article {
+	section.title {
+		padding-top: 50px;
+    	padding-bottom: 30px;
+    	text-align: center;
+	}
+	h1,h2,h3,h4,h5 {
+		font-family: 'Cabin Sketch', cursive;
+
+	}
+	h1 {font-size: 3rem;}
+	h2 {font-size: 2.5rem;}
+	h3 {font-size: 2rem;}
+	h4 {font-size: 1.5rem;}
+	h5 {font-size: 1.5rem;}
+	img {
+    	object-fit: cover;
+    	width: 75px;
+    	height: 75px;
+	}
+}
+
+.tag-list-post {
+	display: none;
+	&:target {
+		display: block;
+	}
+}

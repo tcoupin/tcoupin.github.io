@@ -1,7 +1,7 @@
 ---
-layout:     post
 title:      "NodeJS et les certificats"
 subtitle:   "Https, certif serveur et client"
+tags: truc&astuce http nodejs
 ---
 
 J'ai été récemment confronté au problème de la sécurisation du lien entre 2 instances NodeJS dans un projet personnel.

@@ -1,23 +1,17 @@
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  <title>
-    {% if page.title %}
-      {{ page.title }} &middot; {{ site.title }}
-    {% else %}
-      {{ site.title }} &middot; {{ site.tagline }}
-    {% endif %}
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <title>
+{% if page.title %}
+      {{ page.title }} &middot; {{ site.title }}
+{% else %}
+      {{ site.title }} &middot; {{ site.tagline }}
+{% endif %}
+  </title>
 
   <!-- Icons -->
   <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -38,25 +32,16 @@
   <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
-  <!-- FontAwesome -->
-  <script src="https://use.fontawesome.com/3c116e7b25.js"></script>
-
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
-  {% if site.author.twitter %}
+  <!-- Twitter Cart -->
+{% if site.author.twitter %}
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@{{ site.author.twitter }}" />
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-    {% if page.title && page.subtitle %}
+  {% if page.title && page.subtitle %}
   <meta name="twitter:description" content="{{ page.subtitle }}" />
-    {% else %}
-      <meta name="twitter:description" content="{{ site.description }}" />
-    {% endif %}
-    {% if page.header-img %}
-  <!--meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/{{ page.header-img }}" /-->
-    {% endif %}
-  <link rel="me" href="https://twitter.com/{{ site.author.twitter }}">
+  {% else %}
+  <meta name="twitter:description" content="{{ site.description }}" />
   {% endif %}
+    <link rel="me" href="https://twitter.com/{{ site.author.twitter }}">
+{% endif %}
 </head>

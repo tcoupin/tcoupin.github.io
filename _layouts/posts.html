@@ -1,0 +1,58 @@
+---
+layout: default
+---
+
+<section class="title">
+  	<h1>{{ page.title }}</h1>
+<p class="text-secondary text-center mb-4">
+{% include post-detail.html %}
+<a class="twitter-share-button" href="https://twitter.com/intent/tweet">Partager</a>
+      </p>
+</section>
+{{ content }}
+
+
+<hr>
+
+{% if page.comments %}
+  <div id="disqus_thread" class="mt-5"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "{{ page.url | prepend: site.baseurl | prepend: site.url }}";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "{{ page.url }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//tcoupin-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                              
+{% endif %}
+
+<hr>
+
+<h3>Voir aussi :</h3>
+{% if page.tags.size >0 %}
+	{% assign alreadydisplay="" | split:'|' %}
+	{% for tag in page.tags %}
+		{% for aussi in site.tags[tag] %}
+		{% unless alreadydisplay contains aussi.title %}
+<a href="{{ aussi.url }}"><h4>{{ aussi.title }}</h4></a>
+{% assign todisplay = aussi %}
+{% include post-detail.html %}
+{% assign alreadydisplay=alreadydisplay | join:'|' | append:'|' | append:aussi.title | split:'|' %}
+{% if alreadydisplay.size > 3 %}
+{% break %}
+{% endif %}
+		{% endunless %}
+		{% endfor %}
+	{% endfor %}
+{% else %}
+	{% for aussi in site.related_posts limit:3 %}
+<a href="{{ aussi.url }}"><h4>{{ aussi.title }}</h4></a>
+{% assign todisplay = aussi %}
+{% include post-detail.html %}
+	{% endfor %}
+{% endif %}

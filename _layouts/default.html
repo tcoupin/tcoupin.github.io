@@ -1,15 +1,25 @@
+---
+---
+<!-- Default layout -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr-fr">
+<html lang="fr">
 
   {% include head.html %}
 
-  <body class="{{ site.mytheme }}">
-
+  <body>
+  	
     {% include sidebar.html %}
+    
+    <main class="container-fluid">
+  			<div class="row">
+    			<div class="col">
+    			<article>
+  					{{ content }}
+				</article>
 
-    <div class="content container">
-      {{ content }}
-    </div>
-
+	    		</div>
+  			</div>
+  	</main>
+    {% include scripts.html %}
   </body>
 </html>

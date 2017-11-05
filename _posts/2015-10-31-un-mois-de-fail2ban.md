@@ -1,7 +1,8 @@
 ---
-layout: post
 title: Un mois de fail2ban
 subtitle:   D'où viennent les attaques ?
+tags: géomatique article
+thumbnail: http://www.escope.net/Images/firewall.png
 ---
 
 Voilà un mois que j'ai (enfin) installé *fail2ban* sur mon serveur pour sécuriser le ssh et le ftp. Il est temps de faire un petit point : **72 ip bloquées**.

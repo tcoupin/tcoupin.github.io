@@ -1,6 +1,6 @@
 ---
-layout: page
 title: "Moi"
+icon: user
 ---
 
 Officiellement, je suis "Ingénieur des Travaux Géographiques et Cartographiques de l'Etat".

@@ -1,31 +1,20 @@
-# Dependencies
-markdown:         kramdown
-highlighter:      rouge
-
 # Permalinks
 permalink:        pretty
-#relative_permalinks: true
+highlighter: rouge
+markdown: kramdown
 
 # Setup
 title:            'Thibault Coupin'
-tagline:          'Mon bloc note'
-description:      'Des notes, des trucs, mon bordel quoi.'
-url:              'https://tcoupin.github.io'
-baseurl:          /
-mytheme:            'theme-base-0d'
+description:      'Notes, articles et trucs utiles'
 
 author:
   name:           'Thibault Coupin'
   twitter:        thibbojunior
   github:         tcoupin
 
-#paginate:         5
-#
-
 reveal:
   version:    3.3.0
   
-highlighter: rouge
 collections:
   presentations:
     permalink: /presentations/:path/
@@ -38,3 +27,13 @@ defaults:
       type: presentations
     values:
       layout: presentations
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: posts
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: pages

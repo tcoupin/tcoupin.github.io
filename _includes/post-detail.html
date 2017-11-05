@@ -1,0 +1,30 @@
+{% assign current= todisplay | default: post | default: page %}
+ <div class="text-secondary">
+      {{ current.date | date: "%d" }}
+      {% assign m = current.date | date: "%m" %}
+      {% case m %}
+          {% when '01' %}janvier
+          {% when '02' %}février
+          {% when '03' %}mars
+          {% when '04' %}avril
+          {% when '05' %}mai
+          {% when '06' %}juin
+          {% when '07' %}juillet
+          {% when '08' %}août
+          {% when '09' %}septembre
+          {% when '10' %}octobre
+          {% when '11' %}novembre
+          {% when '12' %}décembre
+      {% endcase %}
+      {{ current.date | date: "%Y" }}
+
+      {% if current.tags.size>0 %}
+        <span> - </span>
+      {% endif %}
+      {% for tag in current.tags %}
+        <a href="/tags/#{{ tag }}"><span class="badge badge-primary">{{ tag }}</span></a>
+      {% endfor %}
+      {% if current.comments %}
+      <span>- <a data-disqus-identifier="{{ current.url }}" href="{{ current.url }}#disqus_thread"></a></span>
+      {% endif %}
+    </div>

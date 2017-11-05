@@ -2,7 +2,7 @@
 
 Mon site web.
 
-Basé sur le thème de [@mdo](https://twitter.com/mdo) https://github.com/poole/hyde
+Inspiré par le thème de [@mdo](https://twitter.com/mdo) https://github.com/poole/hyde, refait en [bootstrap](https://getbootstrap.com).
 
 ## Déploiement local 
 

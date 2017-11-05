@@ -1,7 +1,8 @@
 ---
-layout: post
 title: Un point sur les proxys HTTP
 subtitle:   "HTTP, Squid3"
+tags: http article
+thumbnail: https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/14/thumb_bigger_formation-node-js.png
 ---
 
 1. [Pourquoi mettre un proxy ?](#pourquoi)

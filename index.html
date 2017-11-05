@@ -1,43 +1,25 @@
 ---
-layout: default
+title: Blog
+icon: rss
 ---
 
-
-<div class="posts">
-  {% for post in site.posts %}
-  <div class="post">
-    <h1 class="post-title">
+{% for post in site.posts %}
+<article class="media border p-2 m-2">
+  <img class="mr-3" src="{% if post.thumbnail %}{{ post.thumbnail }}{% else %}https://dummyimage.com/75/6a9fb5/fff&text={{ post.title | truncate: 2, "" }}{% endif %}" alt="Generic placeholder image">
+  <div class="media-body">
+    <h4 class="mt-0">
       <a href="{{ post.url }}">
         {{ post.title }}
       </a>
-    </h1>
+    </h4>
+    <p>
+      {{ post.subtitle }}
+    </p>
+{% include post-detail.html %}
 
-    <span class="post-date">
-      {{ post.date | date: "%d" }}
-      {% assign m = post.date | date: "%m" %}
-      {% case m %}
-          {% when '01' %}janvier
-          {% when '02' %}février
-          {% when '03' %}mars
-          {% when '04' %}avril
-          {% when '05' %}mai
-          {% when '06' %}juin
-          {% when '07' %}juillet
-          {% when '08' %}août
-          {% when '09' %}septembre
-          {% when '10' %}octobre
-          {% when '11' %}novembre
-          {% when '12' %}décembre
-      {% endcase %}
-      {{ post.date | date: "%Y" }}
-    - {{ post.subtitle }}
-    {% if post.comments %}
-    <a data-disqus-identifier="{{ post.url }}" href="{{ post.url }}#disqus_thread"></a>
-    {% endif %}
-    </span>
 
   </div>
-  {% endfor %}
-</div>
+    
+</article>
+{% endfor %}
 
-<script id="dsq-count-scr" src="//tcoupin-github-io.disqus.com/count.js" async></script>

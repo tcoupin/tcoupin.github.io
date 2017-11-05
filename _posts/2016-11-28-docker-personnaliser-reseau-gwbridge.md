@@ -1,8 +1,9 @@
 ---
-layout: post
 title: "Docker : comment personnaliser le réseau docker_gwbridge ?"
 subtitle: "J'ai eu du mal, alors je partage ;)"
 comments: true
+thumbnail: http://logo-logos.com/wp-content/uploads/2016/10/Docker_logo_logotype.png
+tags: docker
 ---
 
 Depuis sa version 1.12, docker engine intègre nativement SwarmKit qui rend extremement facile la mise en place d'un cluster de noeuds docker.

@@ -1,5 +1,4 @@
 ---
-layout:     post
 title:      "Mon premier post"
 subtitle:   "C'est parti"
 ---

@@ -1,8 +1,9 @@
 ---
-layout: post
 title: Suppression impossible de réseau docker
 subtitle: Mon réseau a encore un endpoint actif, mais où ça ?
 comments: true
+thumbnail: http://logo-logos.com/wp-content/uploads/2016/10/Docker_logo_logotype.png
+tags: docker
 ---
 
 ## Message d'erreur

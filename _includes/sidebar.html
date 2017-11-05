@@ -1,56 +1,25 @@
-<div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <h1>{{ site.title }}</h1>
-      <p class="lead">{{ site.description }}</p>
+<nav class="navbar navbar-dark bg-custom">
+  <a class="navbar-brand d-inline-flex flex-column" href="/">
+    <div class="d-inline-flex flex-lg-column flex-sm-row align-items-center">
+    <img src="/favicon/apple-icon-120x120.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    <span class="brand-title">{{ site.title }}</span>
     </div>
+    <span class="brand-description">{{ site.description }}</span>
+  </a>
 
-    <ul class="sidebar-nav">
-      <li class="sidebar-nav-item{% if page.title == "Home" %} active{% endif %}">
-        <a href="/">Home</a>
-      </li>
-
-      {% comment %}
-        The code below dynamically generates a sidebar nav of pages with
-        `layout: page` in the front-matter. See readme for usage.
-      {% endcomment %}
-
-      {% assign pages_list = site.pages %}
-      {% for node in pages_list %}
-        {% if node.title != null %}
-          {% if node.layout == "page" %}
-            <li class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}">
-              <a href="{{ node.url }}">{{ node.title }}</a>
-            </li>
-          {% endif %}
-        {% endif %}
+    <ul class="navbar-nav">
+      {% for node in site.html_pages %}
+        <li class="nav-item{% if page.url == node.url %} active{% endif %}">
+          <a class="nav-link" href="{{ node.url }}" title="{{ node.title }}"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-{{ node.icon }} fa-stack-1x"></i></span><span class="d-none d-lg-inline"> {{ node.title }}</span></a>
+        </li>
       {% endfor %}
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/{{ site.author.twitter }}" title="Twitter"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span><span class="d-none d-lg-inline"> Twitter</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/{{ site.author.github }}" title="Github"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-github fa-stack-1x"></i></span><span class="d-none d-lg-inline"> Github</span></a>
+      </li>
     </ul>
-    <p align="center">
-      <a href="/atom.xml">
-          <span class="fa-stack fa-lg">
-              <i class="fa fa-circle-thin fa-stack-2x"></i>
-              <i class="fa fa-rss fa-stack-1x"></i>
-          </span>
-      </a>
-
-      <a href="https://twitter.com/{{ site.author.twitter }}">
-          <span class="fa-stack fa-lg">
-              <i class="fa fa-circle-thin fa-stack-2x"></i>
-              <i class="fa fa-twitter fa-stack-1x"></i>
-          </span>
-      </a>
-
-      <a href="https://github.com/{{ site.author.github }}">
-          <span class="fa-stack fa-lg">
-              <i class="fa fa-circle-thin fa-stack-2x"></i>
-              <i class="fa fa-github fa-stack-1x"></i>
-          </span>
-      </a>
-    </p>
-    <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
-    <p>
-      <small>Dernière mise à jour : {{ site.time | date: '%d-%m-%Y' }}</small>
-    </p>
-  </div>
-</div>
+    <a class="twitter-follow-button" href="https://twitter.com/{{ site.author.twitter }}"></a>
+    <span class="navbar-text badge badge-pill badge-dark">Dernière mise à jour : {{ site.time | date: '%d-%m-%Y' }}</span>
+</nav>
