@@ -1,8 +1,10 @@
 ---
-title:      "Nginx + Squid = relay :)"
-subtitle:   "Comment configurer Nginx pour proxyfier des requêtes ?"
-header-img: "img/proxy.jpeg"
-tags: truc&astuce
+title: Nginx + Squid = relay :)
+date: 2015-08-21 00:00:00 Z
+tags:
+- truc&astuce
+subtitle: Comment configurer Nginx pour proxyfier des requêtes ?
+header-img: img/proxy.jpeg
 ---
 
 C'était une de mes prises de tête aujourd'hui : je ne peux pas attaquer un serveur directement en raison d'un problème de crossdomain. Une de nos applis flash (shame on us !) a besoin d'accéder à `fpdownload.adobe.com` pour charger des dépendances mais aujourd'hui surprise, leur crossdomain.xml a changé !

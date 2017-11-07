@@ -1,8 +1,11 @@
 ---
+title: Travis-ci ou DockerHub ?
+date: 2017-11-07 19:09:32.574000000 Z
+tags:
+- article
+- docker
 layout: post
-title: Travis-ci ou DockerHub ? 
 subtitle: Construire ses images docker.
-tags: article docker
 ---
 
 To do... 

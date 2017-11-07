@@ -1,6 +1,6 @@
 ---
 title: Cours & Prez
-description: 'Quelques présentations'
+description: Quelques présentations
 icon: slideshare
 ---
 

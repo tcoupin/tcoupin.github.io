@@ -1,39 +1,43 @@
-# Permalinks
-permalink:        pretty
+---
+title: Thibault Coupin
+timezone: UTC
+collections:
+  posts:
+    title: Posts
+    output: true
+  presentations:
+    title: Presentations
+    output: true
+    permalink: "/presentations/:path/"
+  slides:
+    title: Slides
+    output: false
+  uploads:
+    title: Uploads
+    output: true
+defaults:
+- scope:
+    path: ''
+    type: presentations
+  values:
+    layout: presentations
+- scope:
+    path: ''
+    type: posts
+  values:
+    layout: posts
+- scope:
+    path: ''
+    type: pages
+  values:
+    layout: pages
+permalink: pretty
 highlighter: rouge
 markdown: kramdown
-
-# Setup
-title:            'Thibault Coupin'
-description:      'Notes, articles et trucs utiles'
-
+description: Notes, articles et trucs utiles
 author:
-  name:           'Thibault Coupin'
-  twitter:        thibbojunior
-  github:         tcoupin
-
+  name: Thibault Coupin
+  twitter: thibbojunior
+  github: tcoupin
 reveal:
-  version:    3.3.0
-  
-collections:
-  presentations:
-    permalink: /presentations/:path/
-    output: true
-  slides:
-
-defaults:
-  - scope:
-      path: ""
-      type: presentations
-    values:
-      layout: presentations
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: posts
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: pages
+  version: 3.3.0

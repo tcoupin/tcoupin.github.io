@@ -1,8 +1,7 @@
 ---
-title: "Tags"
+title: Tags
 icon: tags
 ---
-
 
 <p class="text-center">
 {% assign fulltags = site.posts | map: 'tags' | compact | sort %}

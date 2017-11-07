@@ -1,9 +1,11 @@
 ---
 title: Raspberry Pi et SSH
+date: 2017-01-23 00:00:00 Z
+tags:
+- raspberrypi
 subtitle: Ajouter sa clé publique avant de flasher la carte SD
 comments: true
 thumbnail: https://files1.element14.com/community/themes/images/raspberrypi/Pilogo_rpi.png
-tags: raspberrypi
 ---
 
 J'aime préparer mes Raspberry PI à gros coups de playbook *ansible*. Il faut avant tout que j'installe ma clé publique sur les RPi pour qu'ansible puisse les piloter en SSH.

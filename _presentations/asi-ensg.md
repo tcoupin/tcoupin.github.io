@@ -1,11 +1,12 @@
 ---
-title: "Architecture des systèmes d'informations"
+title: Architecture des systèmes d'informations
 subtitle: ENSG, février 2017
 theme: night
 initialization:
   transition: convex
   slideNumber: c/t
 ---
+
 <!--http://patorjk.com/software/taag/#p=display&f=Big&t=Definitions -->
 
 ## Moi

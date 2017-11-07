@@ -1,7 +1,10 @@
 ---
 title: Un point sur les proxys HTTP
-subtitle:   "HTTP, Squid3"
-tags: http article
+date: 2015-10-16 00:00:00 Z
+tags:
+- http
+- article
+subtitle: HTTP, Squid3
 thumbnail: https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/14/thumb_bigger_formation-node-js.png
 ---
 

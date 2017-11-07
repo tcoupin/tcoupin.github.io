@@ -1,9 +1,12 @@
 ---
-title: "Docker : comment bien diffuser son application ?"
-subtitle: "Retours de ma petite expérience"
+title: 'Docker : comment bien diffuser son application ?'
+date: 2016-11-01 00:00:00 Z
+tags:
+- docker
+- article
+subtitle: Retours de ma petite expérience
 comments: true
 thumbnail: http://logo-logos.com/wp-content/uploads/2016/10/Docker_logo_logotype.png
-tags: docker article
 ---
 
 Docker révolutionne la vie des applications. Sa force est d'avoir mis à disposition des dev et des ops un outil commun pour que chacun puisse se focaliser sur son cœur de travail tout en prenant en compte les besoins et impératifs de l'autre. 

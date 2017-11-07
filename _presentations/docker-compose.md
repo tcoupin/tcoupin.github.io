@@ -1,5 +1,5 @@
 ---
-title: "Docker-compose"
+title: Docker-compose
 subtitle: ENSG, février 2017
 theme: night
 initialization:

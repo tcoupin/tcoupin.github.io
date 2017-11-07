@@ -1,12 +1,11 @@
 ---
-title: "Intro à docker"
+title: Intro à docker
 subtitle: ENSG, février 2017
 theme: sky
 initialization:
   transition: convex
   slideNumber: c/t
 ---
-
 
 ## Moi
 
