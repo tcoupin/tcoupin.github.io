@@ -19,6 +19,8 @@
 		{% else %}		
 			<link rel="stylesheet" href="//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/css/theme/black.css">
 		{% endif %}
+		<link rel="stylesheet" href="//cdn.rawgit.com/fengyuanchen/viewerjs/v0.10.0/dist/viewer.min.css">
+		<script type="text/javascript" src="//cdn.rawgit.com/fengyuanchen/viewerjs/v0.10.0/dist/viewer.min.js"
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -75,6 +77,39 @@
 					{ src: '//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+			var viewerimage;
+			window.onload = function(){
+				var imgs = document.querySelectorAll("img");
+				for (var i =0;i< imgs.length;i++){
+					var img = imgs[i];
+					img.addEventListener('click',function(){
+						if (viewerimage){
+							viewerimage.hide();
+							viewerimage.destroy();
+						}
+						viewerimage = new Viewer(this)
+						viewerimage.show()
+						// Gestion du click hors image pour la fermeture
+						document.querySelectorAll(".viewer-canvas")[0].addEventListener("click",function(e){
+							if (e.target.localName == 'div'){
+								console.log("Click");
+								viewerimage.hide();
+							}
+						})
+					});
+				}
+				Viewer.setDefaults(
+					{
+						navbar: false,
+						toolbar: false,
+						movable: true,
+						rotatable: true,
+						scalable: true,
+						transition: true
+					}
+				);
+			}
+
 		</script>
 	</body>
 </html>

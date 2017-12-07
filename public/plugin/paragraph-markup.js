@@ -64,6 +64,7 @@
 		}
 	};
 
+
 	var sections = document.querySelectorAll("section > section");
 	for (var i = 0; i < sections.length; i++){
 		var section = sections[i];
@@ -77,6 +78,8 @@
 		section.innerHTML = section.innerHTML.replace(/§fragment:([^§]*)§;/g,"§element:class=fragment data-fragment-index=$1§;");
 		// Replace $fragment to §element:class=fragment§;
 		section.innerHTML = section.innerHTML.replace(/§fragment/g,"§element:class=fragment§;");
+
+		section.innerHTML = section.innerHTML.replace(/§icon:([^§]*)§;/g,"<i class='fa fa-$1' aria-hidden='true'></i>");
 
 		/*
 		 *  Handle §side tag
@@ -112,10 +115,9 @@
 		handlePElement(section);
 		//Finaly remove
 		section.innerHTML = section.innerHTML.replace(/§pelement:[^§]*§;/g,'');
-
+	
 		// Usefull for writing paragraph command on slide
 		section.innerHTML = section.innerHTML.replace(/PARAGRAPH/g,'§');
-		
 	}
 
 

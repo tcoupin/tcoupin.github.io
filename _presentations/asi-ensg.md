@@ -1,5 +1,5 @@
 ---
-title: Architecture des systèmes d'informations
+title: "[2017] Architecture des systèmes d'informations"
 subtitle: ENSG, février 2017
 theme: night
 initialization:
