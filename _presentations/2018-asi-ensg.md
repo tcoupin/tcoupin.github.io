@@ -7,7 +7,6 @@ initialization:
   slideNumber: c/t
 ---
 
-
 ## Moi
 
 Thibault Coupin
