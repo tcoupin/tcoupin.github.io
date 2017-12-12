@@ -1,6 +1,6 @@
 ---
 title: Intro à docker
-subtitle: ENSG, février 2017
+subtitle: ENSG, février 2018
 theme: sky
 initialization:
   transition: convex
@@ -11,11 +11,12 @@ initialization:
 
 Thibault Coupin
 
-- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> ingénieur au pôle [Géoportail](https://www.geoportail.gouv.fr) de l'IGN
-- §fragment<i class="fa fa-gear" aria-hidden="true"></i> Chef division Services&CDA & DevOps
-- §fragment<i class="fa fa-envelope-o" aria-hidden="true"></i> thibault.coupin<i class="fa fa-at" aria-hidden="true"></i>ign.fr
+- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> Admin SIG à l'[IRD](http://www.ird.fr)
+- §fragment<i class="fa fa-gear" aria-hidden="true"></i> Anciennement Chef division WebServices & DevOps au [Géoportail](https://www.geoportail.gouv.fr)
+- §fragment<i class="fa fa-envelope-o" aria-hidden="true"></i> thibault.coupin<i class="fa fa-at" aria-hidden="true"></i>gmail.com
 - §fragment<i class="fa fa-github" aria-hidden="true"></i> [tcoupin](https://github.com/tcoupin)
 - §fragment<i class="fa fa-twitter" aria-hidden="true"></i> [@thibbojunior](https://twitter.com/thibbojunior)
+
 
 §break
 
@@ -58,9 +59,7 @@ Thibault Coupin
 
 ### Qu'est ce que c'est ?
 
-> Docker est un outil qui peut empaqueter une application et ses dépendances dans un conteneur isolé, qui pourra être exécuté sur n'importe quel serveur Linux.
-
-451 Research
+Docker Engine est un outil permettant l'exécution d'application packagée de façon isolée, on parle de **conteneur**.
 
 
 §break
@@ -144,13 +143,22 @@ PID   USER     TIME   COMMAND
 
 §break
 
-### Terminologie
+### Terminologie : les 4 éléments
 
 Pour démarrer une application de façon isolée, on lance un **conteneur§fragment** basé sur une **image§fragment**.
 
 Pour stocker des données on peut associer le conteneur à un ou plusieurs **volumes§fragment**.§fragment
 
 Le conteneur peut être associé à un ou plusieurs **réseaux§fragment** pour communiquer avec d'autres conteneurs ou avec l'extérieur.§fragment
+
+§break
+
+### Architecture
+
+Docker Engine est composée de 2 éléments principaux :
+
+- le *daemon* **§fragment: c'est lui qui gère les conteneurs et les à-côtés, il expose une API**
+- le *cli* **§fragment: la ligne de commande qui contrôle le daemon via son API**
 
 §break
 
@@ -163,6 +171,7 @@ La liste complète est disponible :
 - sur la [documentation web](https://docs.docker.com/engine/reference/commandline/)
 - en ligne de commande `docker help`
 
+Dans les versions actuelles, 2 API cohabitent. On ne parlera que de la plus récente.
 §break
 
 ### En pratique
@@ -214,8 +223,9 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
 - Les images fonctionnent comme des repo
 - Les images sans / sont des images officielles
 - Les images USER/NOM sont des images personnelles ou d'organisation
-- Le nom de la distribution est dans le nom de l'image ou le tag.
+- Le nom de la distribution est parfois dans le nom de l'image ou le tag.
 - Idem pour les images destinées aux archi ARM
+- Depuis peu, les images officielles sont portées sur d'autres architecture (armv6, i386...)
 
 ```
 hypriot/rpi-traefik:raclette
@@ -228,7 +238,7 @@ hypriot/rpi-traefik:raclette
 Lister les images locales
 
 ```
-$ docker images 
+$ docker image ls
 REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
 forumi0721/alpine-armv7h-minidlna   latest              8418d491e218        2 weeks ago         44.34 MB
 hypriot/rpi-traefik                 latest              a1350c91b51e        3 weeks ago         37.91 MB
@@ -238,7 +248,7 @@ tcoupin/rpi-gpass                   latest              f8bfd0e5c152        6 we
 ```
 
 §notes
-On peut voir la présence d'un TAG qui vaut par défaut latest. Il peut servir à préciser une version ou un variante (arm/x86, fastcgi/http...)
+On peut voir la présence d'un TAG qui vaut par défaut latest. Il peut servir à préciser une version et/ou un variante (arm/x86, fastcgi/http...)
 
 §break
 
@@ -262,10 +272,10 @@ marcells/aspnet-hello-world               ASP.NET vNext - Hello World           
 Télécharger une image depuis hub.docker.com
 
 ```
-$ docker pull hello-world
+$ docker image pull hello-world
 ```
 
-<small>*Le hub offre aussi la possibilité d'héberger vos images avec les commandes `docker login` et `docker push`*</small>
+<small>*Le hub offre aussi la possibilité d'héberger vos images avec les commandes `docker login` et `docker image push`*</small>
 
 §break
 
@@ -274,10 +284,8 @@ $ docker pull hello-world
 Supprimer une image locale
 
 ```
-$ docker rmi hello-world
+$ docker image rm hello-world
 ```
-
-<i class="fa fa-warning" aria-hidden="true"></i> Ne pas confondre avec *rm* qui supprime un conteneur.
 
 §break
 
@@ -286,7 +294,7 @@ $ docker rmi hello-world
 Construire une image avec un Dockerfile
 
 ```
-$ docker build DOCKERFILE_PATH
+$ docker image build DOCKERFILE_PATH
 ```
 
 - *DOCKERFILE_PATH* est le chemin du dossier contenant le Dockerfile.
@@ -300,7 +308,7 @@ Plus de détails dans le chapitre [Dockerfile](#dockerfile).
 Nommer/tagguer une image
 
 ```
-$ docker tag IMAGE:TAG IMAGE:TAG
+$ docker image tag IMAGE:TAG IMAGE:TAG
 ```
 
 §break 
@@ -311,12 +319,11 @@ $ docker tag IMAGE:TAG IMAGE:TAG
 Voir les métadonnées d'une image
 
 ```
-$ docker inspect hello-world
+$ docker image inspect hello-world
 ```
 
 Beaucoup de chose !§fragment
 
-<i class="fa fa-warning" aria-hidden="true"></i> Ne pas confondre avec *rm* qui supprime un conteneur.
 
 §break
 
@@ -344,7 +351,7 @@ Beaucoup de chose !§fragment
 ### Démarrer un conteneur
 
 ```
-$ docker run OPTIONS IMAGE[:TAG] COMMANDE 
+$ docker container run OPTIONS IMAGE[:TAG] COMMANDE 
 ```
 
 - *OPTIONS* : diverses options sont possibles
@@ -358,7 +365,7 @@ $ docker run OPTIONS IMAGE[:TAG] COMMANDE
 Exemple :
 
 ```
-$ docker run debian:jessie cat /etc/hostname
+$ docker container run debian:jessie cat /etc/hostname
 ```
 
 Le conteneur affiche le contenu du fichier `/etc/hostname` et s'arrête.
@@ -370,7 +377,7 @@ Le conteneur affiche le contenu du fichier `/etc/hostname` et s'arrête.
 Exemple :
 
 ```
-$ docker run -it debian:jessie /bin/bash
+$ docker container run -it debian:jessie /bin/bash
 ```
 
 Démarre un terminal bash dans le conteneur.
@@ -386,14 +393,14 @@ ifconfig pour voir la config réseau
 ### Lister les conteneurs
 
 ```
-$ docker ps
+$ docker container ls
 CONTAINER ID        IMAGE                               COMMAND                  CREATED             STATUS              PORTS                                      NAMES
 ```
 
 Mais pourquoi on ne voit pas les conteneurs d'avant ? §fragment
 
 ```
-$ docker ps -a §fragment
+$ docker container ls -a §fragment
 CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS                     PORTS                               NAMES
 a5b74e24da65        debian:jessie            "cat /etc/hostname"      9 seconds ago       Exited (0) 6 seconds ago                                       happy_cori
 ```
@@ -403,15 +410,15 @@ a5b74e24da65        debian:jessie            "cat /etc/hostname"      9 seconds 
 ### Supprimer les conteneurs
 
 ```
-$ docker rm NOM
+$ docker container rm NOM
 ```
 
 §break
 
 ### Gérer les conteneurs
 
-- `stop` et `start`
-- `retart`
+- `stop` et `start` (`kill` aussi)
+- `restart`
 - `pause` et `unpause`
 
 §break
@@ -447,7 +454,7 @@ Commiter un conteneur revient à ajouter une couche à une image.
 Les modifications de l'image apportées par le conteneur peuvent être utilisées pour créer une nouvelle image.
 
 ```
-$ docker commit CONTAINER_NAME IMAGE[:TAG]
+$ docker container commit CONTAINER_NAME IMAGE[:TAG]
 ```
 
 On peut également ajouter un auteur, un message de commit...
@@ -493,7 +500,7 @@ Les 3 valeurs les plus répandues :
 ### Pas de réseau
 
 ```
-$ docker run --rm --net none debian:jessie ip a
+$ docker container run --rm --net none debian:jessie ip a
 ```
 
 Seulement l'interface *loopback*.§fragment
@@ -503,7 +510,7 @@ Seulement l'interface *loopback*.§fragment
 ### Réseau de l'hôte
 
 ```
-$ docker run --rm --net host debian:jessie ip a
+$ docker container run --rm --net host debian:jessie ip a
 ```
 
 Toutes les interfaces de la machine hôte (eth0, wlan0...).§fragment
@@ -521,7 +528,7 @@ Toutes les interfaces de la machine hôte (eth0, wlan0...).§fragment
 ### Exposer un port avec l'option `-p`
 
 ```
-$ docker run --rm -p 8080:80 httpd:alpine
+$ docker container run --rm -p 8080:80 httpd:alpine
 ```
 
 [http://127.0.0.1:8080](http://127.0.0.1:8080)
@@ -606,7 +613,7 @@ On utilise l'option `-v LOCAL_PATH:PATH_ON_CONTAINER:MODE`
 - *MODE* (optionnel) : mode d'accès, principalement *rw* (par défaut) et *ro*
 
 ```
-$ docker run --rm -it -v /:/monhote:ro debian:jessie /bin/bash
+$ docker container run --rm -it -v /:/monhote:ro debian:jessie /bin/bash
 ```
 
 §break
@@ -654,7 +661,7 @@ On peut préciser le *driver* à utiliser (dépend du backend, par défaut local
 Créer un volume lors de la création d'un conteneur
 
 ```
-$ docker run -v [NAME]:[PATH_ON_CONTAINER]:[OPTS]
+$ docker container run -v [NAME]:[PATH_ON_CONTAINER]:[OPTS]
 ```
 
 §fragmentUn peu comme pour un volume hôte, mais avec un nom au lieu d'un chemin.
@@ -666,7 +673,7 @@ $ docker run -v [NAME]:[PATH_ON_CONTAINER]:[OPTS]
 Les métadonnées d'une image peuvent forcer la création d'un volume :
 
 ```
-docker inspect rok4/data-bdortho-d075                                            
+docker image inspect rok4/data-bdortho-d075                                            
 [{...
     "Config": {...
         "Volumes": {
@@ -693,7 +700,7 @@ $ docker volume rm NAME
 Supprimer un volume lors de la suppression d'un conteneur
 
 ```
-$ docker rm -v CONTAINER_NAME
+$ docker container rm -v CONTAINER_NAME
 ```
 
 <i class="fa fa-warning" aria-hidden="true"></i> Ne concerne que les volumes créés automatiquement par les métadonnées d'une image.
@@ -749,7 +756,7 @@ Script de création d'image.
 Construire une image avec un Dockerfile
 
 ```
-$ docker build DOCKERFILE_PATH
+$ docker image build DOCKERFILE_PATH
 ```
 
 - *DOCKERFILE_PATH* est le chemin du dossier contenant le Dockerfile.
@@ -775,7 +782,7 @@ FROM debian:jessie
 Modifier les métadonnées
 
 ```
-MAINTAINER Thibault Coupin <thibault.coupin@ign.fr>
+MAINTAINER Thibault Coupin <thibault.coupin@gmail.com>
 LABEL mon_tag="ma valeur"
 ```
 
@@ -800,7 +807,7 @@ Utilisation : `${name:-default_value}`
 Paramétriser le Dockerfile
 
 ```
-docker build --build-arg name=value .
+docker image build --build-arg name=value .
 ```
 
 §break
