@@ -1,7 +1,7 @@
 ---
 title: Architecture des systèmes d'informations
 subtitle: ENSG, janvier 2018
-theme: sky
+theme: solarized
 initialization:
   transition: slide
   slideNumber: c/t

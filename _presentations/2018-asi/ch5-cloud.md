@@ -45,6 +45,37 @@ Inconvénients :
 
 ### Architecture *serverless*
 
-TODO
+![Serverless](https://www.commitstrip.com/wp-content/uploads/2017/04/Strip-Severless-650-finalV2.jpg)§pelement:height=60%§;
 
-https://blog.ippon.fr/2017/06/09/les-architectures-serverless/
+*CommitStrip*
+
+§break
+
+### Architecture *serverless*
+
+Nouvelles offres :
+
+- abstraction totale de la fonction de serveur
+- on ne déploie plus une application, mais le code d'une fonction
+
+§break
+
+### Exemple
+
+
+![Serverless](/data/serverless.png)§pelement:height=60%§;
+
+§break
+
+### Architecture *serverless*
+
+Avantages :
+
+- plus de gestion de la scalabitlité§fragment:1§;
+- facturation à l'appel/temps d’exécution  et non à la VM/container§fragment:1§;
+
+Inconvénients :
+
+- jeunesse de la technologie§fragment:2§;
+- peu d'acteur proposant cette fonctionnalité§fragment:2§;
+- l'efficacité du code influe sur le coût§fragment:2§;
