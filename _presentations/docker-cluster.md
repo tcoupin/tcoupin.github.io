@@ -2,7 +2,6 @@
 title: Docker en cluster
 subtitle: ENSG, février 2018
 theme: night
-draft: true
 initialization:
   transition: convex
   slideNumber: c/t
