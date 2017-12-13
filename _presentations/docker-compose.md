@@ -1,6 +1,6 @@
 ---
-title: Docker-compose
-subtitle: ENSG, février 2017
+title: Docker-compose pour le développeur
+subtitle: ENSG, février 2018
 theme: night
 initialization:
   transition: convex
@@ -11,9 +11,10 @@ initialization:
 
 Thibault Coupin
 
-- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> ingénieur au pôle [Géoportail](https://www.geoportail.gouv.fr) de l'IGN
-- §fragment<i class="fa fa-gear" aria-hidden="true"></i> Chef division Services&CDA & DevOps
-- §fragment<i class="fa fa-envelope-o" aria-hidden="true"></i> thibault.coupin<i class="fa fa-at" aria-hidden="true"></i>ign.fr
+
+- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> Admin SIG à l'[IRD](http://www.ird.fr)
+- §fragment<i class="fa fa-gear" aria-hidden="true"></i> Anciennement Chef division WebServices & DevOps au [Géoportail](https://www.geoportail.gouv.fr)
+- §fragment<i class="fa fa-envelope-o" aria-hidden="true"></i> thibault.coupin<i class="fa fa-at" aria-hidden="true"></i>gmail.com
 - §fragment<i class="fa fa-github" aria-hidden="true"></i> [tcoupin](https://github.com/tcoupin)
 - §fragment<i class="fa fa-twitter" aria-hidden="true"></i> [@thibbojunior](https://twitter.com/thibbojunior)
 
@@ -40,7 +41,7 @@ Docker-compose est utile pour l'utilisation sur : §fragment
 - un poste simple comme celui d'un développeur (toutes versions)§fragment
 - un cluster swarm standalone de version < 1.12§fragment
 
-Pour les cluster swarm de version >= 1.13, il faut utiliser le concept des stacks.§fragment
+Pour les cluster swarmkit (Engine version >= 1.13), il faut utiliser le concept des stacks.§fragment
 
 §break
 
@@ -64,10 +65,10 @@ Pour les cluster swarm de version >= 1.13, il faut utiliser le concept des stack
 
 ### Rappels
 
-On lance les conteneurs avec la commande
+On lance les conteneurs avec la commande ?
 
 ```
-$ docker run [OPTS] IMAGE [CMD]
+$ docker container run [OPTS] IMAGE [CMD] §fragment
 ```
 
 §break
@@ -83,10 +84,10 @@ $ docker run [OPTS] IMAGE [CMD]
 
 ### Rappels : les volumes
 
-On gère les volumes aves les commandes
+On gère les volumes aves les commandes ?
 
 ```
-$ docker volume create [OPTS]
+$ docker volume create [OPTS] §fragment
 $ docker volume ls
 $ docker volume rm VOLUME_NAME
 ```
@@ -95,10 +96,10 @@ $ docker volume rm VOLUME_NAME
 
 ### Rappels : les réseaux
 
-On gère les réseaux avec les commandes
+On gère les réseaux avec les commandes ?
 
 ```
-$ docker network create ...
+$ docker network create ... §fragment
 $ docker network connect ...
 $ docker network ls ...
 $ docker network disconnect ...
@@ -147,7 +148,8 @@ Imaginez la complexité pour déployer un CMS comprenant :
 
 ## Comment
 
-- Compose pilote directement le démon docker pour créer et gérer :
+- Compose pilote directement le daemon docker pour créer et gérer :
+  - les images
   - les conteneurs
   - les volumes
   - les réseaux
@@ -158,7 +160,7 @@ Imaginez la complexité pour déployer un CMS comprenant :
 
 ## Le fichier de définition
 
-L'application est définie dans un fichier au format YAML avec 3 sections :
+L'application est définie dans un fichier au format YAML avec 3 sections principales :
 
 - les services (les conteneurs)
 - les volumes
@@ -187,7 +189,7 @@ Un langage facilement lisible reprenant les concepts de XML ou JSON
 
 ### Un format yaml
 
-```dockerfile
+```
 services:
   some-service:
     networks:
@@ -210,10 +212,16 @@ Le modèle du docker-compose.yml a plusieurs versions possibles.
 
 | Compose file format | Docker Engine |
 |---------------------|---------------|
-| **3.0**             | 1.13.0+       |  
-| 2.1                 | 1.12.0+       |  
-| 2.0                 | 1.10.0+       |  
-| 1.0                 | 1.9.1+        |
+|                 3.4 | 17.09.0+      |
+|                 3.3 | 17.06.0+      |
+|                 3.2 | 17.04.0+      |
+|                 3.1 | 1.13.1+       |
+|                 3.0 | 1.13.0+       |
+|                 2.3 | 17.06.0+      |
+|                 2.2 | 1.13.0+       |
+|                 2.1 | 1.12.0+       |
+|                 2.0 | 1.10.0+       |
+|                 1.0 | 1.9.1.+       |
 
 §pelement:style=background-color:white§;
 
@@ -221,12 +229,17 @@ Le modèle du docker-compose.yml a plusieurs versions possibles.
 
 ### Le contenu
 
-4 sections :
+Plusieurs sections :
 
 - la version du format
+- des fragments de fichiers compose réutilisable
 - les réseaux
 - les volumes
 - les services
+- des configs (pour une utilisation swarmkit)
+- des secrets (pour une utilisation swarmkit)
+
+§icon:warning§; Pas de section dans la v1.0 §fragment
 
 §notes
 Version : si absent, v1.
@@ -234,54 +247,7 @@ Version : si absent, v1.
 §break
 
 
-### Les réseaux
 
-- Permet de définir des réseaux (driver, options)
-- Par défaut, un réseau est créé par projet
-- Gestion de l'IPAM
-- Tout réseau utilisé par un service doit être déclaré, même s'il est externe (*external*)
-
-Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#/network-configuration-reference).
-§break
-
-### Les réseaux
-
-#### Exemple : driver par défaut (bridge)
-
-```dockerfile
-networks:
-  monreseau:
-    ipam:
-      config:
-        - subnet: 192.168.91.1/24
-          ip_range: 192.168.91.0/25
-          gateway: 192.168.91.1
-```
-
-§break
-
-### Les volumes
-
-- Permet de définir des volumes (driver, options)
-- Tout volume utilisé par un service doit être déclaré, même s'il est externe (*external*)
-- Les montages host->container ne sont pas concernés
-
-Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#volume-configuration-reference).
-§break
-
-
-### Les volumes
-
-#### Exemple
-
-```dockerfile
-volumes:
-  monvolume:
-  monsecondvolume:
-    driver: toto
-```
-
-§break
 
 ### Les services
 
@@ -303,20 +269,20 @@ Quelle est la base du conteneur ?
 
 - une image
 
-```dockerfile
+```
 image: httpd:alpine
 ```
 
 - un *DockerFile*
 
-```dockerfile
+```
 build: ./path
 # ou
 build:
-	context: ./path
-	dockerfile: monDockerFile
-	args:
-		...
+  context: ./path
+  dockerfile: monDockerFile
+  args:
+    ...
 ```
 
 §break
@@ -325,16 +291,20 @@ build:
 
 Montage des volumes Docker ou host
 
-```dockerfile
+```
 volumes:
   # Just specify a path and let the Engine create a volume
   - /var/lib/mysql
+  
   # Specify an absolute path mapping
   - /opt/data:/var/lib/mysql
+  
   # Path on the host, relative to the Compose file
   - ./cache:/tmp/cache
+  
   # User-relative path
   - ~/configs:/etc/configs/:ro
+  
   # Named volume
   - datavolume:/var/lib/mysql
 ```
@@ -345,7 +315,7 @@ volumes:
 
 Branchement des réseaux et exposition de ports sur la machine hôte
 
-```dockerfile
+```
 services:
   some-service:
     networks:
@@ -365,14 +335,14 @@ services:
   - **external_links** : comme *links* mais pour des conteneurs externe au docker-compose.yml
   - **extra_hosts** : on ajoute manuellement une entrée DNS dans le conteneur
 
-```dockerfile
+```
 links:
-	- pgsql:database
-	- redis
+  - pgsql:database
+  - redis
 external_links:
-	- existing_container
+  - existing_container
 extra_hosts:
-	- "box:192.168.1.1"
+  - "box:192.168.1.1"
 ```
 
 §break
@@ -384,10 +354,10 @@ Docker-compose démarre les conteneurs dans le bon ordre à condition qu'il le c
 - les **link** engendrent des dépendances inter-conteneurs
 - si nécessaire, on peut déclarer des dépendances avec **depends_on**
 
-```dockerfile
+```
 depends_on:
-	- service1
-	- service2
+  - service1
+  - service2
 ```
 
 §break
@@ -396,12 +366,60 @@ depends_on:
 
 Pour surcharger la commande par défaut, on utilise le paramètre **command**
 
-```dockerfile
+```
 command: some command && some other
 ```
 
 §break
 
+### Les volumes
+
+- Permet de définir des volumes (driver, options)
+- Tout volume utilisé par un service doit être déclaré, même s'il est externe (*external*)
+- Les montages host->container ne sont pas concernés
+
+Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#volume-configuration-reference).
+§break
+
+
+### Les volumes
+
+#### Exemple
+
+```
+volumes:
+  monvolume:
+  monsecondvolume:
+    driver: toto
+```
+
+§break
+
+### Les réseaux
+
+- Permet de définir des réseaux (driver, options)
+- Par défaut, un réseau est créé par projet
+- Gestion de l'IPAM
+- Tout réseau utilisé par un service doit être déclaré, même s'il est externe (*external*)
+
+Tous les détails sur la [doc](https://docs.docker.com/compose/compose-file/#/network-configuration-reference).
+§break
+
+### Les réseaux
+
+#### Exemple : driver par défaut (bridge)
+
+```
+networks:
+  monreseau:
+    ipam:
+      config:
+        - subnet: 192.168.91.1/24
+          ip_range: 192.168.91.0/25
+          gateway: 192.168.91.1
+```
+
+§break
 
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#/sommaire)
 §new
