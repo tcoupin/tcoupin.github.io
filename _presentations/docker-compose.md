@@ -1,7 +1,7 @@
 ---
 title: Docker-compose pour le développeur
 subtitle: ENSG, février 2018
-theme: night
+theme: sky
 initialization:
   transition: convex
   slideNumber: c/t
