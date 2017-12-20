@@ -89,6 +89,14 @@ Docker Engine peut aussi être géré en mode cluster par d'autres solutions :
 * **Amazon ECS** : Elastic Container Service, basé sur des instances Amazon EC2
 
 §break
+
+### Fonction de l'orchestrateur
+
+* Commander et surveiller les noeuds
+* Répartir au mieux les applications
+* Gérer les réseaux, les données, les logs 
+§break
+
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
 
@@ -146,7 +154,6 @@ Exemple avec un service Httpd scalé à 4 :
 
 Le réseau et les volumes doivent être disponibles sur l'**ensemble** des noeuds pour que les containers aient le même comportement quelque soit la machine où ils se trouvent.
 
-Solutions logiciels et/ou matériel...
 
 **Réseau** : l'overlay network, macvlan... §fragment
 
@@ -195,7 +202,6 @@ Un service est la définition de l'état désiré :
 docker service create --name web -p 80:80 emilevauge/whoami
 ```
 
-Etat voulu :
 
 - nom du service : *web*
 - publication du port 80 sur les noeuds manager
@@ -205,13 +211,10 @@ Etat voulu :
 §break
 
 
+
 ### Service : création
 
-```
-docker service create --name web -p 80:80 emilevauge/whoami
-```
-
-Etapes :
+Travail du leader :
 
 1. Liste des noeuds répondant aux contraintes de placement
 2. Choix d'un noeud (le moins chargé tant qu'à faire...)
@@ -240,25 +243,45 @@ En plus de ces étapes, l'état du cluster est mis à jour sur l'ensemble des ma
 docker service update ...
 ```
 
-- changement de la configuration
-- changement de l'image (mise à jour applicative)
+Quoi ?§fragment:1§;
 
-Mise à jour instance après instance (règles d'update)
+- changement de la configuration§fragment:2§;
+- changement de l'image (mise à jour applicative)§fragment:2§;
 
-En cas de soucis, pour revenir dans l'état précédent
+Comment ?§fragment:1§;
+
+- mise à jour instance après instance§fragment:3§;
+- les règles d'update définissent le déroulement§fragment:3§; 
+
+
+§break
+
+### Service : mise à jour
+### ... qui a tout cassé !§fragment:1§;
 
 ```
-docker service rollback ...
+docker service rollback ...§fragment:2§;
 ```
+
+En cas de soucis, on revient dans l'état précédent avec un *rollback*.§fragment:3§;
+
+
+Il y a aussi des règles de rollback, comme pour l'update.§fragment:3§;
 
 §break
 
 ### Service : placement constraint
 §id:placement§;
 
+Permet de restreindre la liste des machines où peut être déployé le service.
+
 ```
-docker service create --constraint 'node.labels.arch == ARM' ...
+docker service create --constraint 'node.labels.arch == ARM' ...§fragment
 ```
+
+§break
+
+### Service : placement constraint
 
 | node.id       | Node ID                  | node.id==2ivku8v2gvtg4                      |
 | node.hostname | Node hostname            | node.hostname!=node-2                       |
@@ -273,15 +296,26 @@ docker service create --constraint 'node.labels.arch == ARM' ...
 
 ### Service : placement preferences
 
-Une seule stratégie disponible : *spread*
+Permet d'influer sur la méthode de répartition utilisée.
+
+Une seule stratégie disponible : *spread* §fragment:1§;
 
 
 ```
-docker service create --placement-pref 'spread=node.labels.datacenter' \
+docker service create --placement-pref 'spread=node.labels.datacenter' \§fragment:1§;
                       --placement-pref 'spread=node.labels.rack' ...
 ```
 
-Répartie au mieux sur les différents datacenter et rack.
+§break
+
+### Service : placement preference
+
+Ex : Répartir 12 instances sur les différents datacenter et rack.
+
+![Placement preference](https://docs.docker.com/engine/swarm/images/placement_prefs.png)
+§pelement:width=70%§;
+
+*Source : [Documentation Docker](https://docs.docker.com/engine/swarm/services/#placement-preferences)*
 §break
 
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
@@ -290,9 +324,45 @@ Répartie au mieux sur les différents datacenter et rack.
 ## Stack
 §id:stack§;
 
+§break
 
-§new
+### Stack
 
+| Docker monoposte | Docker en swarm |
+| ---              |                 |
+| Container        | Service         |
+| docker-compose   | Stack           |
+
+§break
+
+### Un tas...
+
+De services seulement !§fragment
+
+Une stack n'est pas l'équivalent d'un docker-compose.yml. §fragment
+
+Une stack est un ensemble de service. §fragment
+
+§break
+
+### Déployer une stack
+
+```
+docker stack deploy ...
+```
+
+Nécessite un fichier de définition de stack :
+
+- DAB : Distributed Application Bundle file§fragment
+- docker-compose.yml... §fragment
+
+§break
+
+### Lien stack/docker-compose
+
+Lors de la création d'une stack à partir d'un docker-compose.yml, les réseaux et volumes sont bien créés mais ne font pas partie de la stack...§fragment
+
+La commande docker-compose n'est pas utilisée, le Yaml est interprété par docker et non docker-compose.§fragment
 
 §break
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
