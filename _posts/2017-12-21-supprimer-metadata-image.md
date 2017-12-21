@@ -1,6 +1,6 @@
 ---
 title: Supprimer certaine metadonnée des images docker
-date: 2017-12-21
+date: 2017-12-21 00:00:00 Z
 tags:
 - docker
 - truc&astuce
