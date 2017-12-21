@@ -1,5 +1,5 @@
 ---
-title: Supprimer certaine metadonnée des images docker
+title: Supprimer certaines metadonnées des images docker
 date: 2017-12-21 00:00:00 Z
 tags:
 - docker
