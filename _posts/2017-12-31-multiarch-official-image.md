@@ -9,7 +9,7 @@ comments: true
 thumbnail: http://logo-logos.com/wp-content/uploads/2016/10/Docker_logo_logotype.png
 ---
 
-De nombreux sites abordent la contruction d'image pour des systèmes non x86. On pourra citer :
+De nombreux sites abordent la construction d'image pour des systèmes non x86. On pourra citer :
 
 - [La documentation offcielle](https://github.com/docker-library/official-images/blob/master/README.md#multiple-architectures)
 - [un article sur l'excellente image multiarch/qemu-user-static](https://eyskens.me/multiarch-docker-images/)
@@ -20,7 +20,7 @@ Il y a de nombreuses images disponibles sur le hub.docker.com pour architecture 
 
 ### Commment faire alors ?
 
-Grâce aux multi-stages build indroduits dans la version 17.05 : https://docs.docker.com/engine/userguide/eng-image/multistage-build/.
+Grâce aux multi-stages builds indroduits dans la version 17.05 : https://docs.docker.com/engine/userguide/eng-image/multistage-build/.
 
 
 Le dockerfile change un chouilla et on garde l'étape d'enregistrement des binaires qemu dans [Binfmt_misc](https://en.wikipedia.org/wiki/Binfmt_misc) :
