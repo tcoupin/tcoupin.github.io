@@ -19,7 +19,7 @@ initialization:
 Thibault Coupin
 
 
-- §fragment§icon:briefcase§; Admin SIG à l'[IRD](http://www.ird.fr) dans [URM GRED](http://gred.ird.fr)
+- §fragment§icon:briefcase§; Admin SIG à l'[IRD](http://www.ird.fr) dans l'[UMR GRED](http://gred.ird.fr)
 - §fragment§icon:gear§; Anciennement Chef division WebServices & DevOps au [Géoportail](https://www.geoportail.gouv.fr)
 - §fragment§icon:envelope-o§; thibault.coupin§icon:at§;gmail.com / §icon:at§;ird.fr
 - §fragment§icon:github§; [tcoupin](https://github.com/tcoupin)
@@ -47,6 +47,7 @@ Thibault Coupin
 - [Stack](#/stack)
 - [Les volumes](#/volumes)
 - [Les réseaux](#/network)
+- [Config & secret](#/configsecret)
 
 §new
 
@@ -216,6 +217,14 @@ Un service est la définition de l'état désiré :
 
 §break
 
+### Les tasks
+
+Les tasks permettent la réalitsation du service
+
+*Ce sont les containers sur les noeuds*
+
+§break
+
 ### Service : création
 
 ```
@@ -254,6 +263,33 @@ En plus de ces étapes, l'état du cluster est mis à jour sur l'ensemble des ma
 | `--update-*/--rollback-*`        | gestion des phases de mise à jour du service |
 
 §pelement:style=font-size:80%;§;
+
+§break
+
+### Service et tasks
+
+
+```
+$ docker service ls
+ID                  NAME                MODE                REPLICAS            IMAGE                             PORTS
+hs40g5qxj3wy        ui                  replicated          2/2                 dockersamples/visualizer:latest   *:8080->8080/tcp
+```
+
+```
+$ docker service ps ui
+ID                  NAME                IMAGE                             NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+ticx39oiptf3        ui.1                dockersamples/visualizer:latest   nodeAZ1N1           Running             Running 8 minutes ago                        
+l7m1coye9jfy        ui.2                dockersamples/visualizer:latest   nodeAZ2N1           Running             Running 38 seconds ago
+```
+
+§break
+
+### Service : réplication
+
+2 modes de déploiement :
+
+- `replicated` : autant d'instance que demandé (par défaut)
+- `global` : une instance par noeud répondant aux contraintes de placement
 
 §break
 
@@ -378,13 +414,36 @@ Nécessite un fichier de définition de stack :
 
 §break
 
-### Lien stack/docker-compose
+### Utilisation d'un docker-compose.yml
 
-Lors de la création d'une stack à partir d'un docker-compose.yml, les réseaux et volumes sont bien créés mais ne font pas partie de la stack...§fragment
-
-La commande docker-compose n'est pas utilisée, le Yaml est interprété par docker et non docker-compose.§fragment
+- L'applicatif docker-compose n'est pas utilisé
+- Certaines options sont nouvelles/différentes/inutilisables
+- De nouveaux éléments : config, secret (voir les sections TODO)
 
 §break
+
+### Docker-compose.yml : les nouveautés
+
+
+* nouvelles sections : `config` et `secret` pour les déclarer
+* nouvelle option `deploy` pour un service :
+  * nombre de réplicas
+  * préférences de placement
+  * labels sur les services et bien d'autres...
+* lien entre service et config/secret
+
+§break
+
+### Docker-compose.yml : les non compatibles
+
+* La liste des options non compatibles avec le mode swarm [sur la documentation](https://docs.docker.com/compose/compose-file/#not-supported-for-docker-stack-deploy)
+* Notamment : 
+  * link (voir la section réseau TODO)
+  * build
+  * restart
+
+§break
+
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 
 §new
@@ -444,9 +503,161 @@ Stockage physique : `/var/lib/docker/volumes/NOM_VOLUME/_data`
 §new
 
 
-## Focus sur les réseaux
+## Réseau
 §id:network§;
+
+- Réseau interne §fragment §element:class=grow§;
+- Réseau externe
+
+§break
+
+### Un engine seul
+
+![](https://www.kaitoy.xyz/images/docker_network.jpg)
+§pelement:width=40%§;
+
+*Source: [www.kaitoy.xyz](www.kaitoy.xyz)*
+
+§break
+
+### Un engine seul
+
+- 3 réseaux de base : *none, host, bridge*
+- possibilité de créer de nouveaux réseaux de type *bridge*§fragment
+- Lien inter-conteneurs :§fragment
+  - sur le même réseau donc lien IP ok§fragment
+  - résolution DNS :§fragment
+    - native sur les réseaux créés
+    - option `--link` pour le bridge par défaut
+
+§notes
+Résolution native par l'engine, modification du etc/hosts pour le bridge par défaut
+
+§break
+
+### Dans un cluster
+
+* Lien entre les tasks des services liés
+* Abstraction de l'emplacement des tasks sur les noeuds
+
+§break
+
+### L'overlay network
+
+![L'overlay](http://blog.nigelpoulton.com/wp-content/uploads/2016/10/Figure8-3-768x445.png)
+§pelement:width=40%§;
+
+* Un réseau présent sur tous les noeuds
+* Un réseau non dupliqué mais distribué
+* Créé lors de l'initialisation du swarm
+
+Source : [Article Demystifying Docker overlay networking](http://blog.nigelpoulton.com/demystifying-docker-overlay-networking/)
+§break
+
+### L'overlay : un tunnel
+
+
+![L'overlay vue physique](http://blog.nigelpoulton.com/wp-content/uploads/2016/10/figure8-8-768x515.png)
+§pelement:width=40%§;
+
+* Utilise un techonologie de VLAN (ici *VXLAN*)
+
+
+Source : [Article Demystifying Docker overlay networking](http://blog.nigelpoulton.com/demystifying-docker-overlay-networking/)
+§break
+
+### L'overlay : d'autres méthodes
+
+* D'autres méthodes incluses dans l'engine : *IPVLAN, MACVLAN*
+* L'engine est extensible avec des *network plugins*
+  * une interface entre l'engine et le backend de réseau
+  * ex : Contiv (by Cisco)... (voir [plus](https://store.docker.com/search?category=network&q=&type=plugin))
+
+
+§break
+
+### DNS
+
+Lorsqu'un service est connecté à un réseau, il bénéficie du service DNS.
+
+<br>
+
+| `SERVICE` | VIP du service (voir LB juste après) |
+| `tasks.SERVICE` | liste de toutes les ips des tasks |
+
+§break
+
+### DNS : exemple
+
+```
+# dig httpd
+
+;; ANSWER SECTION:
+httpd.      600 IN  A 10.0.1.6
+```
+
+```
+# dig tasks.httpd
+
+;; ANSWER SECTION:
+tasks.httpd.    600 IN  A 10.0.1.8
+tasks.httpd.    600 IN  A 10.0.1.10
+tasks.httpd.    600 IN  A 10.0.1.11
+tasks.httpd.    600 IN  A 10.0.1.12
+tasks.httpd.    600 IN  A 10.0.1.9
+tasks.httpd.    600 IN  A 10.0.1.7
+```
+
+
+§break
+
+
+## Réseau
+
+- Réseau interne
+- Réseau externe §fragment §element:class=grow§;
+
+§break
+
+### Le réseau ingress
+
+- Est sur tous les noeuds (overlay)
+- Gère les relations entre le cluster et le monde extérieur
+  - bound des ports publiés
+  - load-balancing IPVS
+
+![](https://success.docker.com/api/images/.%2Frefarch%2Fucp-service-discovery%2Fimages%2Frouting-mesh.png)
+§pelement:width=40%§;
+
+Source : [success.docker.com](https://success.docker.com/)
+§break
+
+### Load balancing
+
+- Tous les noeuds (manager ou worker) du cluster expose les ports publiés par les services
+- La requête est transférée vers l'IPVS puis vers une des tasks du service
+- Possibilité d'utiliser un LB externe
+
+![LB](https://i.stack.imgur.com/Hyxbk.png)
+§pelement:width=40%§;
+
+Source : [docs.docker.com](https://docs.docker.com/engine/swarm/ingress/)
+
+§break 
+
+[§icon:arrow-left§; Retour sommaire](#/sommaire)
+
+§new
+
+## Config & secret
+§id:configsecret§;
 TODO
+
+- qq c'est, différence, utilité
+- creer
+- utiliser
+- dans docker compose
+
 §new
 
 
