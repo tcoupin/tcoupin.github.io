@@ -1,6 +1,6 @@
 ---
 title: Docker en cluster
-subtitle: mai 2018
+subtitle: Initiation à Swarm
 theme: sky
 initialization:
   transition: convex
@@ -651,12 +651,162 @@ Source : [docs.docker.com](https://docs.docker.com/engine/swarm/ingress/)
 
 ## Config & secret
 §id:configsecret§;
-TODO
 
-- qq c'est, différence, utilité
-- creer
-- utiliser
-- dans docker compose
+§break
+
+### Dissocier l'appication de la configuration
+
+- Gestion globale des configurations, en dehors des images
+- En parallèle//complément de la configuration par variables d'environnement
+- En finir avec les volumes "config" initialisés à la main...
+
+§break
+
+### Les configs
+
+- Objet de l'engine avec un workflow (create, inspect, rm, ls)
+- Encodé en base64 (texte, image, ...) dans le swarm
+  - disponibilité par réplication
+  - cohérence grâce à l'algo raft du swarm
+- Monté dans les containers
+
+§break
+
+### Les secrets
+
+Comme une config +
+
+- Encodage (non lisible avec la commande inspect)
+- Déployé dans l'espace mémoire du container et non dans l'espace stockage
+
+Pour les données sensibles : mot de passe, clé SSL, certificat...
+
+§break
+
+### CLI 
+
+```
+docker config create NOM FILE
+ou
+echo "ma config" | docker config create NOM -
+```
+
+```
+docker config ls
+```
+
+
+```
+docker config rm NOM
+```
+
+De même pour les secrets...
+
+§break
+
+### Utilisation dans un service
+
+```
+docker service create --config NAME IMAGE
+# Sera accessible à /NAME
+```
+
+```
+docker service create --config src=NAME,target=/path/to/file IMAGE
+# Sera accessible à /path/to/file
+```
+
+Par défault un secret est accessible dans `/run/secrets/NAME`
+
+§break
+
+### Config et docker-compose.yml
+
+```
+version: "3.3"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    configs:
+      - my_config
+      - my_other_config
+configs:
+  my_config:
+    file: ./my_config.txt
+  my_other_config:
+    external: true
+```
+
+§break
+
+### Config et docker-compose.yml
+
+```
+version: "3.3"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    configs:
+      - source: my_config
+        target: /redis_config
+        uid: '103'
+        gid: '103'
+        mode: 0440
+configs:
+  my_config:
+    file: ./my_config.txt
+  my_other_config:
+    external: true
+```
+
+§break
+
+### Secret et docker-compose.yml
+
+```
+version: "3.1"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - my_secret
+      - my_other_secret
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+  my_other_secret:
+    external: true
+```
+
+§break
+
+### Secret et docker-compose.yml
+
+```
+version: "3.1"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - source: my_secret
+        target: redis_secret
+        uid: '103'
+        gid: '103'
+        mode: 0440
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+  my_other_secret:
+    external: true
+```
 
 §new
 
