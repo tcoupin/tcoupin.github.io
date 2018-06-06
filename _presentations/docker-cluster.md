@@ -34,6 +34,7 @@ Thibault Coupin
 - disponible sur [https://tcoupin.github.io/presentations/docker-cluster](https://tcoupin.github.io/presentations/docker-cluster)
 - propulsé fièrement par [reveal.js](https://github.com/hakimel/reveal.js) via [Gh-reveal](https://github.com/tcoupin/gh-reveal)
 
+Des outils pour déployer facilement un cluster swarm sur des VM sont dispo sur mon github : [https://github.com/tcoupin/swarm-playground](https://github.com/tcoupin/swarm-playground)
 
 §break
 
