@@ -43,9 +43,9 @@ Des outils pour déployer facilement un cluster swarm sur des VM sont dispo sur 
 §id:sommaire§;
 
 - [Intro](#/intro)
-- [Noeuds](#/nodes)
-- [Service](#/service)
-- [Stack](#/stack)
+- [Les noeuds](#/nodes)
+- [Les services](#/service)
+- [Les stacks](#/stack)
 - [Les volumes](#/volumes)
 - [Les réseaux](#/network)
 - [Config & secret](#/configsecret)
@@ -102,7 +102,7 @@ Contrôler un ensemble de machines en faisant abstraction des machines, elles fo
 
 ### Historique du clustering dans docker
 
-* **Swarm standalone** : un proxy qui répartie les commandes sur les noeuds.
+* **Swarm standalone** : un proxy qui réparti les commandes sur les noeuds.
 * **Swarmkit/swarm mode** : natif depuis Docker 1.12 (été 2016), fonction intégrée à Engine, nouveaux concepts de services/stack... 
 
 §break
@@ -149,7 +149,7 @@ Docker Engine peut aussi être géré en mode cluster par d'autres solutions :
 
 * **Leader**
   * Un manager en particulier
-  * Répartie les demandes en service de l'utilisateur sur les noeuds
+  * Réparti les demandes en service de l'utilisateur sur les noeuds
 
 §break
 
@@ -200,11 +200,11 @@ Voir [Service/Placement](#/placement)
 §new
 
 
-## Service
+## Les services
 §id:service§;
 §break
 
-### Service
+### Les services
 
 Une couche d'abstraction par rapport au container.
 
@@ -220,7 +220,7 @@ Un service est la définition de l'état désiré :
 
 ### Les tasks
 
-Les tasks permettent la réalitsation du service
+Les tasks permettent la réalisation du service
 
 *Ce sont les containers sur les noeuds*
 
@@ -258,7 +258,7 @@ En plus de ces étapes, l'état du cluster est mis à jour sur l'ensemble des ma
 
 | `--bind/--mount`                 | gestion des volumes                          |
 | `-p/--publish`                   | gestion des ouvertures réseau                |
-| `--replicas`                     | nombre d'instance                            |
+| `--replicas`                     | nombre d'instances                            |
 | `--reserve-cpu/--reserve-memory` | besoin en CPU/RAM                            |
 | `--health-*`                     | configurer le health-check applicatif        |
 | `--update-*/--rollback-*`        | gestion des phases de mise à jour du service |
@@ -289,7 +289,7 @@ l7m1coye9jfy        ui.2                dockersamples/visualizer:latest   nodeAZ
 
 2 modes de déploiement :
 
-- `replicated` : autant d'instance que demandé (par défaut)
+- `replicated` : autant d'instances que demandé (par défaut)
 - `global` : une instance par noeud répondant aux contraintes de placement
 
 §break
@@ -367,7 +367,7 @@ docker service create --placement-pref 'spread=node.labels.datacenter' \§fragme
 
 ### Service : placement preference
 
-Ex : Répartir 12 instances sur les différents datacenter et rack.
+Ex : Répartir 12 instances sur les différents datacenters et racks.
 
 ![Placement preference](https://docs.docker.com/engine/swarm/images/placement_prefs.png)
 §pelement:width=70%§;
@@ -378,7 +378,7 @@ Ex : Répartir 12 instances sur les différents datacenter et rack.
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 §new
 
-## Stack
+## Les stacks
 §id:stack§;
 
 §break
@@ -392,7 +392,7 @@ Ex : Répartir 12 instances sur les différents datacenter et rack.
 
 §break
 
-### Un tas...
+### Une pile...
 
 De services seulement !§fragment
 
@@ -635,7 +635,7 @@ Source : [success.docker.com](https://success.docker.com/)
 
 ### Load balancing
 
-- Tous les noeuds (manager ou worker) du cluster expose les ports publiés par les services
+- Tous les noeuds (manager ou worker) du cluster exposent les ports publiés par les services
 - La requête est transférée vers l'IPVS puis vers une des tasks du service
 - Possibilité d'utiliser un LB externe
 
