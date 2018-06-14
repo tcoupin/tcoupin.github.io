@@ -20,10 +20,11 @@
 			<link rel="stylesheet" href="//cdn.rawgit.com/hakimel/reveal.js/{{ site.reveal.version }}/css/theme/black.css">
 		{% endif %}
 		<link rel="stylesheet" href="//cdn.rawgit.com/fengyuanchen/viewerjs/v0.10.0/dist/viewer.min.css">
-		<script type="text/javascript" src="//cdn.rawgit.com/fengyuanchen/viewerjs/v0.10.0/dist/viewer.min.js"
+		<script type="text/javascript" src="//cdn.rawgit.com/fengyuanchen/viewerjs/v0.10.0/dist/viewer.min.js"></script>
 
 		<!-- Printing and PDF exports -->
-		<script>
+		<script type="text/javascript">
+			console.log("Print mode");
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
