@@ -151,6 +151,19 @@ ici il y a du serveur en stock mais ce n'est pas toujours le cas...
 
 §break
 
+### La vie sur du matériel physique
+
+* **Avantages**
+  * Accès à 100 % des capacités des composants
+  * Pas de complexité d'une couche d'abstraction
+* **Limites**
+  * Coût
+  * Ressources perdues
+  * Déploiement long : installation, rackage, câblage
+  * Migragration complexe
+
+§break
+
 ### Besoin de plus de puissance ?
 
 2 solutions : §fragment:1§;
@@ -226,6 +239,8 @@ On ne peut simuler que le matériel qu'on a déjà, il s'agit surtout d'isolatio
 
 §break
 
+
+
 ### Virtualisation des serveurs
 
 Containeurs : LXC, Docker, Jails
@@ -251,6 +266,18 @@ concept des partitions de disque dur, d’agrégation RAID, ajout/remplacement d
 ![](http://dduportal.github.io/cours/ensg-asi-2015/images/virtu_net.png)§pelement:height=60%§;
 
 *Damien Duportal*
+
+§break
+
+### La vie sur des VMs
+
+* **Avantages**
+  * Un serveur physique héberge plusieurs VMs
+  * Disponibilité des VMs
+  * Possible modèle cloud : paiement à la consommation sans actions humaines
+* **Limites**
+  * Plusieurs OS sur une machine physique (conso de RAM, CPU...)
+  * Performances inférieures par rapport à du physique
 
 §break
 
