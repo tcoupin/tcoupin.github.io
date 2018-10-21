@@ -1,11 +1,21 @@
 ---
-title: Intro à docker
-subtitle: ENSG, février 2018
+title: Docker Engine
+subtitle: Prise en main
 theme: sky
 initialization:
   transition: convex
   slideNumber: c/t
 ---
+
+
+## Historique de la présentation
+
+- ENSG, février 2017
+- IGN, avril et mai 2018
+- ENSG, février 2018
+- ENSG, novembre 2018
+
+§break
 
 ## Moi
 
@@ -86,6 +96,10 @@ On simule le disque dur, la carte mère, les processeurs...§fragment
 
 *C'est un peu lourd §fragment*
 
+§notes
+
+Se poser la question : pourquoi c'est lourd ? Comment ça marche la virtu ?
+
 §break
 
 ### C'est quoi la para-virtualisation ?
@@ -117,6 +131,10 @@ Environ 200 processus actifs...
 
 ça fait beaucoup pour une seule application utile.
 
+§notes
+
+Pourquoi c'est lourd ? A quoi servent tous ces processus ?
+
 §break
 
 ## Comment c'est avec docker ?
@@ -135,11 +153,12 @@ PID   USER     TIME   COMMAND
 
 ### Petit historique
 
-- dotCloud, Inc., société française développe Docker principalement par Solomon Hykes
-- Docker open source à partir de mars 2013 : c'est la nouvelle tendance
-- octobre 2013 : dotCloud, Inc. devient docker, Inc. basé à San Francisco
+- 2008 : dotCloud, Inc., société française de PaaS, développe Docker principalement par Solomon Hykes
+- mars 2013 : Docker open source, c'est la nouvelle tendance
+- octobre 2013 : dotCloud, Inc. devient Docker, Inc. basé à San Francisco
 - 2015 : docker for Mac et docker for Windows
-- 2016 : orchestration multi-hôte intégrée
+- 2016 : orchestration multi-hôte intégrée avec SwarmMode
+- 2018 : Kubernetes devient officiellement une solution de clustering certifiée Docker
 
 §break
 
@@ -162,9 +181,27 @@ Docker Engine est composée de 2 éléments principaux :
 
 §break
 
+### Les variantes
+
+Docker Engine est disponible en 2 variantes :
+
+- CE : *community edition*, version gratuite que nous allons utiliser ;
+- EE : *entreprise edition*, plus évoluée avec des fonctionnalités supplémentaires et une certification de fonctionnement sur certain matériel.
+
+§break
+
+### Les versions
+
+Depuis mars 2017, *AA.MM* avec AA l'année et MM le mois <small>(ex. : 17.04 pour la version d'avril 2017)</small>
+
+- une version *stable* est compilée tous les trimestre (ex : 17.03, 17.06, 17.09, 17.12...) ;
+- une version *edge* est compilée tous les mois et contient les nouvelles fonctionnalitées.
+
+§break
+
 ### La ligne de commande
 
-La suite de cette présentation liste les commandes utiles.
+La suite de cette présentation aborde les concepts de docker et liste les commandes utiles.
 
 La liste complète est disponible :
 
@@ -172,6 +209,7 @@ La liste complète est disponible :
 - en ligne de commande `docker help`
 
 Dans les versions actuelles, 2 API cohabitent. On ne parlera que de la plus récente.
+
 §break
 
 ### En pratique
@@ -228,7 +266,7 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
 - Depuis peu, les images officielles sont portées sur d'autres architecture (armv6, i386...)
 
 ```
-hypriot/rpi-traefik:raclette
+arm32v6/traefik:maroilles
 ```
 
 §break
@@ -407,6 +445,14 @@ a5b74e24da65        debian:jessie            "cat /etc/hostname"      9 seconds 
 
 §break
 
+### L'activité des conteneurs
+
+```
+$ docker container stats [NOM]
+```
+
+§break
+
 ### Supprimer les conteneurs
 
 ```
@@ -436,19 +482,6 @@ Il en existe beaucoup d'autres : gestion des ressources, environnement d’exéc
 §break
 
 
-### Le stockage dans un conteneur
-
-Les modifications dans le système de fichier sont stockées dans une surcouche de l'image.
-
-![Couches de conteneurs](https://docs.docker.com/engine/userguide/storagedriver/images/container-layers.jpg)
-
-§notes
-Partage des couches images pour tous les conteneurs basés sur la même image.
-Une image est un assemblage de couche.
-Commiter un conteneur revient à ajouter une couche à une image.
-
-§break
-
 ### Commiter un conteneur
 
 Les modifications de l'image apportées par le conteneur peuvent être utilisées pour créer une nouvelle image.
@@ -461,6 +494,19 @@ On peut également ajouter un auteur, un message de commit...
 
 §notes
 C'est le mal... La création manuelle rend l'image difficile à maintenir.
+
+§break
+
+### Le stockage dans un conteneur
+
+Les modifications dans le système de fichier sont stockées dans une surcouche de l'image.
+
+![Couches de conteneurs](https://docs.docker.com/engine/userguide/storagedriver/images/container-layers.jpg)
+
+§notes
+Partage des couches images pour tous les conteneurs basés sur la même image.
+Une image est un assemblage de couche.
+Commiter un conteneur revient à ajouter une couche à une image.
 
 §break
 
@@ -879,6 +925,38 @@ VOLUME #Ajout d'un volume
   - les commandes qui changent le moins en premiers (`MAINTAINER`, `EXPOSE` ...)§fragment
   - les commandes ADD plutôt vers la fin§fragment
 
+§break
+
+### Multistage build
+
+> juste ce qu'il faut
+
+**Pour le run**§fragment
+
+**Rien en rapport avec le dev/build**§fragment
+
+Un conteneur de *build* génère un package à copier sur le conteneur de *run* §fragment
+
+§break
+
+### Multistage build
+
+Exemple :
+
+```
+FROM debian:jessie as monBuilder
+RUN apt-get update && apt-get install build-essential BUILD_DEPENDENCIES
+ADD https://github.com/...../master.zip /master
+RUN make 
+
+FROM debian:jessie
+RUN apt-get update && apt-get install RUN_DEPENDENCIES
+COPY --from=monBuilder /master/monBinaire /opt/bin/
+CMD /opt/bin/monBinaire
+```
+
+
+[Doc multistage build](https://docs.docker.com/develop/develop-images/multistage-build/)
 
 §break
 
