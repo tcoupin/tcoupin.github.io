@@ -7,7 +7,6 @@ initialization:
   slideNumber: c/t
 ---
 
-
 ## Historique de la présentation
 
 - ENSG, février 2017
