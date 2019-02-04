@@ -19,7 +19,7 @@ initialization:
 Thibault Coupin
 
 
-- §fragment§icon:briefcase§; Admin SIG à l'[IRD](http://www.ird.fr) dans l'[UMR GRED](http://gred.ird.fr)
+- §fragment§icon:briefcase§; IngSys DevOps à l'[IRD](http://www.ird.fr)
 - §fragment§icon:gear§; Anciennement Chef division WebServices & DevOps au [Géoportail](https://www.geoportail.gouv.fr)
 - §fragment§icon:envelope-o§; thibault.coupin§icon:at§;gmail.com / §icon:at§;ird.fr
 - §fragment§icon:github§; [tcoupin](https://github.com/tcoupin)
@@ -61,7 +61,17 @@ Des outils pour déployer facilement un cluster swarm sur des VM sont dispo sur 
 
 Docker et docker-compose contrôle *un seul* daemon/machine.
 
-§fragmentPour avoir plus de ressources, on utilisera *plusieurs* machines.
+§fragmentPour avoir plus de ressources, 2 possibilités :
+
+- §fragmentUne grosse machine
+- beaucoup de machines normales
+
+§break
+
+### Pourquoi un cluster ?
+
+![Computer food chain](http://player.slideplayer.com/13/4070747/data/images/img13.png)
+§pelement: style=background:rgba(255,255,255,1)§;
 
 §break 
 
@@ -73,13 +83,6 @@ Nouvelles contraintes :
 - répartir la charge
 - gérer les pannes
 - ...
-
-§break
-
-**NON**, on a inventé le cluster ! 
-
-![Computer food chain](http://player.slideplayer.com/13/4070747/data/images/img13.png)
-§pelement: style=background:rgba(255,255,255,1)§;
 
 §break
 
@@ -114,6 +117,7 @@ Docker Engine peut aussi être géré en mode cluster par d'autres solutions :
 * **kubernetes (K8s)** : solution Google de gestion d'applications conteneurisées
 * **OpenStack** : solution open-source de gestion de Cloud, gère majoritairement des VM, peut aussi gérer des containers
 * **Amazon ECS** : Elastic Container Service, basé sur des instances Amazon EC2 + docker
+* **Rancher** ...
 * ...
 
 §break
