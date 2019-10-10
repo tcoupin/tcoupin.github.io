@@ -13,6 +13,7 @@ initialization:
 - IGN, avril et mai 2018
 - ENSG, février 2018
 - ENSG, novembre 2018
+- ENSG, octobre 2019
 
 §break
 
@@ -20,12 +21,11 @@ initialization:
 
 Thibault Coupin
 
-- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> Admin SIG à l'[IRD](http://www.ird.fr)
+- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> Ingé Sys DevOps à l'[IRD](http://www.ird.fr)
 - §fragment<i class="fa fa-gear" aria-hidden="true"></i> Anciennement Chef division WebServices & DevOps au [Géoportail](https://www.geoportail.gouv.fr)
 - §fragment<i class="fa fa-envelope-o" aria-hidden="true"></i> thibault.coupin<i class="fa fa-at" aria-hidden="true"></i>gmail.com
 - §fragment<i class="fa fa-github" aria-hidden="true"></i> [tcoupin](https://github.com/tcoupin)
 - §fragment<i class="fa fa-twitter" aria-hidden="true"></i> [@thibbojunior](https://twitter.com/thibbojunior)
-
 
 §break
 
@@ -33,12 +33,18 @@ Thibault Coupin
 
 - super intéressant
 - open-source sous licence GNU GPL
-- disponible sur [https://tcoupin.github.io/presentations/docker-intro](https://tcoupin.github.io/presentations/docker-intro)
+- disponible sur <a id="link"></a>
 - propulsé fièrement par [reveal.js](https://github.com/hakimel/reveal.js) via [Gh-reveal](https://github.com/tcoupin/gh-reveal)
+
+<script>
+var url = location.protocol+"//"+location.host+location.pathname;
+var a = document.getElementById("link");
+a.href=url
+a.innerHTML=url
+</script>
 
 
 §break
-
 ## Sommaire
 
 §id:sommaire§;
@@ -152,7 +158,7 @@ PID   USER     TIME   COMMAND
 
 ### Petit historique
 
-- 2008 : dotCloud, Inc., société française de PaaS, développe Docker principalement par Solomon Hykes
+- 2008 : dotCloud, Inc., société française de PaaS, développe Docker
 - mars 2013 : Docker open source, c'est la nouvelle tendance
 - octobre 2013 : dotCloud, Inc. devient Docker, Inc. basé à San Francisco
 - 2015 : docker for Mac et docker for Windows
@@ -500,7 +506,8 @@ C'est le mal... La création manuelle rend l'image difficile à maintenir.
 
 Les modifications dans le système de fichier sont stockées dans une surcouche de l'image.
 
-![Couches de conteneurs](https://docs.docker.com/engine/userguide/storagedriver/images/container-layers.jpg)
+![Couches de conteneurs](https://docs.docker.com/storage/storagedriver/images/container-layers.jpg)
+§pelement:style=max-height:35vh§;
 
 §notes
 Partage des couches images pour tous les conteneurs basés sur la même image.
@@ -584,8 +591,13 @@ Le port 8080 de la machine hôte est redirigé vers le port 80 du conteneur.§fr
 
 ### Communication inter-conteneurs
 
-- Les conteneurs peuvent communiquer avec les autres sur le même réseau, mais il faut connaître l'IP.
-- Le DNS peut être modifié localement dans le conteneur avec 2 options :
+Les conteneurs peuvent communiquer avec les autres sur le même réseau, mais il faut connaître l'IP ou disposer d'une entrée DNS.
+
+§break
+
+### Communication inter-conteneurs
+
+Le DNS peut être modifié localement dans le conteneur avec 2 options :
   - `--link` : on déclare le lien entre 2 conteneurs : `--link CONTAINER_NAME:ALIAS`
   - `--add-host` : on ajoute manuellement une entrée DNS dans le conteneur : `--add-host NAME:IP`
 
@@ -919,7 +931,10 @@ VOLUME #Ajout d'un volume
 - un conteneur est éphémère **: utilisation de volumes§fragment**
 - juste ce qu'il faut§fragment
 - un seul processus par conteneur§fragment
-- minimiser le nombre de couche du système de fichiers **en minimisant les commandes RUN et en utilisant beaucoup de `&&`§fragment**§fragment
+
+§break
+
+- minimiser le nombre de couche du système de fichiers **en minimisant les commandes RUN et en utilisant beaucoup de `&&`§fragment**
 - optimiser l'utilisation du cache de build :§fragment
   - les commandes qui changent le moins en premiers (`MAINTAINER`, `EXPOSE` ...)§fragment
   - les commandes ADD plutôt vers la fin§fragment
