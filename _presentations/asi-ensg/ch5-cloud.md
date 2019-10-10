@@ -1,6 +1,36 @@
 
 §break
 
+### SOA : concepts
+
+L'application globale est découpée en sous-éléments communiquant entre eux.
+
+- couplage faible pour réduire les dépendances (matérielles et d'environnement)
+- rationalisation des services
+- découverte des services
+
+§break
+
+
+### SOA : variante WOA
+
+- chaque service est une application web
+- le web joue le rôle de bus (DNS+TCP/IP)
+- interopérable
+- SPOFs limités, couplage faible
+
+§break
+
+### SOA : variante WOA
+
+REST :
+
+- **URL** : Uniform Resource Locator
+- **HTTP** : GET, POST, PUT, DELETE... + fonctionnalité d'en-tête
+- Stateless
+
+§break
+
 ### Les apports des offres cloud
 
 * virtualisation généralisée et accessible
@@ -19,12 +49,11 @@ Rendre les infrastructures les plus modulaires possibles pour optimiser le dimen
 
 ### Architecture micro-services
 
-
-Généralement du WOA avec un découpage beaucoup plus fin :
+Du WOA avec un découpage beaucoup plus fin :
 
 - une seule fonction par service
 - le projet doit être proprement mené : automatisation, déploiement et tests
-- service élastique
+- service "élastique"
 
 §break
 
@@ -45,7 +74,8 @@ Inconvénients :
 
 ### Architecture *serverless*
 
-![Serverless](https://www.commitstrip.com/wp-content/uploads/2017/04/Strip-Severless-650-finalV2.jpg)§pelement:height=60%§;
+![Serverless](https://www.commitstrip.com/wp-content/uploads/2017/04/Strip-Severless-650-finalV2.jpg)
+§pelement:style=max-height:45vh§;
 
 *CommitStrip*
 
@@ -63,7 +93,8 @@ Nouvelles offres :
 ### Exemple
 
 
-![Serverless](/data/serverless.png)§pelement:height=60%§;
+![Serverless](/data/serverless.png)
+§pelement:style=max-height:45vh§;
 
 §break
 

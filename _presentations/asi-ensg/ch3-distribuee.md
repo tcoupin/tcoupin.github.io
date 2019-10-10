@@ -21,7 +21,7 @@
 
 §element: style=background-color:white§;
 ![Archi distribuée](http://dduportal.github.io/cours/ensg-asi-2015/images/arch_distribuee.png)
-§pelement:height=60%§;
+§pelement:style=max-height:45vh;§;
 
 *Source : Damien Duportal*
 
@@ -44,26 +44,11 @@ Ne plus avoir des composants spécifiques, transférer cette spécificité dans 
 - Cohérence de l'information
 - Concurrence des actions
 - Complexité de l'architecture
+§notes
+Cohérence de l'information : Quelque soit le chemin emprunté, la donnée doit rester cohérente.
+Concurrence des actions : Plusieurs éléments manipulent en même temps la même donnée. Qui gagne ?
+Complexité de l'architecture : Multiplication des éléments de l'architecture.
 
-§break
-
-### Cohérence de l'information
-
-Quelque soit le chemin emprunté, la donnée doit rester cohérente.
-
-§break
-
-### Concurrence des actions
-
-Plusieurs éléments manipulent en même temps la même donnée.
-
-Qui gagne ?
-
-§break
-
-### Complexité de l'architecture
-
-Multiplication des éléments de l'architecture.
 
 §break
 
@@ -100,7 +85,7 @@ Mise en place de la Haute Disponibilité (HA)
   - ...
 - les données sont stockées selon leur nature dans : §fragment
   - une base de données Postgis
-  - un "gros" disque dur pour les données raster
+  - baie de stockage de données raster
 
 
 §break
@@ -140,30 +125,6 @@ Le principe du *map-reduce*.
 
 §break
 
-### La vie sur du matériel physique
-
-![CommitStrip](http://www.commitstrip.com/wp-content/uploads/2013/03/Strips-Serveurs-MAXIS-550-final1.jpg)§pelement:height=60%§;
-
-*CommitStrip*
-
-§notes
-ici il y a du serveur en stock mais ce n'est pas toujours le cas...
-
-§break
-
-### La vie sur du matériel physique
-
-* **Avantages**
-  * Accès à 100 % des capacités des composants
-  * Pas de complexité d'une couche d'abstraction
-* **Limites**
-  * Coût
-  * Ressources perdues
-  * Déploiement long : installation, rackage, câblage
-  * Migragration complexe
-
-§break
-
 ### Besoin de plus de puissance ?
 
 2 solutions : §fragment:1§;
@@ -196,6 +157,7 @@ Inconvénient : complexification, dégradation des perfs possibles, par de norme
 
 §break
 
+
 ### Virtualisation
 
 Simuler un système “invité” sur un système “hôte”.
@@ -211,18 +173,14 @@ La virtualisation est une couche APPLICATIVE.
 
 Un même matériel physique est utilisé pour simuler plusieurs matériels, qui n'ont aucune conscience de cette relation...
 
-§slide: data-transition=fade§;
-§break
-
-§slide: data-background-image=https://i.stack.imgur.com/UAxa8.gif §;
-
 §break
 
 ### Virtualisation des serveurs
 
-Machine virtuelle : VMWare, VirtualBox
+Machine virtuelle : VMWare, VirtualBox,...
 
-![](http://dduportal.github.io/cours/ensg-asi-2015/images/virtu_srv.png)§pelement:height=60%§;
+![](http://dduportal.github.io/cours/ensg-asi-2015/images/virtu_srv.png)
+§pelement:style=max-height:40vh;§;
 
 *Damien Duportal*
 
@@ -230,7 +188,7 @@ Machine virtuelle : VMWare, VirtualBox
 
 ### Virtualisation des serveurs
 
-Para-virtualisation : Xen, HyperV
+Para-virtualisation 
 
 *Limiter la simulation logiciel du matériel, en simulant un matériel similaire au matériel réel et passer directement les instructions au matériel.*
 
@@ -244,7 +202,7 @@ On ne peut simuler que le matériel qu'on a déjà, il s'agit surtout d'isolatio
 ### Virtualisation des serveurs
 
 Containeurs : LXC, Docker, Jails
-![](http://dduportal.github.io/cours/ensg-asi-2015/images/containers.png)§pelement:height=60%§;
+![](http://dduportal.github.io/cours/ensg-asi-2015/images/containers.png)§pelement:style=max-height:45vh;§;
 
 *Damien Duportal*
 
@@ -252,7 +210,7 @@ Containeurs : LXC, Docker, Jails
 
 ### Virtualisation du stockage
 
-![](http://dduportal.github.io/cours/ensg-asi-2015/images/virtu_storage.png)§pelement:height=60%§;
+![](http://dduportal.github.io/cours/ensg-asi-2015/images/virtu_storage.png)§pelement:style=max-height:45vh;§;
 
 *Damien Duportal*
 
@@ -269,6 +227,19 @@ concept des partitions de disque dur, d’agrégation RAID, ajout/remplacement d
 
 §break
 
+### La vie sur du matériel physique
+
+* **Avantages**
+  * Accès à 100 % des capacités des composants
+  * Pas de complexité d'une couche d'abstraction
+* **Limites**
+  * Coût
+  * Ressources perdues
+  * Déploiement long : installation, rackage, câblage
+  * Migragration complexe
+
+§break
+
 ### La vie sur des VMs
 
 * **Avantages**
@@ -280,6 +251,7 @@ concept des partitions de disque dur, d’agrégation RAID, ajout/remplacement d
   * Performances inférieures par rapport à du physique
 
 §break
+
 
 ### Indépendance d'un matériel physique
 
@@ -393,7 +365,7 @@ Tests : c'est bien aussi pour le CI/CD
 ### Etats du système
 
 ![Etats du système](http://dduportal.github.io/cours/ensg-asi-2015/images/etats.png)
-§pelement:height=60%§;
+§pelement:style=max-height:45vh;§;
 
 *Source : Damien Duportal*
 
@@ -448,6 +420,8 @@ Détecter les noeuds défaillants pour ne pas les inclure dans l'algorithme de r
 * Réseau : combien d'attachement ? redondance du coeur de réseau ?
 * Matériel de secours
 
+![](https://www.scalair.fr/hubfs/photos/blog/classifications-datacenter/data-center-tiers.png)
+§pelement:style=max-height:10vh;§;
 §break
 
 ### En pratique 
@@ -456,7 +430,7 @@ Détecter les noeuds défaillants pour ne pas les inclure dans l'algorithme de r
 RAID 0 : agrégation par bande, pas HA
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RAID_0.svg/325px-RAID_0.svg.png)
-§pelement:height=40%§;
+§pelement:style=max-height:40vh;§;
 
 *Source : wikipédia*
 
@@ -468,7 +442,7 @@ RAID 0 : agrégation par bande, pas HA
 RAID 1 : disque miroir
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/RAID_1.svg/325px-RAID_1.svg.png)
-§pelement:height=40%§;
+§pelement:style=max-height:40vh;§;
 
 *Source : wikipédia*
 
@@ -480,7 +454,7 @@ RAID 1 : disque miroir
 RAID 5 : agrégation par bande à parité répartie
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/RAID_5.svg/675px-RAID_5.svg.png)
-§pelement:height=40%§;
+§pelement:style=max-height:40vh;§;
 
 *Source : wikipédia*
 
@@ -492,7 +466,7 @@ RAID 5 : agrégation par bande à parité répartie
 RAID 6 : agrégation par bande à double parité répartie
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/RAID_6.svg/850px-RAID_6.svg.png)
-§pelement:height=40%§;
+§pelement:style=max-height:40vh;§;
 
 *Source : wikipédia*
 §break

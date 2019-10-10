@@ -12,6 +12,7 @@ initialization:
 Version précédente : [ENSG, 2017](../2017-asi-esg)
 - ENSG, février 2018
 - ENSG, novembre 2018
+- ENSG, octobre 2019
 
 §break
 
@@ -19,7 +20,7 @@ Version précédente : [ENSG, 2017](../2017-asi-esg)
 
 Thibault Coupin
 
-- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> Admin SIG à l'[IRD](http://www.ird.fr)
+- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> Ingé Sys DevOps à l'[IRD](http://www.ird.fr)
 - §fragment<i class="fa fa-gear" aria-hidden="true"></i> Anciennement Chef division WebServices & DevOps au [Géoportail](https://www.geoportail.gouv.fr)
 - §fragment<i class="fa fa-envelope-o" aria-hidden="true"></i> thibault.coupin<i class="fa fa-at" aria-hidden="true"></i>gmail.com
 - §fragment<i class="fa fa-github" aria-hidden="true"></i> [tcoupin](https://github.com/tcoupin)
@@ -31,8 +32,15 @@ Thibault Coupin
 
 - super intéressant
 - open-source sous licence GNU GPL
-- disponible sur [https://tcoupin.github.io/presentations/asi-ensg](https://tcoupin.github.io/presentations/asi-ensg)
+- disponible sur <a id="link"></a>
 - propulsé fièrement par [reveal.js](https://github.com/hakimel/reveal.js) via [Gh-reveal](https://github.com/tcoupin/gh-reveal)
+
+<script>
+var url = location.protocol+"//"+location.host+location.pathname;
+var a = document.getElementById("link");
+a.href=url
+a.innerHTML=url
+</script>
 
 
 §break
@@ -52,8 +60,7 @@ Thibault Coupin
 - [Définitions](#/definitions)
 - [Concepts de base](#/concepts)
 - [Architecture distribuée](#/loadbalancing)
-- [Architecture orientée service](#/soa)
-- [Architecture cloud](#/cloud)
+- [Architecture service et cloud](#/cloud)
 
 §new
 
@@ -79,14 +86,8 @@ Thibault Coupin
 
 §new
 
-## Ch.4 : Architecture orientée services
-§id:soa§;
 
-{% include_relative asi-ensg/ch4-services.md %}
-
-§new
-
-## Ch.5 : Architecture cloud
+## Ch.4 : Architecture service et cloud
 §id:cloud§;
 
 {% include_relative asi-ensg/ch5-cloud.md %}

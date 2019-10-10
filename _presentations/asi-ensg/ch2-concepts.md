@@ -98,12 +98,6 @@ Un acteur, un élément du déploiement, un applicatif qui a une fonction partic
 
 §break
 
-### 1 tiers
-
-Un peu seul au monde§fragment
-![Seul au monde](http://cdn.cinemur.fr/posts/cache/cast7-1024x550.jpg)
-
-§break
 
 ### 2 tiers : client-serveur
 
@@ -121,31 +115,6 @@ Un peu seul au monde§fragment
 - relation maître-esclave
 - même protocole de communication (HTTP ?)
 - le serveur a l'information
-- communication via un middleware§fragment
-
-§break
-
-### Middleware : intergiciel
-
-> Couches logicielles d'interfaçage pour l'échange d'informations.
-
-§break
-
-### Middleware
-
-4 familles :
-
-- §fragment**Message-oriented Middleware** : échange de message (pas des emails <i class="fa fa-smile-o" aria-hidden="true"></i>)
-- §fragment**Remote procedure call** : demande de traitement
-- §fragment**Objects request broker** : manipulation d'objet (attributs et méthodes)
-- §fragment**Transactional monitors** : une transaction est une suite d'opérations indissociables - qui doivent être réalisées entièrement ou pas du tout (rollback)
-
-
-§notes
-MOM : faible couplage, concept de file
-RPC : appel asynchrone (exemple en geomatique : WPS)
-ORB : les traitements de l'objet sont faites sur le serveur
-TM  : SGBD ACID
 
 §break
 
@@ -154,7 +123,7 @@ TM  : SGBD ACID
 
 §element: style=background-color:white§;
 ![Répartition dans le modèle 2 tiers](http://dduportal.github.io/cours/ensg-asi-2015/images/arch_2_tiers_2_types.png)
-§pelement:height=60%§;
+§pelement:style=max-height:45vh;§;
 
 *Source : Damien Duportal*
 
