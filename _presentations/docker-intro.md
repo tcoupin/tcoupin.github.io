@@ -45,6 +45,7 @@ a.innerHTML=url
 
 
 §break
+
 ## Sommaire
 
 §id:sommaire§;
@@ -399,7 +400,7 @@ $ docker container run OPTIONS IMAGE[:TAG] COMMANDE
 
 - *OPTIONS* : diverses options sont possibles
 - *IMAGE* : le nom de l'image ou son identifiant. On peut préciser une version avec le *TAG*
-- *COMMANDE* : la commande à lancer dans le conteneur. L'image peut être associée à une commande par défaut
+- *COMMANDE* : la commande à lancer dans le conteneur. **L'image peut être associée à une commande par défaut**
 
 §break
 
@@ -546,6 +547,7 @@ Les 3 valeurs les plus répandues :
 - `none` : pas de réseau
 - `host` : les réseaux de l'hôte
 - `bridge` (par défaut) : un réseau isolé avec un mécanisme de *bridge*
+- Le nom d'un réseau créé avec la commande `docker network create`
 
 §break 
 
@@ -572,8 +574,13 @@ Toutes les interfaces de la machine hôte (eth0, wlan0...).§fragment
 ### Réseau isolé
 
 - Les conteneurs sont sur un réseau séparé
-- Ils peuvent communiquer avec l'extérieur et entre eux
+- Ils peuvent communiquer avec l'extérieur et entre eux (via l'IP)
 - L'extérieur ne peut pas communiquer avec le conteneur, sauf si explicitement demandé (option `-p`).
+
+### Réseau créé
+
+- Prévu pour interconnecter des conteneurs
+- Même fonction que `bridge` + résolution DNS des autres conteneurs
 
 §break
 
@@ -589,21 +596,8 @@ Le port 8080 de la machine hôte est redirigé vers le port 80 du conteneur.§fr
 
 §break
 
-### Communication inter-conteneurs
 
-Les conteneurs peuvent communiquer avec les autres sur le même réseau, mais il faut connaître l'IP ou disposer d'une entrée DNS.
-
-§break
-
-### Communication inter-conteneurs
-
-Le DNS peut être modifié localement dans le conteneur avec 2 options :
-  - `--link` : on déclare le lien entre 2 conteneurs : `--link CONTAINER_NAME:ALIAS`
-  - `--add-host` : on ajoute manuellement une entrée DNS dans le conteneur : `--add-host NAME:IP`
-
-§break
-
-### Gestion avancée des réseaux
+### Création de réseaux
 
 On peut gérer plus finement les réseaux avec des commandes : 
 
@@ -614,14 +608,6 @@ $ docker network ls ...
 $ docker network disconnect ...
 $ docker network rm ...
 ```
-
-§break
-
-### To be continued...
-
-Docker inclut d'autres fonctionnalités, notamment pour la mise en cluster.
-
-A voir plus tard dans une autre présentation.
 
 §break
 

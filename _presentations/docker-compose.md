@@ -1,6 +1,6 @@
 ---
-title: Docker-compose pour le développeur
-subtitle: ENSG, février 2018
+title: Docker-compose
+subtitle: Pour le développeur
 theme: sky
 initialization:
   transition: convex
@@ -11,8 +11,7 @@ initialization:
 
 Thibault Coupin
 
-
-- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> Admin SIG à l'[IRD](http://www.ird.fr)
+- §fragment<i class="fa fa-briefcase" aria-hidden="true"></i> Ingé Sys DevOps à l'[IRD](http://www.ird.fr)
 - §fragment<i class="fa fa-gear" aria-hidden="true"></i> Anciennement Chef division WebServices & DevOps au [Géoportail](https://www.geoportail.gouv.fr)
 - §fragment<i class="fa fa-envelope-o" aria-hidden="true"></i> thibault.coupin<i class="fa fa-at" aria-hidden="true"></i>gmail.com
 - §fragment<i class="fa fa-github" aria-hidden="true"></i> [tcoupin](https://github.com/tcoupin)
@@ -24,24 +23,15 @@ Thibault Coupin
 
 - super intéressant
 - open-source sous licence GNU GPL
-- disponible sur [https://tcoupin.github.io/presentations/docker-compose](https://tcoupin.github.io/presentations/docker-compose)
+- disponible sur <a id="link"></a>
 - propulsé fièrement par [reveal.js](https://github.com/hakimel/reveal.js) via [Gh-reveal](https://github.com/tcoupin/gh-reveal)
 
-
-§break
-
-### Limitations
-
-§slide: style=text-align:left §;
-
-Docker a subi beaucoup de changements depuis la version 1.12 (été 2016).
-
-Docker-compose est utile pour l'utilisation sur : §fragment
-
-- un poste simple comme celui d'un développeur (toutes versions)§fragment
-- un cluster swarm standalone de version < 1.12§fragment
-
-Pour les cluster swarmkit (Engine version >= 1.13), il faut utiliser le concept des stacks.§fragment
+<script>
+var url = location.protocol+"//"+location.host+location.pathname;
+var a = document.getElementById("link");
+a.href=url
+a.innerHTML=url
+</script>
 
 §break
 
@@ -108,7 +98,7 @@ $ docker network rm ...
 
 §break
 
-### Rappels : bilan
+### Bilan
 
 - Un commande par conteneurs
 - Toutes les options à écrire
@@ -116,7 +106,7 @@ $ docker network rm ...
 
 §break
 
-### Rappels : limite
+### Limites
 
 Imaginez la complexité pour déployer un CMS comprenant :
 
@@ -146,15 +136,16 @@ Imaginez la complexité pour déployer un CMS comprenant :
 
 §break
 
-## Comment
+## Comment ?
 
-- Compose pilote directement le daemon docker pour créer et gérer :
-  - les images
-  - les conteneurs
-  - les volumes
-  - les réseaux
-- Compose gère les dépendances entre ces éléments.
-- Compose permet de scaler un conteneur en particulier
+- Un fichier définit les composants :
+  - image
+  - réseau
+  - volume
+  - relation/dépendance
+- Compose pilote directement le daemon docker
+- *Compose permet de scaler un conteneur en particulier*
+
 
 §break 
 
@@ -206,43 +197,45 @@ services:
 
 §break
 
-### Les versions
-
-Le modèle du docker-compose.yml a plusieurs versions possibles.
-
-| Compose file format | Docker Engine |
-|---------------------|---------------|
-|                 3.4 | 17.09.0+      |
-|                 3.3 | 17.06.0+      |
-|                 3.2 | 17.04.0+      |
-|                 3.1 | 1.13.1+       |
-|                 3.0 | 1.13.0+       |
-|                 2.3 | 17.06.0+      |
-|                 2.2 | 1.13.0+       |
-|                 2.1 | 1.12.0+       |
-|                 2.0 | 1.10.0+       |
-|                 1.0 | 1.9.1.+       |
-
-§pelement:style=background-color:white§;
-
-§break
-
 ### Le contenu
 
 Plusieurs sections :
 
 - la version du format
-- des fragments de fichiers compose réutilisable
-- les réseaux
-- les volumes
 - les services
-- des configs (pour une utilisation swarmkit)
-- des secrets (pour une utilisation swarmkit)
+- les volumes
+- les réseaux
+- *des configs (pour une utilisation swarmkit)*
+- *des secrets (pour une utilisation swarmkit)*
 
 §icon:warning§; Pas de section dans la v1.0 §fragment
 
 §notes
 Version : si absent, v1.
+
+§break
+
+### Les versions
+
+Le modèle du docker-compose.yml a plusieurs versions possibles.
+
+| Compose file format | Docker Engine |
+| ------------------- | ------------- |
+| 3.7                 | 18.06.0+      |
+| 3.6                 | 18.02.0+      |
+| 3.5                 | 17.12.0+      |
+| 3.4                 | 17.09.0+      |
+| 3.3                 | 17.06.0+      |
+| 3.2                 | 17.04.0+      |
+| 3.1                 | 1.13.1+       |
+| 3.0                 | 1.13.0+       |
+| 2.3                 | 17.06.0+      |
+| 2.2                 | 1.13.0+       |
+| 2.1                 | 1.12.0+       |
+| 2.0                 | 1.10.0+       |
+| 1.0                 | 1.9.1.+       |
+
+§pelement:style=background-color:white§;
 
 §break
 
@@ -254,8 +247,8 @@ Version : si absent, v1.
 Permet de définir les éléments composant l'application :
 
 - image ou *Dockerfile*
-- volumes
-- réseaux
+- utilisation de volumes
+- utilisation de réseaux
 - port d'écoute
 - ...
 
@@ -327,32 +320,12 @@ services:
 
 §break
 
-### Services : liens inter-conteneurs
-
-- Les conteneurs peuvent communiquer avec les autres sur le même réseau, mais il faut connaître l’IP.
-- Le DNS peut être modifié localement dans le conteneur avec 2 options :
-  - **links** : on déclare le lien entre 2 conteneurs SERVICE:[ALIAS]
-  - **external_links** : comme *links* mais pour des conteneurs externe au docker-compose.yml
-  - **extra_hosts** : on ajoute manuellement une entrée DNS dans le conteneur
-
-```
-links:
-  - pgsql:database
-  - redis
-external_links:
-  - existing_container
-extra_hosts:
-  - "box:192.168.1.1"
-```
-
-§break
 
 ### Services : dépendances inter-conteneurs
 
 Docker-compose démarre les conteneurs dans le bon ordre à condition qu'il le connaisse...
 
-- les **link** engendrent des dépendances inter-conteneurs
-- si nécessaire, on peut déclarer des dépendances avec **depends_on**
+- on peut déclarer des dépendances avec **depends_on**
 
 ```
 depends_on:
@@ -425,7 +398,7 @@ networks:
 §new
 
 
-## Les commandes
+## La commande docker-compose
 
 §id:cli§;
 
