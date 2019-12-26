@@ -11,13 +11,13 @@ initialization:
 
 - ENSG, février 2018
 - IRD, juin 2018
+- ENSG, février 2019
 
 §break
 
 ## Moi
 
 Thibault Coupin
-
 
 - §fragment§icon:briefcase§; IngSys DevOps à l'[IRD](http://www.ird.fr)
 - §fragment§icon:gear§; Anciennement Chef division WebServices & DevOps au [Géoportail](https://www.geoportail.gouv.fr)
@@ -31,8 +31,15 @@ Thibault Coupin
 
 - super intéressant
 - open-source sous licence GNU GPL
-- disponible sur [https://tcoupin.github.io/presentations/docker-cluster](https://tcoupin.github.io/presentations/docker-cluster)
+- disponible sur <a id="link"></a>
 - propulsé fièrement par [reveal.js](https://github.com/hakimel/reveal.js) via [Gh-reveal](https://github.com/tcoupin/gh-reveal)
+
+<script>
+var url = location.protocol+"//"+location.host+location.pathname;
+var a = document.getElementById("link");
+a.href=url
+a.innerHTML=url
+</script>
 
 Des outils pour déployer facilement un cluster swarm sur des VM sont dispo sur mon github : [https://github.com/tcoupin/swarm-playground](https://github.com/tcoupin/swarm-playground)
 
@@ -64,7 +71,7 @@ Docker et docker-compose contrôle *un seul* daemon/machine.
 §fragmentPour avoir plus de ressources, 2 possibilités :
 
 - §fragmentUne grosse machine
-- beaucoup de machines normales
+- §fragmentbeaucoup de machines normales
 
 §break
 
@@ -117,7 +124,7 @@ Docker Engine peut aussi être géré en mode cluster par d'autres solutions :
 * **kubernetes (K8s)** : solution Google de gestion d'applications conteneurisées
 * **OpenStack** : solution open-source de gestion de Cloud, gère majoritairement des VM, peut aussi gérer des containers
 * **Amazon ECS** : Elastic Container Service, basé sur des instances Amazon EC2 + docker
-* **Rancher** ...
+* **Rancher** v1 ...
 * ...
 
 §break
@@ -146,10 +153,18 @@ Docker Engine peut aussi être géré en mode cluster par d'autres solutions :
   * Héberge des containers : exécute les ordres donnés par les managers
   * Accepte le trafic réseau et le réparti sur les noeuds hébergeant la ressource demandée (ingress)
 
+§break
+
+### 2+1 typologies
+
 * **Manager**
   * Héberge des containers (ou pas)
   * Surveille l'ensemble des noeuds (état+containers)
   * Accepte le trafic réseau et le réparti sur les noeuds hébergeant la ressource demandée
+
+§break
+
+### 2+1 typologies
 
 * **Leader**
   * Un manager en particulier
@@ -404,6 +419,10 @@ Une stack n'est pas l'équivalent d'un docker-compose.yml. §fragment
 
 Une stack est un ensemble de service. §fragment
 
+§notes
+
+Bien précisé qu'une stack est un objet docker et pas un fichier.
+
 §break
 
 ### Déployer une stack
@@ -499,7 +518,7 @@ Stockage physique : `/var/lib/docker/volumes/NOM_VOLUME/_data`
 
 
 ![Network volume](/data/network-volume.png)
-§pelement:width=40%§;
+§pelement:width=20%§;
 
 
 §break
@@ -549,26 +568,27 @@ Résolution native par l'engine, modification du etc/hosts pour le bridge par d�
 
 ### L'overlay network
 
-![L'overlay](http://blog.nigelpoulton.com/wp-content/uploads/2016/10/Figure8-3-768x445.png)
+![L'overlay](https://img1.wsimg.com/isteam/ip/ada6c322-5e3c-4a32-af67-7ac2e8fbc7ba/3.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1280)
 §pelement:width=40%§;
 
 * Un réseau présent sur tous les noeuds
 * Un réseau non dupliqué mais distribué
 * Créé lors de l'initialisation du swarm
 
-Source : [Article Demystifying Docker overlay networking](http://blog.nigelpoulton.com/demystifying-docker-overlay-networking/)
+
+Source : [Article Demystifying Docker overlay networking](https://nigelpoulton.com/blog/f/demystifying-docker-overlay-networking)
 §break
 
 ### L'overlay : un tunnel
 
 
-![L'overlay vue physique](http://blog.nigelpoulton.com/wp-content/uploads/2016/10/figure8-8-768x515.png)
+![L'overlay vue physique](https://img1.wsimg.com/isteam/ip/ada6c322-5e3c-4a32-af67-7ac2e8fbc7ba/8.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1280)
 §pelement:width=40%§;
 
 * Utilise un techonologie de VLAN (ici *VXLAN*)
 
 
-Source : [Article Demystifying Docker overlay networking](http://blog.nigelpoulton.com/demystifying-docker-overlay-networking/)
+Source : [Article Demystifying Docker overlay networking](https://nigelpoulton.com/blog/f/demystifying-docker-overlay-networking)
 §break
 
 ### L'overlay : d'autres méthodes
@@ -631,10 +651,10 @@ tasks.httpd.    600 IN  A 10.0.1.7
   - bound des ports publiés
   - load-balancing IPVS
 
-![](https://success.docker.com/api/images/.%2Frefarch%2Fucp-service-discovery%2Fimages%2Frouting-mesh.png)
+![](https://docs.docker.com/engine/swarm/images/ingress-routing-mesh.png)
 §pelement:width=40%§;
 
-Source : [success.docker.com](https://success.docker.com/)
+Source : [docker.com](https://docker.com/)
 §break
 
 ### Load balancing
