@@ -7,7 +7,7 @@ tags:
 - k8s
 subtitle: plusieurs fichiers de config ? un fichier de config
 comments: true
-thumbnail: https://docs.traefik.io/img/traefik.logo.png
+thumbnail: https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1200px-Kubernetes_logo_without_workmark.svg.png
 ---
 
 ## Fusion de configuration
