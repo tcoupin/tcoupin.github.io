@@ -45,16 +45,6 @@ L'analyse systémique est une démarche globale qui modélise quelque chose en s
 
 §break
 
-### Système
-
-![http://wikimeca.org/images/e/eb/SADT.PNG](http://wikimeca.org/images/e/eb/SADT.PNG)
-
-§notes
-
-Analyse fonctionnelle descendante
-SADT (en anglais Structured Analysis and Design Technique)
-
-§break
 
 ### Système
 
