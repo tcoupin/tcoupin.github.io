@@ -73,25 +73,6 @@ a.innerHTML=url
 
 §break
 
-### Qu'est ce que c'est ?
-
-Docker Engine est un outil permettant l'exécution d'application packagée de façon isolée, on parle de **conteneur**.
-
-
-§break
-
-### Qu'est ce que c'est ?
-
-- Un système d'isolation de processus, de système de fichier et de réseau **: on peut exécuter des processus comme s'ils étaient tout seuls et contrôler ce qu'ils voient§fragment.**§fragment 
-- Un système d'image pour facilement transporter une application et ses dépendances **: un super "zip".§fragment**§fragment
-
-§break
-
-### Presque comme la virtualisation, mais non.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/L2nBaOj4qRg" frameborder="0" allowfullscreen></iframe>
-
-§break 
 
 ### C'est quoi la virtualisation ?
 
@@ -156,6 +137,27 @@ PID   USER     TIME   COMMAND
 ```
 
 §break
+
+
+### Qu'est ce que c'est ?
+
+Docker Engine est un outil permettant l'exécution d'application packagée de façon isolée, on parle de **conteneur**.
+
+
+§break
+
+### Qu'est ce que c'est ?
+
+- Un système d'isolation de processus, de système de fichier et de réseau **: on peut exécuter des processus comme s'ils étaient tout seuls et contrôler ce qu'ils voient§fragment.**§fragment 
+- Un système d'image pour facilement transporter une application et ses dépendances **: un super "zip".§fragment**§fragment
+
+§break
+
+### Presque comme la virtualisation, mais non.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L2nBaOj4qRg" frameborder="0" allowfullscreen></iframe>
+
+§break 
 
 ### Petit historique
 
@@ -252,7 +254,7 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
 
 §break
 
-### Où on les trouve ? 
+### Comment on les trouve ?
 
 - [hub.docker.com](https://hub.docker.com) : des images officielles ou communautaires 
 - à construire soi-même 
@@ -264,7 +266,7 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
 
 ### Nomenclature des images sur le hub
 
-- Les images fonctionnent comme des repo
+- Les images fonctionnent comme des repo git
 - Les images sans / sont des images officielles
 - Les images USER/NOM sont des images personnelles ou d'organisation
 - Le nom de la distribution est parfois dans le nom de l'image ou le tag.
@@ -274,6 +276,13 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
 ```
 arm32v6/traefik:maroilles
 ```
+
+§break
+
+### Où on les trouve ? 
+
+- des serveurs *registry* permettent de téléchager des images
+- sur votre serveur si vous avez déjà télécharger l'image
 
 §break
 
@@ -834,30 +843,6 @@ LABEL mon_tag="ma valeur"
 ### Instructions
 §slide:data-transition=fade§;
 
-Paramétriser le Dockerfile
-
-```
-ARG <name>[=<default value>]
-```
-
-Utilisation : `${name:-default_value}`
-
-§break
-
-### Instructions
-§slide:data-transition=fade§;
-
-Paramétriser le Dockerfile
-
-```
-docker image build --build-arg name=value .
-```
-
-§break
-
-### Instructions
-§slide:data-transition=fade§;
-
 Lancer une instruction
 
 ```
@@ -906,11 +891,36 @@ Modifier l’exécution
 
 ```
 CMD    #Commande par défaut
-EXPOSE #Ajout d'un port ouvert
-VOLUME #Ajout d'un volume
+EXPOSE #Déclarer un port réseau
+VOLUME #Déclarer un volume
 ```
 
 §break
+
+### Instructions
+§slide:data-transition=fade§;
+
+Paramétriser le Dockerfile
+
+```
+ARG <name>[=<default value>]
+```
+
+Utilisation : `${name:-default_value}`
+
+§break
+
+### Instructions
+§slide:data-transition=fade§;
+
+Paramétriser le Dockerfile
+
+```
+docker image build --build-arg name=value .
+```
+
+§break
+
 
 ### Bonnes pratiques de conceptions
 
@@ -962,9 +972,8 @@ CMD /opt/bin/monBinaire
 
 [<i class="fa fa-arrow-left" aria-hidden="true"></i> Retour sommaire](#sommaire)
 
-§new                                                                                     
+§new
 
-<i class="fa fa-copyright" aria-hiden="true"></i> N. De Loof & 
-<i class="fa fa-copyright" aria-hiden="true"></i> Docker, Inc.
+### C'est déjà fini
 
-§slide: data-background-image=http://1.bp.blogspot.com/-uW4MDLVVJxw/WFA35g_80-I/AAAAAAAATWs/aVMGBGKrcKYzQrYJ8oswJxDcVJ70yRnjQCK4B/s1600/that%2527s%2Ball%2Bfolks.png §;
+[§icon:arrow-left§; Retour sommaire](#sommaire)
