@@ -254,9 +254,18 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
 
 §break
 
-### Comment on les trouve ?
+### Où trouve-t-on les images ?
 
-- [hub.docker.com](https://hub.docker.com) : des images officielles ou communautaires 
+- Sur des *registry* sur internet, principalement [hub.docker.com](https://hub.docker.com) 
+- sur votre serveur si vous avez déjà télécharger l'image
+
+§notes
+D'autres registry publique et privée : gitlab.com, quay.io, gcr.io (google container registry) ...
+
+§break
+
+### Images personnalisées
+
 - à construire soi-même 
   - *from sracth* ou basée sur des images de base (ubuntu, centOs, alpine)
   - à partir d'un *Dockerfile*
@@ -264,25 +273,18 @@ Elle contient le système d'exploitation, l'application et des métadonnées.
 
 §break
 
-### Nomenclature des images sur le hub
+### Les commandes utiles
 
-- Les images fonctionnent comme des repo git
-- Les images sans / sont des images officielles
-- Les images USER/NOM sont des images personnelles ou d'organisation
-- Le nom de la distribution est parfois dans le nom de l'image ou le tag.
-- Idem pour les images destinées aux archi ARM
-- Depuis peu, les images officielles sont portées sur d'autres architecture (armv6, i386...)
+Transfert des images
 
 ```
-arm32v6/traefik:maroilles
+# Authentification
+docker login
+# Télécharger une image
+docker image pull SERVER/IMAGE:TAG
+# Téléverser une image
+docker image push SERVER/IMAGE:TAG
 ```
-
-§break
-
-### Où on les trouve ? 
-
-- des serveurs *registry* permettent de téléchager des images
-- sur votre serveur si vous avez déjà télécharger l'image
 
 §break
 
@@ -294,10 +296,16 @@ Lister les images locales
 $ docker image ls
 REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
 forumi0721/alpine-armv7h-minidlna   latest              8418d491e218        2 weeks ago         44.34 MB
-hypriot/rpi-traefik                 latest              a1350c91b51e        3 weeks ago         37.91 MB
+traefik                             latest              a1350c91b51e        3 weeks ago         37.91 MB
 portainer/portainer                 arm                 dc7e0ee82da9        6 weeks ago         10.27 MB
 tcoupin/rpi-gpass                   latest              f8bfd0e5c152        6 weeks ago         193.8 MB
 ...
+```
+
+Supprimer une image locale
+
+```
+$ docker image rm hello-world
 ```
 
 §notes
@@ -307,40 +315,13 @@ On peut voir la présence d'un TAG qui vaut par défaut latest. Il peut servir �
 
 ### Les commandes utiles
 
-Chercher une image sur hub.docker.com
+Renommer/retagguer une image
 
 ```
-$ docker search hello-world
-NAME                                      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
-hello-world                               Hello World! (an example of minimal Docker...   225       [OK]       
-tutum/hello-world                         Image to test docker deployments. Has Apac...   29                   [OK]
-dockercloud/hello-world                   Hello World!                                    9                    [OK]
-marcells/aspnet-hello-world               ASP.NET vNext - Hello World                     4                    [OK]
-...
-```
-§break
-
-### Les commandes utiles
-
-Télécharger une image depuis hub.docker.com
-
-```
-$ docker image pull hello-world
+$ docker image tag IMAGE:TAG IMAGE:TAG
 ```
 
-<small>*Le hub offre aussi la possibilité d'héberger vos images avec les commandes `docker login` et `docker image push`*</small>
-
-§break
-
-### Les commandes utiles
-
-Supprimer une image locale
-
-```
-$ docker image rm hello-world
-```
-
-§break
+§break 
 
 ### Les commandes utiles
 
@@ -355,16 +336,6 @@ $ docker image build DOCKERFILE_PATH
 Plus de détails dans le chapitre [Dockerfile](#dockerfile).
 
 §break
-
-### Les commandes utiles
-
-Nommer/tagguer une image
-
-```
-$ docker image tag IMAGE:TAG IMAGE:TAG
-```
-
-§break 
 
 
 ### Les commandes utiles
