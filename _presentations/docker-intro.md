@@ -281,9 +281,9 @@ Transfert des images
 # Authentification
 docker login
 # Télécharger une image
-docker image pull SERVER/IMAGE:TAG
+docker image pull REGISTRY/IMAGE:TAG
 # Téléverser une image
-docker image push SERVER/IMAGE:TAG
+docker image push REGISTRY/IMAGE:TAG
 ```
 
 §break
@@ -305,7 +305,7 @@ tcoupin/rpi-gpass                   latest              f8bfd0e5c152        6 we
 Supprimer une image locale
 
 ```
-$ docker image rm hello-world
+$ docker image rm REGISTRY/IMAGE:TAG
 ```
 
 §notes
@@ -318,7 +318,7 @@ On peut voir la présence d'un TAG qui vaut par défaut latest. Il peut servir �
 Renommer/retagguer une image
 
 ```
-$ docker image tag IMAGE:TAG IMAGE:TAG
+$ docker image tag REGISTRY/IMAGE:TAG REGISTRY/IMAGE:TAG
 ```
 
 §break 
@@ -328,7 +328,7 @@ $ docker image tag IMAGE:TAG IMAGE:TAG
 Construire une image avec un Dockerfile
 
 ```
-$ docker image build DOCKERFILE_PATH
+$ docker image build -t REGISTRY/IMAGE:TAG DOCKERFILE_PATH
 ```
 
 - *DOCKERFILE_PATH* est le chemin du dossier contenant le Dockerfile.
@@ -343,7 +343,7 @@ Plus de détails dans le chapitre [Dockerfile](#dockerfile).
 Voir les métadonnées d'une image
 
 ```
-$ docker image inspect hello-world
+$ docker image inspect REGISTRY/IMAGE:TAG
 ```
 
 Beaucoup de chose !§fragment
@@ -375,11 +375,11 @@ Beaucoup de chose !§fragment
 ### Démarrer un conteneur
 
 ```
-$ docker container run OPTIONS IMAGE[:TAG] COMMANDE 
+$ docker container run OPTIONS REGISTRY/IMAGE:TAG COMMANDE 
 ```
 
 - *OPTIONS* : diverses options sont possibles
-- *IMAGE* : le nom de l'image ou son identifiant. On peut préciser une version avec le *TAG*
+- *REGISTRY/IMAGE:TAG* : le nom de l'image ou son identifiant. On peut préciser une version avec le *TAG*
 - *COMMANDE* : la commande à lancer dans le conteneur. **L'image peut être associée à une commande par défaut**
 
 §break
@@ -457,29 +457,13 @@ $ docker container rm NOM
 
 ### Options utiles
 
-- *--name* :  donner un nom au conteneur
+- *--name* :  donner un nom au conteneur§fragment
 - *-i* : interactif§fragment
 - *-t* : forcer l'allocation d'un TTY§fragment
 - *--rm* : supprimer le conteneur à la fin de son exécution§fragment
 - *-d* : démarrer le conteneur en arrière-plan§fragment
 
-Il en existe beaucoup d'autres : gestion des ressources, environnement d’exécution...
-
-§break
-
-
-### Commiter un conteneur
-
-Les modifications de l'image apportées par le conteneur peuvent être utilisées pour créer une nouvelle image.
-
-```
-$ docker container commit CONTAINER_NAME IMAGE[:TAG]
-```
-
-On peut également ajouter un auteur, un message de commit...
-
-§notes
-C'est le mal... La création manuelle rend l'image difficile à maintenir.
+Il en existe beaucoup d'autres : gestion des ressources, environnement d’exécution...§fragment
 
 §break
 
@@ -522,7 +506,7 @@ L'isolation porte aussi sur le réseau.
 
 La commande *run* offre l'option `--net`
 
-Les 3 valeurs les plus répandues : 
+Les 4 valeurs : 
 
 - `none` : pas de réseau
 - `host` : les réseaux de l'hôte
@@ -735,6 +719,14 @@ $ docker container rm -v CONTAINER_NAME
 
 - un volume hôte remplace totalement un chemin du conteneur.
 - un volume docker utilisé pour la première fois est initialisé avec le contenu du chemin de montage dans le conteneur.
+
+§break
+
+### Volumes avancés
+
+L'option `--mount` permet des montages plus élaborés :
+- autant de possibilités qu'avec le fichier `/etc/fstab`
+- suppose que le support existe, pas de création à la volée comme avec un `docker volume create`
 
 §break
 
