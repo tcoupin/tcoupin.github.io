@@ -726,7 +726,7 @@ $ docker container rm -v CONTAINER_NAME
 
 L'option `--mount` permet des montages plus élaborés :
 - autant de possibilités qu'avec le fichier `/etc/fstab`
-- suppose que le support existe, pas de création à la volée comme avec un `docker volume create`
+- suppose que le support existe, pas de création à la volée comme avec un `docker volume create` (ex. : pas de création de l'export NFS)
 
 §break
 
