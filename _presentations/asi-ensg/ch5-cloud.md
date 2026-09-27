@@ -3,11 +3,11 @@
 
 ### SOA : concepts
 
-L'application globale est découpée en sous-éléments communiquant entre eux.
+Comment interconnecter plusieurs applications ?
 
-- couplage faible pour réduire les dépendances (matérielles et d'environnement)
-- rationalisation des services
-- découverte des services
+- formats d'échange
+- canal d'échange (bus)
+- avec un couplage faible
 
 §break
 
@@ -16,8 +16,8 @@ L'application globale est découpée en sous-éléments communiquant entre eux.
 
 - chaque service est une application web
 - le web joue le rôle de bus (DNS+TCP/IP)
-- interopérable
-- SPOFs limités, couplage faible
+- interopérable (format de données)
+- architecture à SPOFs limités, couplage faible
 
 §break
 
@@ -28,10 +28,11 @@ REST :
 - **URL** : Uniform Resource Locator
 - **HTTP** : GET, POST, PUT, DELETE... + fonctionnalité d'en-tête
 - Stateless
+- Format de données selon le domaine (GeoJSON, JPEG, GPX...)
 
 §break
 
-### Les apports des offres cloud
+### Architecture cloud
 
 * virtualisation généralisée et accessible
 * aaS : self-service, API
@@ -47,7 +48,7 @@ Rendre les infrastructures les plus modulaires possibles pour optimiser le dimen
 
 §break
 
-### Architecture micro-services
+### WOA+Cloud => Architecture micro-services
 
 Du WOA avec un découpage beaucoup plus fin :
 

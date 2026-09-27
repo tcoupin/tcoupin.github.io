@@ -420,7 +420,7 @@ Détecter les noeuds défaillants pour ne pas les inclure dans l'algorithme de r
 * Réseau : combien d'attachement ? redondance du coeur de réseau ?
 * Matériel de secours
 
-![](https://www.scalair.fr/hubfs/photos/blog/classifications-datacenter/data-center-tiers.png)
+![](https://www.xl360.fr/wp-content/uploads/2014/03/tier4.png)
 §pelement:style=max-height:10vh;§;
 §break
 
@@ -429,7 +429,7 @@ Détecter les noeuds défaillants pour ne pas les inclure dans l'algorithme de r
 
 RAID 0 : agrégation par bande, pas HA
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/RAID_0.svg/325px-RAID_0.svg.png)
+![](https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/RAID_0.svg/330px-RAID_0.svg.png)
 §pelement:style=max-height:40vh;§;
 
 *Source : wikipédia*
@@ -441,7 +441,7 @@ RAID 0 : agrégation par bande, pas HA
 
 RAID 1 : disque miroir
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/RAID_1.svg/325px-RAID_1.svg.png)
+![](https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/RAID_1.svg/330px-RAID_1.svg.png)
 §pelement:style=max-height:40vh;§;
 
 *Source : wikipédia*
@@ -453,7 +453,7 @@ RAID 1 : disque miroir
 
 RAID 5 : agrégation par bande à parité répartie
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/RAID_5.svg/675px-RAID_5.svg.png)
+![](https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/RAID_5.svg/500px-RAID_5.svg.png)
 §pelement:style=max-height:40vh;§;
 
 *Source : wikipédia*
@@ -465,7 +465,7 @@ RAID 5 : agrégation par bande à parité répartie
 
 RAID 6 : agrégation par bande à double parité répartie
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/RAID_6.svg/850px-RAID_6.svg.png)
+![](https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/RAID_6.svg/960px-RAID_6.svg.png)
 §pelement:style=max-height:40vh;§;
 
 *Source : wikipédia*

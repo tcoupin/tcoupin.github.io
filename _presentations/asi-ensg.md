@@ -7,15 +7,6 @@ initialization:
   slideNumber: c/t
 ---
 
-## Historique de la présentation
-
-Version précédente : [ENSG, 2017](../2017-asi-esg)
-- ENSG, février 2018
-- ENSG, novembre 2018
-- ENSG, octobre 2019
-
-§break
-
 ## Moi
 
 Thibault Coupin
